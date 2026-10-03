@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, GraduationCap } from "lucide-react";
+import { ArrowRight, GraduationCap, LogIn } from "lucide-react";
 import { YetiGlobe, GOA, STATION_POINTS, webglSupported, type ArcSpec, type GlobeHandle } from "@/components/globe/YetiGlobe";
 import { FallbackMap } from "@/components/globe/GlobeFallback";
 import { T } from "@/lib/i18n";
+import { useRole } from "@/lib/roles";
 
 const ARC_COLORS: Record<string, [string, string]> = {
   maitri: ["#3BE8B0", "rgba(59,232,176,0.05)"],
@@ -50,6 +51,7 @@ export function Hero() {
   const globeHandle = useRef<GlobeHandle | null>(null);
   const [globeOn, setGlobeOn] = useState(false);
   const [noWebGL, setNoWebGL] = useState(false);
+  const { session } = useRole();
 
   const fullArcs = useMemo<ArcSpec[]>(
     () =>
@@ -169,7 +171,7 @@ export function Hero() {
           <div ref={copyRef} className="max-w-3xl">
             <p className="meta-label mb-5 flex items-center gap-2">
               <span className="size-1.5 rounded-full bg-accent pulse-dot" aria-hidden />
-              Ministry of Earth Sciences · NCPOR · Demonstration build
+              <T k="hero.kicker" as="span" />
             </p>
             <h1 className="display text-balance text-[2.6rem] font-bold leading-[1.02] md:text-6xl lg:text-[4.4rem]">
               <T k="hero.line1" as="span" className="block text-text" />
@@ -180,19 +182,33 @@ export function Hero() {
               <T k="hero.sub" as="span" />
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
+              {/* Primary: straight to a workspace — one click when signed in,
+                  one-click demo entry via ?demo= otherwise. */}
               <Link
-                href="/atlas"
+                href={session ? (session.role === "admin" ? "/admin" : "/researcher") : "/login"}
                 className="btn-tactile inline-flex items-center gap-2 rounded-md bg-accent-fill px-6 py-3.5 text-sm font-semibold text-accent-ink hover:opacity-90"
               >
-                <T k="cta.journey" as="span" />
+                {session ? (
+                  <GraduationCap className="size-4" strokeWidth={1.5} aria-hidden />
+                ) : (
+                  <LogIn className="size-4" strokeWidth={1.5} aria-hidden />
+                )}
+                <T k="hero.cta.workspace" as="span" />
                 <ArrowRight className="size-4" strokeWidth={1.5} aria-hidden />
               </Link>
-              <Link
-                href="/learn"
+              {/* Secondary: anchor-scroll to the USP/feature band. */}
+              <a
+                href="#science"
                 className="btn-tactile inline-flex items-center gap-2 rounded-md border border-line-strong bg-surface/50 px-6 py-3.5 text-sm font-semibold text-text backdrop-blur hover:border-text-3"
               >
-                <GraduationCap className="size-4" strokeWidth={1.5} aria-hidden />
-                <T k="cta.gyaan" as="span" />
+                <T k="hero.cta.explore" as="span" />
+              </a>
+              {/* Tertiary: the signature experience. */}
+              <Link
+                href="/atlas"
+                className="btn-tactile inline-flex items-center gap-2 rounded-md px-4 py-3.5 text-sm font-semibold text-text-2 hover:text-accent"
+              >
+                <T k="cta.journey" as="span" />
               </Link>
             </div>
           </div>
@@ -201,7 +217,9 @@ export function Hero() {
         {/* Scroll cue */}
         <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 max-md:bottom-20" aria-hidden>
           <div className="flex flex-col items-center gap-2 text-text-3">
-            <span className="meta-label !text-[9px] max-md:hidden">Scroll — the camera descends</span>
+            <span className="meta-label !text-[9px] max-md:hidden">
+              <T k="hero.scrollcue" as="span" />
+            </span>
             <span className="h-8 w-px animate-pulse bg-gradient-to-b from-accent to-transparent" />
           </div>
         </div>

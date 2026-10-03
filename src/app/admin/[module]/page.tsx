@@ -30,7 +30,7 @@ const MODULES: Record<string, { title: string; body: string; tasks: string[] }> 
   },
   review: {
     title: "Review queue",
-    body: "Everything awaiting a human: Sanchar drafts, alt-texts, translations, dataset submissions.",
+    body: "Everything awaiting a human: Dissemination drafts, alt-texts, translations, dataset submissions.",
     tasks: ["Role-scoped queues", "Diff view for edits", "SLA indicators"],
   },
   analytics: {
@@ -76,7 +76,7 @@ export default async function AdminModulePage({ params }: PageProps<"/admin/[mod
         </div>
         <p className="text-xs text-text-3">
           The two modules that prove the product end-to-end — the dashboard and the{" "}
-          <Link href="/admin/sanchar" className="link-line text-accent">Sanchar workspace</Link> — are fully built
+          <Link href="/admin/dissemination" className="link-line text-accent">Media dissemination</Link> — are fully built
           in this demonstration.
         </p>
       </div>

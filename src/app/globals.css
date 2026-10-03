@@ -86,6 +86,7 @@
   --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
   --font-hindi: var(--font-noto-devanagari), var(--font-plex-sans), sans-serif;
+  --font-bengali: var(--font-noto-bengali), var(--font-plex-sans), sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
@@ -123,6 +124,10 @@ body {
 
 .font-hindi {
   font-family: var(--font-hindi);
+}
+
+.font-bengali {
+  font-family: var(--font-bengali);
 }
 
 .display {
@@ -489,4 +494,28 @@ html[data-kiosk="true"] .dh-container {
 }
 .ws-rise {
   animation: ws-rise 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Aurora oval — the /science/aurora illustration. Layered gradient ovals
+   breathing on a long, calm cycle; the global reduced-motion switch above
+   flattens it to a still aurora. */
+.aurora-oval {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(28px);
+  animation: aurora-shift 14s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+.aurora-oval--late {
+  animation-delay: -7s;
+}
+@keyframes aurora-shift {
+  from {
+    transform: translateX(-3%) scaleY(0.94) rotate(-1.2deg);
+    opacity: 0.55;
+  }
+  to {
+    transform: translateX(3%) scaleY(1.06) rotate(1.2deg);
+    opacity: 0.9;
+  }
 }

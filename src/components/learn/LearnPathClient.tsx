@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import type { LearnPath } from "@/lib/types";
 import { Button, ProvenanceChip } from "@/components/ui/primitives";
+import { MascotBadge } from "@/components/yeti/Mascot";
 import { cn } from "@/lib/utils";
 
 const BADGE_ICONS: Record<string, React.ReactNode> = {
@@ -52,18 +53,30 @@ export function LearnPathClient({ path }: { path: LearnPath }) {
   const [stage, setStage] = useState<Stage>({ kind: "overview" });
   const [passed, setPassed] = useState<Set<string>>(new Set());
   const [certName, setCertName] = useState("");
+  const [celebration, setCelebration] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => setPassed(loadPassed()), []);
 
-  const markPassed = useCallback((badgeId: string) => {
-    setPassed((prev) => {
-      const next = new Set(prev);
-      next.add(badgeId);
-      localStorage.setItem("yeti-badges", JSON.stringify([...next]));
-      return next;
-    });
-  }, []);
+  const markPassed = useCallback(
+    (badgeId: string) => {
+      setPassed((prev) => {
+        const isNew = !prev.has(badgeId);
+        if (isNew) {
+          const badge = path.modules.find((m) => m.badge.id === badgeId)?.badge;
+          if (badge) {
+            setCelebration(`${badge.name}|||${badge.description}`);
+            window.setTimeout(() => setCelebration(null), 4200);
+          }
+        }
+        const next = new Set(prev);
+        next.add(badgeId);
+        localStorage.setItem("yeti-badges", JSON.stringify([...next]));
+        return next;
+      });
+    },
+    [path],
+  );
 
   const pathComplete = path.modules.every((m) => passed.has(m.badge.id));
 
@@ -130,6 +143,21 @@ export function LearnPathClient({ path }: { path: LearnPath }) {
 
   return (
     <div className="pb-20">
+      {/* Badge celebration — YETI marks the milestone, calmly */}
+      {celebration && (
+        <div
+          role="status"
+          className="ws-rise fixed bottom-20 left-1/2 z-50 flex max-w-[92vw] -translate-x-1/2 items-center gap-3 rounded-xl border border-accent/40 bg-bg/95 px-4 py-3 shadow-[var(--shadow-card)] backdrop-blur md:bottom-8"
+        >
+          <MascotBadge state="success" className="h-10 w-14 shrink-0" />
+          <div className="min-w-0">
+            <p className="meta-label !text-[9px]">Badge earned · YETI logged it in your field notebook</p>
+            <p className="text-sm font-semibold text-text">
+              {celebration.split("|||")[0]} — {celebration.split("|||")[1]}
+            </p>
+          </div>
+        </div>
+      )}
       {/* Path header */}
       <header className="relative flex min-h-[52vh] flex-col justify-end overflow-hidden border-b border-line pb-10 pt-32">
         {/* eslint-disable-next-line @next/next/no-img-element */}

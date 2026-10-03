@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { SancharClient } from "@/components/admin/SancharClient";
+import { DisseminationClient } from "@/components/admin/DisseminationClient";
 
 export const metadata: Metadata = {
-  title: "Sanchar Media Engine",
+  title: "Social Media Dissemination",
   description: "Upload a report → extract → generate channel drafts → review → approve → publish. The editorial production workspace.",
 };
 
-export default function SancharPage() {
+export default function DisseminationPage() {
   return (
-      <SancharClient />
+      <DisseminationClient />
   );
 }

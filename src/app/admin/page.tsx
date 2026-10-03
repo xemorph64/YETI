@@ -78,7 +78,7 @@ export default function AdminPage() {
           { label: "Repository records", value: total, note: "published & discoverable" },
           { label: "In review queue", value: pendingSubs.length, note: "researcher submissions", tone: "sunrise" },
           { label: "Access requests", value: pendingReqs.length, note: "restricted-data gating", tone: "sunrise" },
-          { label: "Sanchar drafts", value: drafts.length, note: "awaiting publish approval", tone: "violet" },
+          { label: "Dissemination drafts", value: drafts.length, note: "awaiting publish approval", tone: "violet" },
         ]}
       />
 
@@ -288,7 +288,7 @@ export default function AdminPage() {
       {/* Quick actions */}
       <nav aria-label="Quick actions" className="flex flex-wrap gap-2.5">
         {[
-          { href: "/admin/sanchar", icon: <Send className="size-4 text-violet" strokeWidth={1.5} aria-hidden />, label: "Sanchar workspace", note: "upload → generate → review → publish", primary: true },
+          { href: "/admin/dissemination", icon: <Send className="size-4 text-violet" strokeWidth={1.5} aria-hidden />, label: "Media dissemination", note: "upload → generate → review → publish", primary: true },
           { href: "/admin/ingestion", icon: <FileSearch className="size-4 text-text-2" strokeWidth={1.5} aria-hidden />, label: "Upload centre", note: "the documented pipeline" },
           { href: "/admin/review", icon: <Inbox className="size-4 text-text-2" strokeWidth={1.5} aria-hidden />, label: "Review queue", note: "decisions & approvals" },
         ].map((c) => (

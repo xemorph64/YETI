@@ -5,6 +5,7 @@ import { YearsInMotion } from "@/components/home/YearsInMotion";
 import { ScatterToWindow } from "@/components/home/ScatterToWindow";
 import { StartHere } from "@/components/home/StartHere";
 import { ThreeDoors } from "@/components/home/ThreeDoors";
+import { UspBand } from "@/components/home/UspBand";
 import { SourceCoverage } from "@/components/home/SourceCoverage";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink, Kicker, ProvenanceChip, SectionHeader, Stat } from "@/components/ui/primitives";
@@ -26,6 +27,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <UspBand />
       <YearsInMotion />
       <StartHere />
 

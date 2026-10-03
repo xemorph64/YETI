@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans, JetBrains_Mono, Noto_Sans_Devanagari, Space_Grotesk } from "next/font/google";
+import { IBM_Plex_Sans, JetBrains_Mono, Noto_Sans_Bengali, Noto_Sans_Devanagari, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/chrome/SiteChrome";
 import { SiteFooter } from "@/components/chrome/SiteFooter";
@@ -22,6 +22,12 @@ const plexSans = IBM_Plex_Sans({
 const notoDevanagari = Noto_Sans_Devanagari({
   subsets: ["devanagari", "latin"],
   variable: "--font-noto-devanagari",
+  display: "swap",
+});
+
+const notoBengali = Noto_Sans_Bengali({
+  subsets: ["bengali", "latin"],
+  variable: "--font-noto-bengali",
   display: "swap",
 });
 
@@ -63,7 +69,8 @@ export const viewport: Viewport = {
   themeColor: "#0A1628",
 };
 
-// Avoids theme flash: applies stored/OS theme before hydration.
+// Avoids theme + language flash: applies stored/OS theme and stored language
+// before hydration (language restore is mirrored in the provider's layout effect).
 const themeBootstrap = `
 (function(){
   try {
@@ -71,6 +78,8 @@ const themeBootstrap = `
     var osLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
     var theme = stored || (osLight ? "light" : "dark");
     document.documentElement.setAttribute("data-theme", theme);
+    var lang = localStorage.getItem("yeti-lang");
+    if (lang === "hi" || lang === "bn") document.documentElement.setAttribute("lang", lang);
     var rm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (rm) document.documentElement.setAttribute("data-reduced-motion", "true");
   } catch (e) {
@@ -85,7 +94,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${spaceGrotesk.variable} ${plexSans.variable} ${notoDevanagari.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${plexSans.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />

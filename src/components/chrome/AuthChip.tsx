@@ -39,9 +39,9 @@ export function AuthChip() {
     return (
       <Link
         href="/login"
-        className="btn-tactile flex items-center gap-1.5 rounded-md border border-accent/50 bg-accent-dim px-3 py-2 text-xs font-semibold text-accent hover:text-accent"
+        className="btn-tactile flex items-center gap-1.5 rounded-md bg-accent-fill px-3.5 py-2 text-xs font-bold text-accent-ink shadow-[0_0_18px_var(--glow-line)] hover:opacity-90"
       >
-        <LogIn className="size-3.5" strokeWidth={1.5} aria-hidden />
+        <LogIn className="size-3.5" strokeWidth={2} aria-hidden />
         <span>Sign in</span>
       </Link>
     );

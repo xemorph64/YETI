@@ -19,6 +19,7 @@ export interface StoreShape {
   publishedChannelDrafts: string[];
   zeroResultQueries: { q: string; at: string }[];
   queryLog: { q: string; at: string; results: number }[];
+  citizenContributions: { id: string; mediaId: string; choice: string; at: string }[];
 }
 
 const KEY = "yeti-store-v1";
@@ -49,7 +50,7 @@ const initial: StoreShape = {
       at: "2026-02-11T09:14:00Z",
       actor: "system (demo)",
       action: "ai-generation",
-      resource: "Sanchar draft batch #23",
+      resource: "Dissemination draft batch #23",
       note: "7 channel drafts generated from approved source “42nd Indian Antarctic Expedition — scientific summary”. Human review required before publication.",
     },
   ],
@@ -58,6 +59,7 @@ const initial: StoreShape = {
   publishedChannelDrafts: [],
   zeroResultQueries: [],
   queryLog: [],
+  citizenContributions: [],
 };
 
 type Listener = (s: StoreShape) => void;

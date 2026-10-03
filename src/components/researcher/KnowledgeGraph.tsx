@@ -21,10 +21,11 @@ const KIND_COLOR: Record<string, string> = {
   publication: "var(--text)",
   report: "var(--text-2)",
   photograph: "#7dd3fc",
+  researcher: "#a5b4fc",
   theme: "var(--text-3)",
 };
 
-const KIND_ORDER = ["station", "expedition", "dataset", "publication", "report", "photograph", "theme"];
+const KIND_ORDER = ["station", "expedition", "dataset", "publication", "report", "photograph", "researcher", "theme"];
 
 const RELATION_LABEL: Record<string, string> = {
   visited: "visited station",
@@ -36,6 +37,9 @@ const RELATION_LABEL: Record<string, string> = {
   "belongs-to": "belongs to theme",
   explored: "explored theme",
   "uses-data": "uses data · seeded",
+  "works-from": "works from station",
+  studies: "studies theme",
+  authored: "authored",
 };
 
 const SEEDS = [

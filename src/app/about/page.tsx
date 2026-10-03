@@ -151,13 +151,42 @@ export default function AboutPage() {
               {[
                 "WCAG 2.1 AA targets: semantic landmarks, keyboard-complete navigation, visible focus rings, skip-to-content link.",
                 "prefers-reduced-motion honoured globally — the globe holds still, scroll choreography switches off, arcs stop animating.",
-                "Hindi-first bilingual chrome (हिन्दी/EN toggle) with Devanagari typography tuned, built for expansion to all 22 scheduled languages.",
+                "Three-language chrome — English · हिन्दी · বাংলা — restored before first paint, with Devanagari and Bengali typography tuned and expansion to all 22 scheduled languages on the roadmap.",
                 "Poster-first hero: imagery renders before WebGL mounts; a 2D expedition map takes over if WebGL is unavailable.",
                 "Light utility theme for Vault, Gyaan, Admin and Search — tuned for dense reading, not just aesthetics.",
               ].map((t) => (
                 <li key={t} className="flex items-start gap-2.5">
                   <BadgeCheck className="mt-0.5 size-4 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
                   {t}
+                </li>
+              ))}
+            </ul>
+          </section>
+        </Reveal>
+
+        {/* Roadmap — documented features this build intentionally does not fake */}
+        <Reveal>
+          <section id="roadmap" className="scroll-mt-24" aria-label="On the roadmap">
+            <div className="flex items-center gap-3">
+              <FlaskConical className="size-5 text-violet" strokeWidth={1.5} aria-hidden />
+              <h2 className="display text-2xl font-semibold">On the roadmap — not faked in this build</h2>
+            </div>
+            <p className="mt-4 max-w-[68ch] text-sm leading-relaxed text-text-2">
+              The project documentation asks for more than any demonstration can honestly ship. These features need
+              real assets, real data or consent-gated records — so YETI names them as roadmap items instead of
+              simulating them.
+            </p>
+            <ul className="mt-5 flex flex-wrap gap-2">
+              {[
+                "Sounds of the Poles — field audio ingest",
+                "360° station tours — asset capture",
+                "Earth-observation live layers — satellite feed",
+                "WebXR field walks — device build",
+                "Crew rosters — consent-gated personal data",
+                "Himalayan dataset ingest — third cryosphere records",
+              ].map((t) => (
+                <li key={t}>
+                  <ProvenanceChip p="demo" label={t} />
                 </li>
               ))}
             </ul>
@@ -176,7 +205,7 @@ export default function AboutPage() {
               every language. Explore the <Link href="/atlas" className="link-line text-accent">Atlas</Link>, the{" "}
               <Link href="/vault" className="link-line text-accent">Vault</Link>,{" "}
               <Link href="/learn" className="link-line text-accent">Polar Gyaan</Link> and the{" "}
-              <Link href="/admin/sanchar" className="link-line text-accent">Sanchar engine</Link> to see the argument.
+              <Link href="/admin/dissemination" className="link-line text-accent">dissemination engine</Link> to see the argument.
             </p>
           </section>
         </Reveal>

@@ -210,13 +210,18 @@ export interface AskEntry {
   id: string;
   patterns: string[];
   answer: string;
+  /** Localized answer variants — scientific terms stay untranslated (§56). */
+  answerHi?: string;
+  answerBn?: string;
   sources: { label: string; href: string }[];
   related?: { label: string; href: string }[];
   /** Supporting passage drawn from the cited archive record (demo of RAG evidence). */
   evidence?: { section: string; quote: string };
+  /** Page-area tags ("stations", "expeditions", …) for a small context boost. */
+  ctx?: string[];
 }
 
-export type SancharChannel =
+export type ChannelId =
   | "press-release"
   | "x-thread"
   | "instagram"
@@ -225,12 +230,18 @@ export type SancharChannel =
   | "hindi-press"
   | "alt-text";
 
-export interface SancharDraft {
-  id: SancharChannel;
+export interface ChannelDraft {
+  id: ChannelId;
   label: string;
   platform: string;
   body: string;
   hindi?: boolean;
   confidence: "high" | "medium" | "review";
   notes?: string;
+  /** Platform character cap for the live counter (undefined = no hard cap). */
+  charLimit?: number;
+  /** Suggested hashtags the editor can append with one click. */
+  hashtags?: string[];
+  /** Days from approval to the suggested calendar slot. */
+  scheduleHintDays?: number;
 }

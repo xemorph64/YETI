@@ -10,7 +10,7 @@ import { useStoreSnapshot } from "@/lib/api/client";
 
 const ITEMS = [
   { href: "/admin", label: "Dashboard", icon: <LayoutDashboard className="size-4" strokeWidth={1.5} aria-hidden />, live: true },
-  { href: "/admin/sanchar", label: "Sanchar", icon: <MessageSquareShare className="size-4" strokeWidth={1.5} aria-hidden />, live: true },
+  { href: "/admin/dissemination", label: "Dissemination", icon: <MessageSquareShare className="size-4" strokeWidth={1.5} aria-hidden />, live: true },
   { href: "/admin/ingestion", label: "Upload centre", icon: <FileSearch className="size-4" strokeWidth={1.5} aria-hidden />, live: true },
   { href: "/admin/review", label: "Review queue", icon: <ShieldCheck className="size-4" strokeWidth={1.5} aria-hidden />, live: true, badge: true },
   { href: "/admin/audit", label: "Audit trail", icon: <ScrollText className="size-4" strokeWidth={1.5} aria-hidden />, live: true },

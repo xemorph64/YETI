@@ -1,4 +1,4 @@
-import type { MediaAsset } from "@/lib/types";
+import type { Expedition, MediaAsset } from "@/lib/types";
 import provenance from "@/lib/data/provenance.json";
 
 /* ---------------------------------------------------------------------------
@@ -98,4 +98,44 @@ export function mediaByExpedition(expeditionId: string) {
 /** Deterministic rotation of media for expedition covers. */
 export function coverFor(index: number) {
   return MEDIA[index % MEDIA.length].src;
+}
+
+/* Thematic subject picks per programme, used when no assets are explicitly
+   linked to an expedition id in the demo build. */
+const PROGRAMME_SUBJECTS: Record<Expedition["programme"], MediaAsset["subject"][]> = {
+  Antarctic: ["Science operations", "Sea ice", "Landscape", "Stations", "Wildlife"],
+  Arctic: ["Landscape", "Stations", "Science operations"],
+  "Southern Ocean": ["Vessels & aircraft", "Sea ice", "Wildlife", "Landscape"],
+};
+
+/**
+ * Field imagery for an expedition page: assets explicitly linked to the
+ * expedition first, then the season's station imagery, then
+ * programme-relevant subjects — all deterministic, never more than four,
+ * and never repeating the hero cover.
+ */
+export function galleryForExpedition(
+  exp: Pick<Expedition, "id" | "number" | "programme" | "stationIds" | "cover">,
+): MediaAsset[] {
+  const picks: MediaAsset[] = [];
+  const seen = new Set<string>();
+  const push = (m: MediaAsset) => {
+    if (seen.has(m.id) || picks.length >= 4) return;
+    if (m.type === "panorama") return; // demo pan-viewer asset, not gallery filler
+    if (m.src === exp.cover) return; // the hero already carries this image
+    seen.add(m.id);
+    picks.push(m);
+  };
+  mediaByExpedition(exp.id).forEach(push);
+  const stationId = exp.stationIds?.[0];
+  if (stationId) MEDIA.filter((m) => m.stationId === stationId).forEach(push);
+  const subjects = PROGRAMME_SUBJECTS[exp.programme];
+  for (let i = 0; i < subjects.length && picks.length < 4; i++) {
+    const subject = subjects[(exp.number + i) % subjects.length];
+    MEDIA.filter((m) => m.subject === subject).forEach(push);
+  }
+  for (let i = 0; i < MEDIA.length && picks.length < 4; i++) {
+    push(MEDIA[(exp.number * 3 + i) % MEDIA.length]);
+  }
+  return picks;
 }

@@ -17,6 +17,7 @@ import { MEDIA } from "@/lib/data/media";
 import { NEWS } from "@/lib/data/newsroom";
 import { LEARN_PATHS } from "@/lib/data/learn";
 import { DATASETS, PUBLICATIONS, REPORTS } from "@/lib/data/vault";
+import { RESEARCHERS } from "@/lib/data/researchers";
 import { logAudit, logQuery, setStore, subscribe, getStore } from "./store";
 import type {
   AccessClass,
@@ -355,6 +356,16 @@ export const graphApi = {
       if (m.stationId) link(m.id, `station:${m.stationId}`, "captured-at");
       if ((m as { expeditionId?: string }).expeditionId) link(m.id, `exp:${(m as { expeditionId?: string }).expeditionId}`, "captured-during");
     }
+    // Researcher directory (§55): demonstration personas wired into the same
+    // graph — people connect to the stations they work from, the themes they
+    // study, the datasets they use and the publications they author.
+    for (const p of RESEARCHERS) {
+      push({ id: p.id, kind: "researcher", label: p.name, meta: p.title });
+      for (const sid of p.stationIds) link(p.id, `station:${sid}`, "works-from");
+      for (const t of p.themes) link(p.id, `theme:${t}`, "studies");
+      for (const d of p.datasetIds) link(p.id, d, "uses-data");
+      for (const pub of p.publicationIds) link(p.id, pub, "authored");
+    }
     // Publications ←→ datasets: the demo corpus has no full-text linkage, so a
     // deterministic ~20% of pairs carry a seeded uses-data edge (labelled demo
     // in the UI legend).
@@ -432,6 +443,7 @@ export const graphApi = {
   hrefFor: (node: GraphNode): string | null => {
     if (node.kind === "station") return `/stations/${node.id.split(":")[1]}`;
     if (node.kind === "expedition") return `/expeditions/${node.id.split(":")[1]}`;
+    if (node.kind === "researcher") return `/researchers/${node.id}`;
     const rec = allRecords().find((r) => r.id === node.id);
     return rec?.href ?? null;
   },

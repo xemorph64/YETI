@@ -128,10 +128,10 @@ export function buildIndex(): SearchEntry[] {
     },
     {
       kind: "Pages",
-      title: "Sanchar Media Engine",
+      title: "Social Media Dissemination",
       subtitle: "Admin · upload → generate → review → publish",
-      href: "/admin/sanchar",
-      keywords: "sanchar admin media social press release hindi generate".toLowerCase(),
+      href: "/admin/dissemination",
+      keywords: "dissemination admin media social press release hindi generate".toLowerCase(),
     },
   );
   INDEX = e;

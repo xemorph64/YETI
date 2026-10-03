@@ -4,11 +4,12 @@
  * Task-based entry, the Zenodo/Google-Arts pattern applied to YETI's
  * three documented experiences: instead of hoping visitors discover the
  * research and admin surfaces, the home page names the doors and what's
- * behind each one. Adapts to the current session.
+ * behind each one. Adapts to the current session. Anonymous doors carry a
+ * one-click demo sign-in (?demo=) so reaching a workspace costs one click.
  */
 
 import Link from "next/link";
-import { ArrowRight, GraduationCap, ShieldCheck, Users } from "lucide-react";
+import { ArrowRight, GraduationCap, ShieldCheck, Users, Zap } from "lucide-react";
 import { useRole } from "@/lib/roles";
 import { cn } from "@/lib/utils";
 
@@ -23,6 +24,8 @@ export function ThreeDoors() {
       who: "Everyone, no account",
       lines: ["Fly the Expedition Atlas & timelines", "Read documentary stories & the newsroom", "Learn polar science in Polar Gyaan"],
       cta: { label: "Start from the Atlas", href: "/atlas" },
+      oneclick: null as string | null,
+      signedIn: false,
     },
     {
       icon: <GraduationCap className="size-5" strokeWidth={1.5} aria-hidden />,
@@ -30,7 +33,11 @@ export function ThreeDoors() {
       title: "I'm a researcher",
       who: "Demo sign-in: meera@yeti.demo",
       lines: ["Walk the Polar Knowledge Graph", "Build collections, export BibTeX/RIS", "Contribute records into scientific review"],
-      cta: { label: session?.role === "researcher" ? "Open your workspace" : "Enter the workspace", href: session?.role === "researcher" ? "/researcher" : "/login?next=researcher" },
+      cta: {
+        label: session?.role === "researcher" ? "Open your workspace" : "Enter the workspace",
+        href: session?.role === "researcher" ? "/researcher" : "/login?next=researcher",
+      },
+      oneclick: session ? null : "/login?demo=researcher",
       signedIn: session?.role === "researcher",
     },
     {
@@ -38,8 +45,12 @@ export function ThreeDoors() {
       tone: "violet" as const,
       title: "I'm NCPOR staff",
       who: "Demo sign-in: steward@ncpor.demo",
-      lines: ["Run the ingestion & review pipeline", "Approve publications in Sanchar", "Decide access requests, audit everything"],
-      cta: { label: session?.role === "admin" ? "Open the console" : "Enter the console", href: session?.role === "admin" ? "/admin" : "/login?next=admin" },
+      lines: ["Run the ingestion & review pipeline", "Approve content for dissemination", "Decide access requests, audit everything"],
+      cta: {
+        label: session?.role === "admin" ? "Open the console" : "Enter the console",
+        href: session?.role === "admin" ? "/admin" : "/login?next=admin",
+      },
+      oneclick: session ? null : "/login?demo=admin",
       signedIn: session?.role === "admin",
     },
   ];
@@ -90,6 +101,15 @@ export function ThreeDoors() {
                 {d.cta.label}
                 <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-0.5" strokeWidth={1.5} aria-hidden />
               </Link>
+              {d.oneclick && (
+                <Link
+                  href={d.oneclick}
+                  className="btn-tactile mt-2 inline-flex items-center justify-center gap-1.5 rounded-lg px-4 py-2 text-xs font-semibold text-text-3 hover:text-accent"
+                >
+                  <Zap className="size-3.5" strokeWidth={1.5} aria-hidden />
+                  One-click demo sign-in
+                </Link>
+              )}
             </div>
           ))}
         </div>

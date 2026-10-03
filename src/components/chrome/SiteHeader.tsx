@@ -3,9 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, Moon, Search, Sun, X } from "lucide-react";
+import { Check, ChevronDown, Globe, Menu, Moon, Search, Sun, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { T, useLang } from "@/lib/i18n";
+import { T, useLang, type Lang } from "@/lib/i18n";
 import { AuthChip } from "@/components/chrome/AuthChip";
 import { useRole } from "@/lib/roles";
 
@@ -15,6 +15,7 @@ import { useRole } from "@/lib/roles";
  */
 const NAV = [
   { href: "/atlas", key: "nav.atlas" as const },
+  { href: "/labs", key: "nav.labs" as const },
   { href: "/expeditions", key: "nav.expeditions" as const },
   { href: "/vault", key: "nav.vault" as const },
   { href: "/stories", key: "nav.stories" as const },
@@ -22,6 +23,10 @@ const NAV = [
 ];
 
 const MORE = [
+  { href: "/science", key: "nav.science" as const },
+  { href: "/timeline", key: "nav.timeline" as const },
+  { href: "/researchers", key: "nav.researchers" as const },
+  { href: "/participate", key: "nav.participate" as const },
   { href: "/gallery", key: "nav.gallery" as const },
   { href: "/stations", key: "nav.stations" as const },
   { href: "/newsroom", key: "nav.newsroom" as const },
@@ -54,8 +59,6 @@ export function SiteHeader({ onOpenSearch }: { onOpenSearch: () => void }) {
   const [moreOpen, setMoreOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
   const { session } = useRole();
-
-  const { lang, setLang } = useLang();
 
   // Immersive pages: header floats transparent until scrolled.
   const immersive = ["/", "/atlas", "/stations", "/stories", "/gallery", "/expeditions"].some(
@@ -190,13 +193,7 @@ export function SiteHeader({ onOpenSearch }: { onOpenSearch: () => void }) {
 
             <AuthChip />
 
-            <button
-              onClick={() => setLang(lang === "en" ? "hi" : "en")}
-              className="btn-tactile rounded-md border border-line-strong px-2.5 py-2 text-xs font-semibold text-text-2 hover:border-text-3 hover:text-text"
-              aria-label="Switch language"
-            >
-              {lang === "en" ? "हिं" : "EN"}
-            </button>
+            <LangSwitcher />
 
             <ThemeToggle />
 
@@ -248,6 +245,7 @@ export function SiteHeader({ onOpenSearch }: { onOpenSearch: () => void }) {
               ))}
             </div>
             <div className="mt-6 flex flex-col gap-2.5">
+              <MobileLangRow />
               {session ? (
                 <>
                   <Link
@@ -286,6 +284,100 @@ export function SiteHeader({ onOpenSearch }: { onOpenSearch: () => void }) {
         </div>
       )}
     </>
+  );
+}
+
+/** Desktop language dropdown — English · हिन्दी · বাংলা. */
+export function LangSwitcher() {
+  const { lang, setLang, langs, t } = useLang();
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDoc);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  const current = langs.find((l) => l.id === lang) ?? langs[0];
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-haspopup="menu"
+        aria-label={`${t("lang.label")}: ${current.native}`}
+        className="btn-tactile flex items-center gap-1.5 rounded-md border border-line-strong px-2.5 py-2 text-xs font-semibold text-text-2 hover:border-text-3 hover:text-text"
+      >
+        <Globe className="size-3.5" strokeWidth={1.5} aria-hidden />
+        <span className="hidden font-hindi md:inline">{lang === "hi" ? "हिन्दी" : lang === "bn" ? "বাংলা" : "EN"}</span>
+        <ChevronDown className={cn("size-3 transition-transform", open && "rotate-180")} strokeWidth={1.5} aria-hidden />
+      </button>
+      {open && (
+        <div
+          role="menu"
+          aria-label={t("lang.label")}
+          className="absolute right-0 top-[calc(100%+8px)] z-[95] w-44 overflow-hidden rounded-xl border border-line-strong bg-surface py-1.5 shadow-[var(--shadow-raised)]"
+        >
+          {langs.map((l) => (
+            <button
+              key={l.id}
+              role="menuitemradio"
+              aria-checked={lang === l.id}
+              onClick={() => {
+                setLang(l.id as Lang);
+                setOpen(false);
+              }}
+              className={cn(
+                "flex w-full items-center justify-between px-3.5 py-2 text-sm transition-colors",
+                lang === l.id ? "font-semibold text-accent" : "text-text-2 hover:bg-surface-2 hover:text-text",
+              )}
+            >
+              <span className={l.id === "hi" ? "font-hindi" : l.id === "bn" ? "font-bengali" : ""}>{l.native}</span>
+              {lang === l.id && <Check className="size-3.5" strokeWidth={2} aria-hidden />}
+            </button>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Compact language row for the full-screen mobile menu. */
+export function MobileLangRow() {
+  const { lang, setLang, langs } = useLang();
+  return (
+    <div className="flex items-center gap-1.5" role="group" aria-label="Language">
+      <Globe className="size-3.5 text-text-3" strokeWidth={1.5} aria-hidden />
+      {langs.map((l) => (
+        <button
+          key={l.id}
+          onClick={() => setLang(l.id as Lang)}
+          aria-pressed={lang === l.id}
+          className={cn(
+            "btn-tactile flex-1 rounded-md border px-3 py-2.5 text-sm font-semibold transition-colors",
+            lang === l.id
+              ? "border-accent/50 bg-accent-dim text-accent"
+              : "border-line-strong text-text-2 hover:text-text",
+            l.id === "hi" && "font-hindi",
+            l.id === "bn" && "font-bengali",
+          )}
+        >
+          {l.native}
+        </button>
+      ))}
+    </div>
   );
 }
 

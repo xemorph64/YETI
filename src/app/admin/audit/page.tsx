@@ -32,7 +32,7 @@ export default function AuditPage() {
         <h1 className="display mt-3 text-balance text-4xl font-bold leading-[1.02]">Every action, on the record.</h1>
         <p className="mt-4 max-w-[68ch] text-base leading-relaxed text-text-2">
           Uploads, metadata changes, reviews, approvals, AI generations, publications, access decisions — who,
-          what, when, and the state change. The export pack from Sanchar includes the same trail.
+          what, when, and the state change. The export pack from Social Media Dissemination includes the same trail.
         </p>
       </header>
 

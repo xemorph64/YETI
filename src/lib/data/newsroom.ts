@@ -11,10 +11,10 @@ export const NEWS: NewsItem[] = [
     body: [
       "The 44th Indian Antarctic Expedition season has wrapped its field plan, with station operations handed to the wintering teams at Maitri and Bharati (demonstration item — official confirmations are published by MoES/NCPOR).",
       "Season activities highlighted the programme's standing priorities: long-term atmospheric observation, glaciological field campaigns inland of Maitri, and coastal oceanography off the Larsemann Hills.",
-      "This item was produced by YETI to demonstrate the Sanchar media workflow end-to-end; wording, review and approval states are part of the demo.",
+      "This item was produced by YETI to demonstrate the media dissemination workflow end-to-end; wording, review and approval states are part of the demo.",
     ],
     workflow: {
-      draftedBy: "Sanchar Engine (demo)",
+      draftedBy: "Social Media Dissemination (demo)",
       reviewedBy: "Editorial desk (demo)",
       approvedBy: "Communications officer (demo)",
       status: "approved",
@@ -34,7 +34,7 @@ export const NEWS: NewsItem[] = [
       "The archive layer underneath — expeditions, datasets, imagery — is the same content researchers use. Students read the primary record, not a summary of a summary.",
     ],
     workflow: {
-      draftedBy: "Sanchar Engine (demo)",
+      draftedBy: "Social Media Dissemination (demo)",
       reviewedBy: "Editorial desk (demo)",
       approvedBy: "Communications officer (demo)",
       status: "approved",
@@ -54,7 +54,7 @@ export const NEWS: NewsItem[] = [
       "Researchers can preview series in-browser before download, and every dataset links back to the expeditions that collected it.",
     ],
     workflow: {
-      draftedBy: "Sanchar Engine (demo)",
+      draftedBy: "Social Media Dissemination (demo)",
       reviewedBy: "Editorial desk (demo)",
       approvedBy: "Communications officer (demo)",
       status: "approved",
@@ -73,7 +73,7 @@ export const NEWS: NewsItem[] = [
       "Campaign science typically spans glacier mass balance, fjord oceanography and atmospheric observation — the Arctic is warming several times faster than the global average, making sustained records here especially valuable.",
     ],
     workflow: {
-      draftedBy: "Sanchar Engine (demo)",
+      draftedBy: "Social Media Dissemination (demo)",
       reviewedBy: "Editorial desk (demo)",
       approvedBy: "Communications officer (demo)",
       status: "approved",
@@ -111,7 +111,7 @@ export const NEWS: NewsItem[] = [
       "Digitisation is the quiet heart of any archive: every scanned page becomes searchable text, and every search hit becomes a door back into 1981.",
     ],
     workflow: {
-      draftedBy: "Sanchar Engine (demo)",
+      draftedBy: "Social Media Dissemination (demo)",
       reviewedBy: "Editorial desk (demo)",
       approvedBy: "Communications officer (demo)",
       status: "approved",

@@ -6,7 +6,7 @@
  * here is the seam where a production identity provider (SSO/LDAP) lands.
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { GraduationCap, LogIn, ShieldCheck, Sparkles, Zap } from "lucide-react";
@@ -36,7 +36,7 @@ const CARDS: Array<{
     title: "NCPOR Admin",
     icon: <ShieldCheck className="size-4" strokeWidth={1.5} aria-hidden />,
     blurb: "The desk that runs the pipeline.",
-    features: ["Ingestion & review queues", "Sanchar approvals", "Audit trail", "Access governance"],
+    features: ["Ingestion & review queues", "Dissemination approvals", "Audit trail", "Access governance"],
   },
 ];
 
@@ -48,11 +48,25 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const demoRan = useRef(false);
 
   useEffect(() => {
-    const n = new URLSearchParams(window.location.search).get("next");
+    const params = new URLSearchParams(window.location.search);
+    const n = params.get("next");
     if (n === "admin") setPicked("admin");
     if (n === "researcher") setPicked("researcher");
+
+    // ?demo=researcher|admin — one-click entry straight from the home page
+    // doors; runs once, only for anonymous visitors.
+    const demo = params.get("demo");
+    if (!demoRan.current && !session && (demo === "researcher" || demo === "admin")) {
+      demoRan.current = true;
+      setPicked(demo);
+      const account = DEMO_ACCOUNTS[demo];
+      const t = setTimeout(() => enter(demo, account.email, "yeti-demo"), 400);
+      return () => clearTimeout(t);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const enter = (role: Exclude<Role, "public">, em: string, pw: string) => {

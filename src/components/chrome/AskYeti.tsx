@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Send, X } from "lucide-react";
 import { ASK_SUGGESTIONS, retrieve } from "@/lib/data/askyeti";
+import { logQuery } from "@/lib/api/store";
 import { T, useLang } from "@/lib/i18n";
 import { useRole } from "@/lib/roles";
 import { Mascot, type MascotState } from "@/components/yeti/Mascot";
@@ -93,15 +94,23 @@ export function AskYeti({
     setTurns((t) => [...t, { q, a: null, sources: [] }]);
     setBusy(true);
     // Simulated retrieval over the archive (no external calls in this build).
+    // The first path segment gives retrieval a small context boost, and every
+    // question is logged so the admin/researcher analytics reflect Ask traffic.
+    const context = pathname?.split("/").filter(Boolean)[0];
     setTimeout(() => {
-      const hit = retrieve(q);
+      const hit = retrieve(q, context);
+      logQuery(q, hit ? 1 : 0);
       setTurns((t) => {
         const next = [...t];
         next[next.length - 1] = {
           q,
           a: hit
-            ? hit.answer
-            : "I could not ground an answer in the archive for that yet. The demo archive is deliberately small — try one of the suggested questions, or browse the Vault directly. (No citation, no answer.)",
+            ? (lang === "hi" && hit.answerHi) || (lang === "bn" && hit.answerBn) || hit.answer
+            : lang === "hi"
+              ? "मैं इसके लिए संग्रह में अभी पर्याप्त साक्ष्य नहीं ढूँढ पाया। डेमो संग्रह जान-बूझकर छोटा है — सुझाए गए प्रश्न आज़माइए या सीधे वॉल्ट देखिए। (बिना स्रोत, बिना उत्तर।)"
+              : lang === "bn"
+                ? "এর জন্য সংগ্রহে যথেষ্ট প্রমাণ খুঁজে পেলাম না। ডেমো সংগ্রহ ইচ্ছাকৃতভাবে ছোট — প্রস্তাবিত প্রশ্নগুলি চেষ্টা করুন বা সরাসরি ভল্ট দেখুন। (উৎস ছাড়া উত্তর নেই।)"
+                : "I could not ground an answer in the archive for that yet. The demo archive is deliberately small — try one of the suggested questions, or browse the Vault directly. (No citation, no answer.)",
           sources: hit?.sources ?? [],
           related: hit?.related,
           evidence: hit?.evidence,
@@ -171,14 +180,16 @@ export function AskYeti({
                     <p className="flex items-center gap-2 rounded-lg border border-accent/30 bg-accent-dim px-3 py-2 text-[11px] text-accent" role="status">
                       <Mascot state="thinking" className="size-6 shrink-0" />
                       <span>
-                        Reading with you: <strong>{ctx.label}</strong> — {lang === "hi" ? "इस पृष्ठ के बारे में पूछ सकते हैं।" : "you can ask about this page."}
+                        <T k="ask.reading" as="span" />: <strong>{ctx.label}</strong>
                       </span>
                     </p>
                   )}
                   <p className="text-sm leading-relaxed text-text-2">
                     {lang === "hi"
                       ? "येती इस संग्रह की 45 साल की रिकॉर्ड से उत्तर ढूँढता है — हर उत्तर के साथ स्रोत।"
-                      : `Yeti retrieves answers only from this archive — 45 years of expedition records, station data and stories — and always shows the source.${role !== "public" ? ` Answering as ${role === "admin" ? "an NCPOR administrator" : "a researcher"}.` : ""}`}
+                      : lang === "bn"
+                        ? "যেতি শুধুই এই সংগ্রহ থেকে উত্তর দেয় — অভিযান, স্টেশন, ডেটা ও গল্পের ৪৫ বছর — এবং সবসময় উৎস দেখায়।"
+                        : `Yeti retrieves answers only from this archive — 45 years of expedition records, station data and stories — and always shows the source.${role !== "public" ? ` Answering as ${role === "admin" ? "an NCPOR administrator" : "a researcher"}.` : ""}`}
                   </p>
                   <div className="flex flex-col gap-2">
                     <p className="meta-label">Try asking</p>
@@ -204,11 +215,17 @@ export function AskYeti({
                     {turn.a === null ? (
                       <div className="flex items-center gap-2 py-1 text-xs text-text-3">
                         <span className="size-1.5 rounded-full bg-accent pulse-dot" aria-hidden />
-                        Searching the archive…
+                        <T k="ask.thinking" as="span" />
                       </div>
                     ) : (
                       <>
                         <p className="text-sm leading-relaxed text-text-2">{turn.a}</p>
+                        {lang !== "en" && !/^[\u0900-\u097F]/.test(turn.a) && lang === "hi" && (
+                          <ContinuesNote />
+                        )}
+                        {lang !== "en" && !/^[\u0980-\u09FF]/.test(turn.a) && lang === "bn" && (
+                          <ContinuesNote />
+                        )}
                         {turn.evidence && (
                           <div className="mt-3 rounded-lg border-l-2 border-accent bg-surface-2 px-3 py-2.5" aria-label="Supporting evidence">
                             <p className="meta-label !text-[9px] !text-accent">Evidence — {turn.evidence.section}</p>
@@ -263,7 +280,9 @@ export function AskYeti({
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
-                placeholder={lang === "hi" ? "संग्रह से पूछें…" : "Ask the archive…"}
+                placeholder={
+                  lang === "hi" ? "संग्रह से पूछें…" : lang === "bn" ? "সংগ্রহে জিজ্ঞাসা করুন…" : "Ask the archive…"
+                }
                 className="h-11 flex-1 rounded-lg border border-line-strong bg-surface px-3.5 text-sm text-text outline-none placeholder:text-text-3 focus:border-accent/60"
                 aria-label="Ask a question"
                 autoFocus={open}
@@ -281,5 +300,14 @@ export function AskYeti({
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+/** Honest notice when an answer exists only in English (master doc §56). */
+function ContinuesNote() {
+  return (
+    <p className="mt-2 text-[10px] leading-snug text-text-3">
+      ⓘ यह उत्तर अंग्रेज़ी में है — वैज्ञानिक शब्दावली यथावत।
+    </p>
   );
 }

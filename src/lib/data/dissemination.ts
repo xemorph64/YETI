@@ -1,10 +1,10 @@
-import type { SancharDraft } from "@/lib/types";
+import type { ChannelDraft } from "@/lib/types";
 
-/* Sanchar Media Engine — demo seed.
+/* Social Media Dissemination — demo seed.
    The "source document" is a synthetic expedition summary; the drafts below
    show exactly what the pipeline produces per channel before human review. */
 
-export const SANCHAR_SOURCE = {
+export const DISSEM_SOURCE = {
   name: "42nd Indian Antarctic Expedition — season summary",
   fileName: "exp-42-season-summary.pdf",
   pages: 6,
@@ -18,7 +18,7 @@ export const SANCHAR_SOURCE = {
   },
 };
 
-export const SANCHAR_DRAFTS: SancharDraft[] = [
+export const DISSEM_DRAFTS: ChannelDraft[] = [
   {
     id: "press-release",
     label: "Press release",
@@ -33,6 +33,7 @@ The season's work spanned glaciological surveys in the Schirmacher Oasis sector 
 India has maintained a continuous Antarctic presence since the first expedition of 1981–82, and today operates two year-round Antarctic stations — Maitri (1989) and Bharati (2012) — alongside the Arctic station Himadri at Ny-Ålesund.
 
 Note: this draft was generated from a synthetic demonstration document and is shown for pipeline illustration only.`,
+    scheduleHintDays: 1,
   },
   {
     id: "x-thread",
@@ -50,6 +51,9 @@ Note: this draft was generated from a synthetic demonstration document and is sh
 5/ Stations handed to the wintering teams. They will hold Maitri and Bharati through polar night — months of darkness, −40 °C, and aurora overhead.
 
 6/ 42 flags on the ice since 1981. The archive of all of them now lives in one place: YETI Knows. Now You Can Too!. (Demo thread generated from a synthetic report.)`,
+    charLimit: 280,
+    hashtags: ["#Antarctica", "#PolarScience"],
+    scheduleHintDays: 1,
   },
   {
     id: "instagram",
@@ -65,6 +69,8 @@ Swipe for the season in frames →
 #Antarctica #PolarScience #Maitri #Bharati #IndianAntarcticProgramme #NCPOR #MoES
 
 (Demo caption generated from a synthetic document; hashtags subject to editorial approval.)`,
+    charLimit: 2200,
+    scheduleHintDays: 2,
   },
   {
     id: "linkedin",
@@ -78,6 +84,9 @@ A continuous Indian presence on the continent since 1981–82 now rests on two y
 The full archive — expedition records, datasets, imagery — is coming together on YETI, the national polar outreach portal (demonstration build).
 
 #PolarScience #Antarctica #ClimateScience #MoES #NCPOR`,
+    charLimit: 3000,
+    hashtags: ["#PolarScience", "#ClimateScience", "#MoES"],
+    scheduleHintDays: 1,
   },
   {
     id: "newsletter",
@@ -91,6 +100,7 @@ Forty-two Indian flags on the ice since 1981 — and the 42nd season has just cl
 One number to keep: 45. That is how many years India has been reading Antarctica continuously — a record written by thousands of people and kept by a handful of instruments that never sleep.
 
 In the next issue: what the wintering crew actually does for eight months of darkness. (Demo block generated from a synthetic report.)`,
+    scheduleHintDays: 3,
   },
   {
     id: "hindi-press",
@@ -108,6 +118,7 @@ In the next issue: what the wintering crew actually does for eight months of dar
 भारत 1981–82 के पहले अभियान से लगातार अंटार्कटिका में उपस्थित है, और आज दो वर्षपर्यंत अंटार्कटिक स्टेशन — मैत्री (1989) और भारती (2012) — तथा आर्कटिक में हिमाद्रि स्टेशन संचालित करता है।
 
 (नोट: यह मसौदा मशीन-अनुवादित है; प्रकाशन से पहले मानव समीक्षा आवश्यक है।)`,
+    scheduleHintDays: 1,
   },
   {
     id: "alt-text",
@@ -124,10 +135,11 @@ In the next issue: what the wintering crew actually does for eight months of dar
 4. "Coastal view from the Larsemann Hills across Prydz Bay sea ice, photographed during coastal campaign work."
 
 (Each alt-text must be confirmed against the actual image before publication — the pipeline flags, never asserts.)`,
+    scheduleHintDays: 1,
   },
 ];
 
-export const SANCHAR_STAGES = [
+export const DISSEM_STAGES = [
   { id: "upload", label: "Upload received", detail: "File accepted · hash recorded" },
   { id: "parse", label: "Parsing document", detail: "Layout model extracts text, figures, tables" },
   { id: "entities", label: "Entity extraction", detail: "Stations, places, instruments, numbers" },
@@ -136,9 +148,9 @@ export const SANCHAR_STAGES = [
   { id: "ready", label: "Ready for review", detail: "Provenance + confidence attached" },
 ] as const;
 
-export const SANCHAR_TEAM = {
+export const DISSEM_TEAM = {
   reviewer: "Editorial desk",
   approver: "Communications officer",
-  promptVersion: "sanchar-v0.9.3",
+  promptVersion: "dissem-v1.0.0",
   model: "demo-pipeline (no external calls in this build)",
 };

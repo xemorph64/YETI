@@ -21,7 +21,7 @@ export default function NewsroomPage() {
               Institutional voice, with receipts.
             </h1>
             <p className="mt-6 max-w-[62ch] text-base leading-relaxed text-text-2">
-              Every item shows how it was made: drafted (by desk or by the Sanchar engine), reviewed, approved.
+              Every item shows how it was made: drafted (by desk or by the dissemination engine), reviewed, approved.
               Media kits bundle releases with rights-cleared imagery and the fact sheet.
             </p>
           </div>
@@ -34,7 +34,7 @@ export default function NewsroomPage() {
               <UserCheck className="size-4 text-sunrise" strokeWidth={1.5} aria-hidden /> Approved
             </div>
             <p className="text-xs leading-relaxed text-text-3">
-              The Sanchar engine drafts; humans approve. Nothing publishes itself — the workflow is the product.
+              The dissemination engine drafts; humans approve. Nothing publishes itself — the workflow is the product.
             </p>
           </div>
         </div>

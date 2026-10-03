@@ -82,6 +82,22 @@ export default function LearnPage() {
         ))}
       </div>
 
+      {/* Science missions */}
+      <section className="dh-container pt-14" aria-label="Science missions">
+        <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-line bg-surface p-6">
+          <div>
+            <h2 className="display text-xl font-semibold text-text">Seven Science Missions</h2>
+            <p className="mt-1 max-w-[60ch] text-sm text-text-2">
+              The programme&apos;s science themes as self-guided investigations — every step opens a real dataset,
+              graph view, lab or lesson from this archive.
+            </p>
+          </div>
+          <Link href="/learn/missions" className="btn-tactile rounded-lg bg-accent-fill px-5 py-2.5 text-sm font-bold text-accent-ink">
+            Start a mission →
+          </Link>
+        </div>
+      </section>
+
       {/* Badge wall */}
       <section className="dh-container" aria-label="Badges">
         <div className="rounded-xl border border-line bg-surface p-8">
@@ -168,7 +184,12 @@ function GlossarySection() {
             are protected, never translated loosely.
           </p>
         </div>
-        <span className="meta-label !text-[9px]">10 of the demo glossary</span>
+        <div className="flex items-center gap-4">
+          <span className="meta-label !text-[9px]">10 of the demo glossary</span>
+          <Link href="/learn/glossary" className="link-line text-xs font-semibold text-accent">
+            Full glossary — EN · हिन्दी · বাংলা →
+          </Link>
+        </div>
       </div>
       <dl className="grid gap-px overflow-hidden rounded-xl border border-line bg-line md:grid-cols-2">
         {GLOSSARY_TERMS.map((g) => (

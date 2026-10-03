@@ -32,7 +32,16 @@ export function useCountUp(target: number, active = true): number {
       if (p < 1) raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    // Background/occluded tabs throttle rAF — snap to the real value rather
+    // than leave the tile stuck at 0.
+    const fallback = window.setTimeout(() => {
+      cancelAnimationFrame(raf);
+      setValue(target);
+    }, duration + 400);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.clearTimeout(fallback);
+    };
   }, [target, active]);
 
   return value;

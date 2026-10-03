@@ -6,15 +6,35 @@
  * Significance → Outputs, with honest visual vignettes:
  *   • BurialVignette (2.5-D ice-shelf cross-section, Dakshin Gangotri era)
  *   • OceanProfileVignette (2-D CTD-style cast, Southern Ocean)
- * Both are explicitly labelled conceptual illustrations — they visualise a
- * documented process, never invented measurements.
+ *   • IceCoreVignette (depth slider → layer reveal, cryosphere seasons)
+ * All are explicitly labelled conceptual illustrations — they visualise
+ * documented processes, never invented measurements. Each chapter closes
+ * with a short "YETI's field note" from the archive mascot, and the Outputs
+ * chapter links this expedition's actual records from the Vault.
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import Link from "next/link";
+import type { LucideIcon } from "lucide-react";
+import {
+  Activity,
+  Bird,
+  Drill,
+  FlaskConical,
+  Mountain,
+  MountainSnow,
+  Satellite,
+  Snowflake,
+  Sparkles,
+  Waves,
+  Wind,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { Expedition } from "@/lib/types";
 import { MiniRouteMap } from "@/components/expeditions/MiniRouteMap";
-import { stationForProgramme } from "@/lib/data/stations";
+import { MascotBadge } from "@/components/yeti/Mascot";
+import { getStation, stationForProgramme } from "@/lib/data/stations";
+import { DATASETS, REPORTS } from "@/lib/data/vault";
 
 /* ------------------------------ Burial vignette --------------------------- */
 
@@ -172,6 +192,134 @@ function OceanProfileVignette() {
   );
 }
 
+/* ----------------------------- Ice core vignette --------------------------- */
+
+const CORE_MAX = 130;
+
+const CORE_LAYERS = [
+  {
+    from: 0,
+    to: 6,
+    name: "Recent snow & firn",
+    age: "0–10 years",
+    color: "#f3fafd",
+    note: "Loose snow compacting under its own weight — this season's weather is still readable in the top metres.",
+  },
+  {
+    from: 6,
+    to: 18,
+    name: "Consolidating firn",
+    age: "10–80 years",
+    color: "#dceef7",
+    note: "Pores between grains are closing; the air here is on its way to becoming a sealed sample of past atmosphere.",
+  },
+  {
+    from: 18,
+    to: 38,
+    name: "Young ice",
+    age: "≈80–250 years",
+    color: "#bfe0ef",
+    note: "Bubbles sealed — an archive of the industrial-era atmosphere, captured on the way down.",
+  },
+  {
+    from: 38,
+    to: 70,
+    name: "Layered ice",
+    age: "≈250–600 years",
+    color: "#9cc9e0",
+    note: "Annual bands with volcanic and sea-salt horizons — the layers used to count years the way tree rings are counted.",
+  },
+  {
+    from: 70,
+    to: 110,
+    name: "Older ice",
+    age: "beyond ≈600 years",
+    color: "#78a9c4",
+    note: "Bands grow thinner with depth — the reason deep cores are drilled and counted with care.",
+  },
+  {
+    from: 110,
+    to: CORE_MAX,
+    name: "Deep ice (schematic)",
+    age: ">1,000 years (illustrative)",
+    color: "#5889a8",
+    note: "At real drill sites, ice this deep carries climate cycles spanning many millennia.",
+  },
+];
+
+function IceCoreVignette() {
+  const [depth, setDepth] = useState(24);
+  const layer =
+    CORE_LAYERS.find((l) => depth >= l.from && depth < l.to) ?? CORE_LAYERS[CORE_LAYERS.length - 1];
+
+  return (
+    <figure className="overflow-hidden rounded-xl border border-line bg-surface" aria-label="Ice core layer reveal, conceptual demonstration">
+      <div className="grid gap-6 p-5 md:grid-cols-[190px_1fr] md:p-6">
+        {/* core column */}
+        <div className="relative h-[300px] overflow-hidden rounded-lg border border-line-strong" aria-hidden>
+          {CORE_LAYERS.map((l) => (
+            <div
+              key={l.name}
+              className="absolute inset-x-0 transition-opacity duration-500"
+              style={{
+                top: `${(l.from / CORE_MAX) * 100}%`,
+                height: `${((l.to - l.from) / CORE_MAX) * 100}%`,
+                background: `linear-gradient(180deg, ${l.color}, ${l.color}cc)`,
+                opacity: depth >= l.to ? 1 : depth > l.from ? 0.55 : 0.18,
+              }}
+            />
+          ))}
+          {/* depth ruler */}
+          {[0, 50, 100].map((m) => (
+            <div key={m} className="absolute left-1" style={{ top: `calc(${(m / CORE_MAX) * 100}% - 6px)` }}>
+              <span className="numeral rounded bg-[#071020]/70 px-1 text-[9px] text-white/85">{m} m</span>
+            </div>
+          ))}
+          {/* drill marker */}
+          <div className="absolute inset-x-0 transition-[top] duration-200" style={{ top: `${(depth / CORE_MAX) * 100}%` }}>
+            <div className="h-[2px] w-full bg-sunrise" />
+          </div>
+        </div>
+        {/* layer card */}
+        <div className="flex flex-col justify-center">
+          <p className="meta-label">
+            Drill depth · <span className="numeral">{depth} m</span>
+          </p>
+          <p className="display mt-2 text-xl font-bold text-text md:text-2xl">{layer.name}</p>
+          <p className="mt-2 inline-flex w-fit rounded-full border border-line bg-surface-2 px-3 py-1 text-xs text-text-2">
+            Approximate age band&nbsp;<span className="numeral text-text">{layer.age}</span>
+          </p>
+          <p className="mt-3 max-w-[55ch] text-sm leading-relaxed text-text-2">{layer.note}</p>
+        </div>
+      </div>
+      <figcaption className="border-t border-line px-5 py-3.5">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-text">A tape recorder made of ice</p>
+            <p className="mt-0.5 text-[11px] leading-relaxed text-text-3">
+              Conceptual demonstration core — depth-to-age bands illustrate how firn closes into ice and layers
+              accumulate. Real age scales are measured per drill site, not assumed.
+            </p>
+          </div>
+          <label className="flex shrink-0 items-center gap-3 text-xs text-text-2">
+            Depth
+            <input
+              type="range"
+              min={0}
+              max={CORE_MAX}
+              value={depth}
+              onChange={(e) => setDepth(Number(e.target.value))}
+              className="dh-range w-36"
+              aria-label="Scrub ice core depth"
+            />
+            <span className="numeral w-12 text-right text-text">{depth} m</span>
+          </label>
+        </div>
+      </figcaption>
+    </figure>
+  );
+}
+
 /* ------------------------------ Story section ----------------------------- */
 
 const CHAPTERS = [
@@ -182,6 +330,135 @@ const CHAPTERS = [
   "Scientific significance",
   "Outputs",
 ] as const;
+
+/* Illustrative field activities for each science-plan theme. The mapping is a
+   demonstration reconstruction of standard polar practice — not a season log. */
+const FIELD_ACTIVITIES: Record<string, { icon: LucideIcon; detail: string }> = {
+  Glaciology: {
+    icon: MountainSnow,
+    detail: "Stake farms re-measured and snow pits logged on foot across the traverse sector.",
+  },
+  "Atmospheric sciences": {
+    icon: Wind,
+    detail: "Weather masts serviced, radiosonde launches run, and the daily meteorological log kept unbroken.",
+  },
+  Oceanography: {
+    icon: Waves,
+    detail: "CTD casts and expendable-bathythermograph sections reading temperature and salinity down the column.",
+  },
+  "Sea-ice observations": {
+    icon: Snowflake,
+    detail: "Bridge watches logging concentration, floe size and ice type along the track.",
+  },
+  Geosciences: {
+    icon: Mountain,
+    detail: "Rock sampling and structural mapping on the ice-free ground the sector offers.",
+  },
+  "Remote sensing ground truth": {
+    icon: Satellite,
+    detail: "Ground-truth sites measured so satellite retrievals can be checked against reality.",
+  },
+  "Polar biology": {
+    icon: Bird,
+    detail: "Lichen, moss and seabird surveys recording biodiversity around the station.",
+  },
+  "Environmental monitoring": {
+    icon: Activity,
+    detail: "Waste, fuel and footprint protocols monitored through the season.",
+  },
+  "Upper atmosphere studies": {
+    icon: Sparkles,
+    detail: "Optical instruments and riometers watching auroral and ionospheric processes.",
+  },
+  "Ice-core reconnaissance": {
+    icon: Drill,
+    detail: "Drilling rehearsals and pit-to-core stratigraphy work for the deeper ice programme.",
+  },
+  Biogeochemistry: {
+    icon: FlaskConical,
+    detail: "Water sampled for nutrients and carbon — the ocean's chemistry collected in bottles.",
+  },
+};
+
+const THEME_SIGNIFICANCE: Record<string, string> = {
+  Glaciology: "glacier and ice-shelf mass balance — the numbers that decide how much water the ice holds",
+  "Atmospheric sciences": "a continuous atmospheric record from a region that anchors Southern Hemisphere climate",
+  Oceanography: "water-column structure where cold fresh layers sit over warm deep water",
+  "Sea-ice observations": "sea-ice extent and type records — the planet's seasonal thermostat, measured watch by watch",
+  Geosciences: "the geological story of Gondwana's southern fragments",
+  "Remote sensing ground truth": "ground measurements that calibrate what satellites claim from orbit",
+  "Polar biology": "biodiversity baselines in one of Earth's least sampled ecosystems",
+  "Environmental monitoring": "a measurable account of the human footprint on polar ground",
+  "Upper atmosphere studies": "auroral and ionospheric processes over the polar cap",
+  "Ice-core reconnaissance": "the climate archive written in layered ice",
+  Biogeochemistry: "carbon and nutrient cycling between ocean and atmosphere",
+};
+
+function significanceText(exp: Expedition): string {
+  const themes = exp.objectives.map((o) => THEME_SIGNIFICANCE[o]).filter(Boolean);
+  const themesText =
+    themes.length > 0 ? `This season's work adds to ${themes.slice(0, 2).join(" and ")}. ` : "";
+  const head =
+    exp.programme === "Arctic"
+      ? "India's Arctic record only began in 2007, so every season carries extra weight in a young series."
+      : exp.programme === "Southern Ocean"
+        ? "The Goa–Prydz Bay corridor is the ocean engine that connects Antarctic ice to the Indian monsoon — the link NCPOR's Southern Ocean work exists to measure."
+        : "A single season never stands alone: its value is the way it stacks onto the decades before it.";
+  return `${themesText}${head} Datasets from this expedition link onward to publications — the graph edge that turns field work into citable science.`;
+}
+
+function journeyWaypoints(exp: Expedition): { label: string; detail: string }[] {
+  if (exp.programme === "Arctic") {
+    return [
+      { label: "Departure — Indian gateway port", detail: "Load-out, science cargo and cold-room checks" },
+      { label: "Longyearbyen, Svalbard", detail: "International Arctic gateway (schematic stop)" },
+      { label: "Ny-Ålesund — Himadri", detail: "Station base for the season's science plan" },
+    ];
+  }
+  if (exp.programme === "Southern Ocean") {
+    return [
+      { label: "Goa — departure", detail: "Vessel load-out for the Goa–Prydz Bay transect" },
+      { label: "Indian Ocean crossing", detail: "En-route sections as the vessel works south" },
+      { label: "Prydz Bay — work sector", detail: "Casts, sea-ice watches and station support" },
+      { label: "Return transect", detail: "Repeat sections and demobilisation" },
+    ];
+  }
+  const station = exp.stationIds?.[0] ? getStation(exp.stationIds[0]) : undefined;
+  return [
+    { label: "Departure — Indian gateway port", detail: "Load-out and science cargo manifest" },
+    { label: "Indian Ocean crossing", detail: "En-route observations and ice-navigation preparation" },
+    { label: "Ice edge", detail: "First sea ice — operations move onto ice coordination" },
+    {
+      label: station ? station.name : exp.region,
+      detail: "Station base and field deployments across the sector",
+    },
+  ];
+}
+
+function fieldNote(i: number, exp: Expedition): string {
+  switch (i) {
+    case 0:
+      return "A science plan is a promise made before the ship leaves. Each objective on this page should later surface as a record in the Vault.";
+    case 1:
+      return "Schematic routes are honest routes — they show how a season is structured, not a navigational track.";
+    case 2:
+      return "Polar field work is mostly logistics: the science happens in the gaps between keeping people warm and instruments alive.";
+    case 3:
+      if (exp.programme === "Southern Ocean")
+        return "One cast is a photograph; a season of casts is a film. Patterns only emerge when profiles stack across years.";
+      if (exp.programme === "Antarctic" && exp.startYear <= 1990 && exp.startYear >= 1982)
+        return "Dakshin Gangotri's burial is an observation you can watch without a single instrument — the ice did the recording.";
+      if (exp.objectives.includes("Ice-core reconnaissance"))
+        return "An ice core is a tape recorder: each year pressed into a layer. Scrub the depth and read it back.";
+      return "When a season's highlights are not digitised yet, the archive says so — honest gaps are part of the record too.";
+    case 4:
+      return "No single season proves anything — records matter for how they stack. Every season here is one layer in a decades-deep series.";
+    case 5:
+      return "If it isn't in the archive, it didn't happen. Every output linked here closes the loop back into the Vault.";
+    default:
+      return "";
+  }
+}
 
 export function ExpeditionStory({ exp }: { exp: Expedition }) {
   const [active, setActive] = useState(0);
@@ -209,6 +486,11 @@ export function ExpeditionStory({ exp }: { exp: Expedition }) {
 
   const showBurial = exp.programme === "Antarctic" && exp.startYear <= 1990 && exp.startYear >= 1982;
   const showOcean = exp.programme === "Southern Ocean";
+  const showIceCore =
+    exp.objectives.includes("Ice-core reconnaissance") ||
+    (exp.programme === "Arctic" && exp.objectives.includes("Glaciology"));
+  const waypoints = journeyWaypoints(exp);
+  const significance = significanceText(exp);
 
   return (
     <section aria-label="Expedition story" className="hairline-t bg-surface/40">
@@ -253,6 +535,7 @@ export function ExpeditionStory({ exp }: { exp: Expedition }) {
                 </li>
               ))}
             </ul>
+            <FieldNote>{fieldNote(0, exp)}</FieldNote>
           </section>
 
           <section ref={(el) => { refs.current[1] = el; }} aria-label="Journey" className="scroll-mt-28">
@@ -263,19 +546,38 @@ export function ExpeditionStory({ exp }: { exp: Expedition }) {
                 : `The season operated across the ${exp.region} sector.`}{" "}
               Routes here are schematic — origin to programme sector, not a navigational track.
             </p>
-            <div className="mt-6 rounded-xl border border-line bg-surface p-4">
-              <MiniRouteLazy stationProgramme={exp.programme} />
+            <div className="mt-6 grid gap-4 lg:grid-cols-2">
+              <div className="rounded-xl border border-line bg-surface p-4">
+                <MiniRouteLazy stationProgramme={exp.programme} />
+              </div>
+              <div className="rounded-xl border border-line bg-surface p-5">
+                <p className="meta-label mb-4">Schematic itinerary</p>
+                <ol className="relative flex flex-col border-l border-line-strong pl-5">
+                  {waypoints.map((w) => (
+                    <li key={w.label} className="relative py-2 first:pt-0 last:pb-0">
+                      <span className="absolute -left-[25px] top-1.5 size-2.5 rounded-full border-2 border-accent bg-surface" aria-hidden />
+                      <p className="text-sm font-semibold text-text">{w.label}</p>
+                      <p className="mt-0.5 text-xs leading-relaxed text-text-3">{w.detail}</p>
+                    </li>
+                  ))}
+                </ol>
+                <p className="mt-4 text-[10px] text-text-3">
+                  Demonstration itinerary — stops are schematic, not a voyage log.
+                </p>
+              </div>
             </div>
+            <FieldNote>{fieldNote(1, exp)}</FieldNote>
           </section>
 
           <section ref={(el) => { refs.current[2] = el; }} aria-label="Field activity" className="scroll-mt-28">
             <ChapterKicker n="03" t="Field activity" />
             <p className="mt-4 max-w-[70ch] text-base leading-relaxed text-text-2">
               Field work follows the season&apos;s science plan: station operations, traverse and sampling work
-              within the {exp.region} sector, and the logistics that keep a polar camp alive. Imagery below is
-              credited per asset.
+              within the {exp.region} sector, and the logistics that keep a polar camp alive. Each objective below
+              maps to the kind of activity it drives in the field.
             </p>
             <FieldStrip exp={exp} />
+            <FieldNote>{fieldNote(2, exp)}</FieldNote>
           </section>
 
           <section ref={(el) => { refs.current[3] = el; }} aria-label="Observation" className="scroll-mt-28">
@@ -298,26 +600,33 @@ export function ExpeditionStory({ exp }: { exp: Expedition }) {
                 <OceanProfileVignette />
               </>
             )}
-            {!showBurial && !showOcean && (
+            {showIceCore && (
+              <>
+                <p className="mb-6 mt-4 max-w-[70ch] text-base leading-relaxed text-text-2">
+                  Some seasons read the ice itself. A core is a stack of years — scrub the drill depth and watch
+                  the layers give up their story.
+                </p>
+                <IceCoreVignette />
+              </>
+            )}
+            {!showBurial && !showOcean && !showIceCore && (
               <p className="mt-4 max-w-[70ch] text-base leading-relaxed text-text-2">
                 Observation highlights for this season are part of the digitisation roadmap — the report series in
                 the Vault carries the primary record.
               </p>
             )}
+            <FieldNote>{fieldNote(3, exp)}</FieldNote>
           </section>
 
           <section ref={(el) => { refs.current[4] = el; }} aria-label="Scientific significance" className="scroll-mt-28">
             <ChapterKicker n="05" t="Scientific significance" />
-            <p className="mt-4 max-w-[70ch] text-base leading-relaxed text-text-2">
-              Each season feeds the programme&apos;s long observational record: multi-year series only mean
-              something because single seasons add to them. Datasets from this expedition link onward to
-              publications — the graph edge that turns field work into citable science.
-            </p>
+            <p className="mt-4 max-w-[70ch] text-base leading-relaxed text-text-2">{significance}</p>
             {exp.milestone && (
               <p className="mt-4 inline-flex rounded-full border border-accent/40 bg-accent-dim px-4 py-1.5 text-sm text-accent">
                 Verified milestone — {exp.milestone}
               </p>
             )}
+            <FieldNote>{fieldNote(4, exp)}</FieldNote>
           </section>
 
           <section ref={(el) => { refs.current[5] = el; }} aria-label="Outputs" className="scroll-mt-28">
@@ -326,7 +635,8 @@ export function ExpeditionStory({ exp }: { exp: Expedition }) {
               Everything this expedition produced, linked from one place — the chapter that closes the loop back
               into the archive.
             </p>
-            <OutputsGrid expId={exp.id} stationId={exp.stationIds?.[0]} />
+            <OutputsGrid exp={exp} />
+            <FieldNote>{fieldNote(5, exp)}</FieldNote>
           </section>
         </div>
       </div>
@@ -348,35 +658,121 @@ function MiniRouteLazy({ stationProgramme }: { stationProgramme: string }) {
   return <MiniRouteMap to={st} label="Schematic origin → sector. Not a navigational track." />;
 }
 
-function FieldStrip({ exp }: { exp: Expedition }) {
+/* YETI's field note — a calm, scientific one-liner from the archive mascot.
+   Never childish: it reads like a margin annotation in a field notebook. */
+function FieldNote({ children }: { children: React.ReactNode }) {
   return (
-    <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
-      {exp.objectives.slice(0, 4).map((o, i) => (
-        <div key={o} className="rounded-lg border border-line bg-surface p-3.5">
-          <span className="numeral text-[10px] text-accent">{String(i + 1).padStart(2, "0")}</span>
-          <p className="mt-1 text-xs leading-relaxed text-text-2">{o}</p>
-        </div>
-      ))}
+    <div className="mt-6 flex items-start gap-3 rounded-lg border border-line bg-surface/80 px-4 py-3">
+      <MascotBadge state="explaining" className="mt-0.5 h-8 w-11 shrink-0" />
+      <div className="min-w-0">
+        <p className="meta-label !text-[9px]">YETI&apos;s field note</p>
+        <p className="mt-1 text-xs leading-relaxed text-text-2">{children}</p>
+      </div>
     </div>
   );
 }
 
-function OutputsGrid({ expId, stationId }: { expId: string; stationId?: string }) {
-  void expId;
+function FieldStrip({ exp }: { exp: Expedition }) {
+  const cards = exp.objectives.map((o) => ({
+    objective: o,
+    icon: FIELD_ACTIVITIES[o]?.icon ?? Snowflake,
+    detail: FIELD_ACTIVITIES[o]?.detail ?? "Season-plan activities carried out as scheduled.",
+  }));
+  return (
+    <div className="mt-6">
+      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        {cards.map((c, i) => (
+          <div key={c.objective} className="rounded-lg border border-line bg-surface p-4">
+            <div className="flex items-center gap-2">
+              <c.icon className="size-4 shrink-0 text-accent" strokeWidth={1.5} aria-hidden />
+              <span className="meta-label !text-[9px]">
+                {String(i + 1).padStart(2, "0")} · {c.objective}
+              </span>
+            </div>
+            <p className="mt-2 text-xs leading-relaxed text-text-2">{c.detail}</p>
+          </div>
+        ))}
+      </div>
+      <p className="mt-3 text-[10px] text-text-3">
+        Illustrative activities typical of each science-plan theme — a demonstration reconstruction, not a season log.
+      </p>
+    </div>
+  );
+}
+
+function OutputsGrid({ exp }: { exp: Expedition }) {
+  const stationId = exp.stationIds?.[0];
+  const reports = useMemo(() => REPORTS.filter((r) => r.expeditionId === exp.id), [exp.id]);
+  const datasets = useMemo(
+    () => DATASETS.filter((d) => d.expeditionId === exp.id || d.stationId === stationId),
+    [exp.id, stationId],
+  );
+  const shownDatasets = datasets.slice(0, 4);
+
   return (
     <div className="mt-6 grid gap-3 md:grid-cols-3">
-      <a href="/vault#reports" className="btn-tactile rounded-xl border border-line bg-surface p-5 hover:border-accent/50">
-        <p className="meta-label !text-[9px]">Reports</p>
-        <p className="mt-1.5 text-sm font-semibold text-text">Expedition report shelf →</p>
-      </a>
-      <a href="/vault" className="btn-tactile rounded-xl border border-line bg-surface p-5 hover:border-accent/50">
-        <p className="meta-label !text-[9px]">Datasets</p>
-        <p className="mt-1.5 text-sm font-semibold text-text">Data catalogue →</p>
-      </a>
-      <a href={stationId ? `/stations/${stationId}` : "/stations"} className="btn-tactile rounded-xl border border-line bg-surface p-5 hover:border-accent/50">
-        <p className="meta-label !text-[9px]">Stations</p>
-        <p className="mt-1.5 text-sm font-semibold text-text">Where it happened →</p>
-      </a>
+      <div className="rounded-xl border border-line bg-surface p-5">
+        <p className="meta-label">Reports · {reports.length} in archive</p>
+        {reports.length > 0 ? (
+          <ul className="mt-3 flex flex-col divide-y divide-line">
+            {reports.map((r) => (
+              <li key={r.id}>
+                <Link href="/vault#reports" className="group flex items-baseline justify-between gap-3 py-2.5">
+                  <span className="text-sm font-medium leading-snug text-text group-hover:text-accent">{r.title}</span>
+                  <span className="numeral shrink-0 text-[11px] text-text-3">{r.pages} pp</span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="mt-3 text-xs leading-relaxed text-text-3">
+            No report digitised for this season yet — the digitisation roadmap covers it. The full season series
+            lives on <Link href="/vault#reports" className="link-line text-accent">the Vault report shelf</Link>.
+          </p>
+        )}
+      </div>
+
+      <div className="rounded-xl border border-line bg-surface p-5">
+        <p className="meta-label">Datasets · {datasets.length} in catalogue</p>
+        {shownDatasets.length > 0 ? (
+          <>
+            <ul className="mt-3 flex flex-col divide-y divide-line">
+              {shownDatasets.map((d) => (
+                <li key={d.id}>
+                  <Link href={`/vault/datasets/${d.slug}`} className="group flex items-baseline justify-between gap-3 py-2.5">
+                    <span className="text-sm font-medium leading-snug text-text group-hover:text-accent">{d.title}</span>
+                    <span className="numeral shrink-0 text-[11px] text-text-3">{d.version}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {datasets.length > shownDatasets.length && (
+              <Link href="/vault" className="link-line mt-2 inline-block text-xs text-accent">
+                +{datasets.length - shownDatasets.length} more in the catalogue →
+              </Link>
+            )}
+          </>
+        ) : (
+          <p className="mt-3 text-xs leading-relaxed text-text-3">
+            No dataset ingested for this record in the demo build — related seasons live in the{" "}
+            <Link href="/vault" className="link-line text-accent">Vault data catalogue</Link>.
+          </p>
+        )}
+      </div>
+
+      <div className="rounded-xl border border-line bg-surface p-5">
+        <p className="meta-label">Stations</p>
+        <Link
+          href={stationId ? `/stations/${stationId}` : "/stations"}
+          className="btn-tactile mt-3 flex items-center justify-between rounded-lg border border-line bg-surface-2 px-4 py-3 text-sm font-semibold text-text hover:border-accent/50"
+        >
+          Where it happened →
+        </Link>
+        <p className="mt-3 text-xs leading-relaxed text-text-3">
+          Station pages carry the observation context: where instruments sit, what they watch, and how long the
+          record runs.
+        </p>
+      </div>
     </div>
   );
 }

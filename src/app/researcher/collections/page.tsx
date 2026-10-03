@@ -5,6 +5,7 @@ import { BookMarked, Download, Plus, Trash2 } from "lucide-react";
 import { allRecords, collectionsApi, useStoreSnapshot } from "@/lib/api/client";
 import { bibTeX, downloadText, ris } from "@/lib/citations";
 import { useToast } from "@/components/workspace/Toasts";
+import { MascotBadge } from "@/components/yeti/Mascot";
 import { cn } from "@/lib/utils";
 
 export default function CollectionsPage() {
@@ -71,9 +72,12 @@ export default function CollectionsPage() {
       <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
         <aside className="flex h-fit flex-col gap-2">
           {list.length === 0 && (
-            <p className="rounded-lg border border-dashed border-line-strong px-4 py-6 text-center text-sm text-text-3">
-              No collections yet. Create one, then search the archive to fill it.
-            </p>
+            <div className="flex flex-col items-center gap-2 rounded-lg border border-dashed border-line-strong px-4 py-6 text-center">
+              <MascotBadge state="idle" className="h-10 w-14" />
+              <p className="text-sm text-text-3">
+                No collections yet. Create one, then search the archive to fill it.
+              </p>
+            </div>
           )}
           {list.map((c) => (
             <button
