@@ -1,0 +1,128 @@
+{
+  "antarctica-aerial": {
+    "source": "https://commons.wikimedia.org/wiki/File%3AApproaching_the_Larsen_Ice_Shelf.jpg",
+    "license": "Public domain",
+    "artist": "NASA Photo by: Jim Ross",
+    "title": "File:Approaching the Larsen Ice Shelf.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "maitri-station": {
+    "source": "https://commons.wikimedia.org/wiki/File%3A%E0%A4%AE%E0%A5%88%E0%A4%A4%E0%A5%8D%E0%A4%B0%E0%A5%80%2C_%E0%A4%AD%E0%A4%BE%E0%A4%B0%E0%A4%A4%E0%A5%80%E0%A4%AF_%E0%A4%B8%E0%A5%8D%E0%A4%9F%E0%A5%87%E0%A4%B6%E0%A4%A8_%E0%A4%85%E0%A4%82%E0%A4%9F%E0%A4%BE%E0%A4%B0%E0%A5%8D%E0%A4%95%E0%A4%9F%E0%A4%BF%E0%A4%95_%E0%A4%AE%E0%A4%B9%E0%A4%BE%E0%A4%A6%E0%A5%8D%E0%A4%B5%E0%A5%80%E0%A4%AA.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Prakash khatarkar",
+    "title": "File:मैत्री, भारतीय स्टेशन अंटार्कटिक महाद्वीप.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "bharati-station": {
+    "source": "https://commons.wikimedia.org/wiki/File%3ABharati_permanent_Antarctic_research_station.jpg",
+    "license": "Public domain",
+    "artist": "Unknown authorUnknown author",
+    "title": "File:Bharati permanent Antarctic research station.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "ny-alesund": {
+    "source": "https://commons.wikimedia.org/wiki/File%3ANy-Aalesund_Hamnerabben_airport_IMG_6513.JPG",
+    "license": "CC BY-SA 3.0",
+    "artist": "Bjoertvedt",
+    "title": "File:Ny-Aalesund Hamnerabben airport IMG 6513.JPG",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "aurora-australis": {
+    "source": "https://commons.wikimedia.org/wiki/File%3AAmundsen-Scott_marsstation_ray_h_edit.jpg",
+    "license": "Public domain",
+    "artist": "Photo by Chris Danals, National Science Foundation",
+    "title": "File:Amundsen-Scott marsstation ray h edit.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "emperor-penguins": {
+    "source": "https://commons.wikimedia.org/wiki/File%3ANASA%E2%80%99s_BARREL_Mission_Launches_20_Balloons_(8758318511).jpg",
+    "license": "Public domain",
+    "artist": "NASA Goddard Space Flight Center from Greenbelt, MD, USA",
+    "title": "File:NASA’s BARREL Mission Launches 20 Balloons (8758318511).jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "iceberg": {
+    "source": "https://commons.wikimedia.org/wiki/File%3AIceberg_in_Antarctica%2C_Antarctic_Peninsula.JPEG",
+    "license": "CC BY-SA 3.0",
+    "artist": "PaoMic",
+    "title": "File:Iceberg in Antarctica, Antarctic Peninsula.JPEG",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "glacier": {
+    "source": "https://commons.wikimedia.org/wiki/File%3AAntarctic_Peninsula%2C_the_Larsen_Ice_Shelf%2C_and_the_sea_ice_covered_waters_around_the_region.jpg",
+    "license": "Public domain",
+    "artist": "Jeff Schmaltz",
+    "title": "File:Antarctic Peninsula, the Larsen Ice Shelf, and the sea ice covered waters around the region.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "crevasse": {
+    "source": "https://commons.wikimedia.org/wiki/File%3APerson_looking_at_glacier_across_bay.jpg",
+    "license": "CC BY 2.0",
+    "artist": "Jason Auch",
+    "title": "File:Person looking at glacier across bay.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "blue-marble-antarctica": {
+    "source": "https://commons.wikimedia.org/wiki/File%3ASatellite_image_of_icebergs_in_Antarctica_in_January_2001.jpg",
+    "license": "Public domain",
+    "artist": "NASA",
+    "title": "File:Satellite image of icebergs in Antarctica in January 2001.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "midnight-sun": {
+    "source": "https://commons.wikimedia.org/wiki/File%3AMidnight_sun%2C_Antarctica.jpg",
+    "license": "CC BY 2.0",
+    "artist": "Jason Auch",
+    "title": "File:Midnight sun, Antarctica.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "field-camp": {
+    "source": "https://commons.wikimedia.org/wiki/File%3ADallmann_Camp.jpg",
+    "license": "CC BY-SA 3.0",
+    "artist": "Wilfried Bauer",
+    "title": "File:Dallmann Camp.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "snow-vehicle": {
+    "source": "https://commons.wikimedia.org/wiki/File%3AIpev_(42).JPG",
+    "license": "CC BY-SA 3.0",
+    "artist": "Morgane Cot",
+    "title": "File:Ipev (42).JPG",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "svalbard-landscape": {
+    "source": "https://commons.wikimedia.org/wiki/File%3AEarth_from_Space-_Svalbard_Archipelago_ESA509074.jpg",
+    "license": "Attribution",
+    "artist": "European Space Agency",
+    "title": "File:Earth from Space- Svalbard Archipelago ESA509074.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "sea-ice": {
+    "source": "https://commons.wikimedia.org/wiki/File%3AAntarctic_mountains%2C_pack_ice_and_ice_floes.jpg",
+    "license": "CC BY 2.0",
+    "artist": "Jason Auch",
+    "title": "File:Antarctic mountains, pack ice and ice floes.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "weather-station": {
+    "source": "https://commons.wikimedia.org/wiki/File%3AIMG_0430-aws-rothera_1200x900.jpg",
+    "license": "CC BY-SA 3.0",
+    "artist": "William M. Connolley",
+    "title": "File:IMG 0430-aws-rothera 1200x900.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "icebreaker": {
+    "source": "https://commons.wikimedia.org/wiki/File%3AUSCGC_Polar_Sea.jpg",
+    "license": "Public domain",
+    "artist": "U. S. Coast Guard photo by Petty Officer 3rd Class Kevin Neff",
+    "title": "File:USCGC Polar Sea.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  },
+  "research-vessel": {
+    "source": "https://commons.wikimedia.org/wiki/File%3APolarstern-cruise_ANT-I_2_a_hg_03.jpg",
+    "license": "CC BY-SA 4.0",
+    "artist": "Hannes Grobe",
+    "title": "File:Polarstern-cruise ANT-I 2 a hg 03.jpg",
+    "note": "Retrieved via Wikimedia Commons API; used for demonstration with recorded provenance."
+  }
+}

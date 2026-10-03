@@ -1,0 +1,492 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   YETI design tokens — "Glacial Language"
+   Dark = immersive experience (Home/Atlas/Stations/Stories/Gallery)
+   Light = utility mode (Vault/Gyaan/Admin/Search/Newsroom/About)
+--------------------------------------------------------------------------- */
+
+:root,
+[data-theme="dark"] {
+  --bg: #0a1628;
+  --bg-deep: #071020;
+  --surface: #0f1c2e;
+  --surface-2: #132238;
+  --surface-3: #182a3e;
+  --line: rgba(167, 188, 207, 0.14);
+  --line-strong: rgba(167, 188, 207, 0.27);
+  --text: #eaf2f8;
+  --text-2: #b0c3d6;
+  --text-3: #7e91a7;
+  --accent: #3be8b0;
+  --accent-dim: rgba(59, 232, 176, 0.14);
+  --accent-ink: #04231a;
+  --accent-fill: #3be8b0;
+  --violet: #8a6cff;
+  --violet-dim: rgba(138, 108, 255, 0.16);
+  --sunrise: #ff8a5c;
+  --sunrise-dim: rgba(255, 138, 92, 0.14);
+  --danger: #ff6b6b;
+  --ice: #eef6fc;
+  --glow-line: rgba(59, 232, 176, 0.35);
+  --shadow-raised: 0 24px 48px -24px rgba(4, 10, 20, 0.8);
+  --shadow-card: 0 16px 32px -20px rgba(4, 10, 20, 0.7);
+}
+
+[data-theme="light"] {
+  --bg: #f4f9fc;
+  --bg-deep: #eaf2f8;
+  --surface: #ffffff;
+  --surface-2: #eaf2f8;
+  --surface-3: #dce9f2;
+  --line: rgba(14, 27, 42, 0.12);
+  --line-strong: rgba(14, 27, 42, 0.24);
+  --text: #0e1b2a;
+  --text-2: #41546a;
+  --text-3: #566d84;
+  --accent: #0c8f6e;
+  --accent-dim: rgba(12, 143, 110, 0.12);
+  --accent-ink: #ffffff;
+  --accent-fill: #0c8f6e;
+  --violet: #6d4fe0;
+  --violet-dim: rgba(109, 79, 224, 0.12);
+  --sunrise: #d95a28;
+  --sunrise-dim: rgba(217, 90, 40, 0.12);
+  --danger: #c93a3a;
+  --glow-line: rgba(12, 143, 110, 0.4);
+  --shadow-raised: 0 24px 48px -28px rgba(20, 40, 60, 0.25);
+  --shadow-card: 0 12px 28px -20px rgba(20, 40, 60, 0.28);
+}
+
+@theme inline {
+  /* Comfort overrides — Tailwind defaults felt tight for long reading */
+  --text-xs: 0.8125rem;
+  --text-xs--line-height: 1.5;
+  --text-sm: 0.9375rem;
+  --text-sm--line-height: 1.6;
+  --color-bg: var(--bg);
+  --color-bg-deep: var(--bg-deep);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-text: var(--text);
+  --color-text-2: var(--text-2);
+  --color-text-3: var(--text-3);
+  --color-accent: var(--accent);
+  --color-accent-dim: var(--accent-dim);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-fill: var(--accent-fill);
+  --color-violet: var(--violet);
+  --color-violet-dim: var(--violet-dim);
+  --color-sunrise: var(--sunrise);
+  --color-sunrise-dim: var(--sunrise-dim);
+  --color-danger: var(--danger);
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-hindi: var(--font-noto-devanagari), var(--font-plex-sans), sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+
+/* --- Typography helpers ------------------------------------------------- */
+
+.font-hindi {
+  font-family: var(--font-hindi);
+}
+
+.display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.meta-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  font-weight: 500;
+}
+
+.numeral {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* --- Layout primitives --------------------------------------------------- */
+
+.dh-container {
+  max-width: 1400px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.dh-container-tight {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.hairline-t {
+  border-top: 1px solid var(--line);
+}
+
+.hairline-b {
+  border-bottom: 1px solid var(--line);
+}
+
+/* --- Atmospheric depth --------------------------------------------------- */
+
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+}
+
+.atmos {
+  background:
+    radial-gradient(120% 90% at 70% -10%, rgba(59, 232, 176, 0.05), transparent 55%),
+    radial-gradient(90% 70% at 10% 110%, rgba(138, 108, 255, 0.06), transparent 60%),
+    var(--bg);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* --- Interactive affordances --------------------------------------------- */
+
+.btn-tactile {
+  transition:
+    transform 0.18s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.btn-tactile:active {
+  transform: translateY(1px) scale(0.985);
+}
+
+.link-line {
+  position: relative;
+}
+
+.link-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-line:hover::after,
+.link-line:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* --- Scroll reveal (JS adds .is-in; falls back to visible) --------------- */
+
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+[data-reveal].is-in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+html.no-js [data-reveal],
+html[data-reduced-motion="true"] [data-reveal] {
+  opacity: 1;
+  transform: none;
+  transition: none;
+}
+
+/* --- Skeletons ------------------------------------------------------------ */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: var(--surface-2);
+  border-radius: 6px;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, var(--line), transparent);
+  animation: shimmer 1.6s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* --- Ambient motion -------------------------------------------------------- */
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(0.8);
+  }
+}
+
+.pulse-dot {
+  animation: pulse-dot 2.4s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+@keyframes dash-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- Globe loading veil ----------------------------------------------------- */
+
+.globe-veil {
+  transition: opacity 0.9s ease;
+}
+
+/* --- Scrollbars inside panels ------------------------------------------------ */
+
+.panel-scroll {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+/* --- Range inputs (timeline scrubber) ----------------------------------------- */
+
+input[type="range"].dh-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 2px;
+  background: var(--line-strong);
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+input[type="range"].dh-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--glow-line);
+}
+
+input[type="range"].dh-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--glow-line);
+}
+
+/* --- Reduced motion ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+html[data-reduced-motion="true"] .pulse-dot,
+html[data-reduced-motion="true"] .skeleton::after {
+  animation: none;
+}
+
+/* --- YETI mascot motion --------------------------------------------------- */
+
+.yeti-mascot-idle {
+  animation: yeti-bob 4.2s ease-in-out infinite;
+}
+.yeti-mascot .yeti-mascot-eye {
+  transform-origin: center;
+  animation: yeti-blink 5.4s infinite;
+}
+.yeti-mascot .yeti-mascot-bubble {
+  animation: yeti-float 2.6s ease-in-out infinite;
+}
+.yeti-mascot .yeti-mascot-sweep {
+  transform-origin: 84px 34px;
+  animation: yeti-sweep 2.2s ease-in-out infinite;
+}
+.yeti-mascot .yeti-mascot-dots {
+  animation: yeti-float 2s ease-in-out infinite;
+}
+
+@keyframes yeti-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2.5px); }
+}
+@keyframes yeti-blink {
+  0%, 94%, 100% { transform: scaleY(1); }
+  96.5% { transform: scaleY(0.12); }
+}
+@keyframes yeti-float {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(-2px); opacity: 0.85; }
+}
+@keyframes yeti-sweep {
+  0%, 100% { transform: rotate(-10deg); }
+  50% { transform: rotate(14deg); }
+}
+
+/* --- Kiosk profile (museum bridge) ---------------------------------------- */
+
+html[data-kiosk="true"] {
+  font-size: 19px;
+}
+html[data-kiosk="true"] .dh-container {
+  max-width: 1200px;
+}
+
+/* --- Workspace console (signed-in surfaces) ------------------------------- */
+
+/* Slim console scrollbars for dense panels */
+.ws-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+.ws-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.ws-scroll::-webkit-scrollbar-thumb {
+  background: var(--line-strong);
+  border-radius: 999px;
+}
+.ws-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Toasts — transform/opacity only, 200ms band */
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+.toast {
+  animation: toast-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes toast-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}
+.toast[data-leaving="true"] {
+  animation: toast-out 180ms ease-in forwards;
+}
+
+/* Stat reveal — a finite, one-shot count-up handled in JS; CSS only fades the tile in */
+@keyframes ws-rise {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.ws-rise {
+  animation: ws-rise 240ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
