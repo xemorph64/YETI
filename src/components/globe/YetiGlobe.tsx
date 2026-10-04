@@ -15,6 +15,7 @@ const Inner = dynamic(() => import("@/components/globe/YetiGlobeInner"), {
 interface YetiGlobeProps {
   arcs: ArcSpec[];
   showStations?: boolean;
+  stations?: GlobeStation[];
   onStationClick?: (s: GlobeStation) => void;
   onArcClick?: (a: ArcSpec) => void;
   autoRotate?: boolean;

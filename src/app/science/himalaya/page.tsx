@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/chrome/Breadcrumbs";
 import { Kicker } from "@/components/ui/primitives";
+import { GlacierFigure } from "@/components/science/Figures";
 
 export const metadata: Metadata = {
   title: "The Himalayan cryosphere",
@@ -44,6 +45,8 @@ export default function HimalayaPage() {
               feeds some basins while others depend on winter systems.
             </p>
           </section>
+
+          <GlacierFigure />
 
           <section>
             <h2 className="display text-xl font-semibold text-text">The same instruments</h2>

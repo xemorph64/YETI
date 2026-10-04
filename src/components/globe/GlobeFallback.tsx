@@ -1,25 +1,29 @@
 "use client";
 
 import Link from "next/link";
-import { GOA, STATION_POINTS, type ArcSpec, webglSupported } from "@/components/globe/YetiGlobe";
-import { useEffect, useState } from "react";
+import { GOA, STATION_POINTS, type ArcSpec, type GlobeStation, webglSupported } from "@/components/globe/YetiGlobe";
+import { useSyncExternalStore } from "react";
+
+const noSubscribe = () => () => {};
 
 /* 2D fallback: equirectangular projection over the Blue Marble texture.
    Ships whenever WebGL is unavailable — the archive stays reachable. */
 export function GlobeFallback({
   arcs,
+  stations,
   children,
 }: {
   arcs: ArcSpec[];
+  stations?: GlobeStation[];
   children?: React.ReactNode;
 }) {
-  const [supported, setSupported] = useState(true);
-  useEffect(() => setSupported(webglSupported()), []);
+  // Server assumes WebGL; the client reads the real capability during hydration.
+  const supported = useSyncExternalStore(noSubscribe, webglSupported, () => true);
   if (supported) return <>{children}</>;
-  return <FallbackMap arcs={arcs} />;
+  return <FallbackMap arcs={arcs} stations={stations} />;
 }
 
-export function FallbackMap({ arcs }: { arcs: ArcSpec[] }) {
+export function FallbackMap({ arcs, stations = STATION_POINTS }: { arcs: ArcSpec[]; stations?: GlobeStation[] }) {
   const W = 1000;
   const H = 500;
   const px = (lat: number, lng: number) => ({
@@ -55,7 +59,7 @@ export function FallbackMap({ arcs }: { arcs: ArcSpec[] }) {
             />
           );
         })}
-        {STATION_POINTS.map((s) => {
+        {stations.map((s) => {
           const p = px(s.lat, s.lng);
           return (
             <g key={s.name}>

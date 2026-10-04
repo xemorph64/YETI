@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/chrome/Breadcrumbs";
 import { Kicker } from "@/components/ui/primitives";
+import { CtdFigure } from "@/components/science/Figures";
 
 export const metadata: Metadata = {
   title: "The Southern Ocean",
@@ -56,6 +57,8 @@ export default function SouthernOceanPage() {
               wiring back temperature and salinity with depth.
             </p>
           </section>
+
+          <CtdFigure />
 
           <section>
             <h2 className="display text-xl font-semibold text-text">Why India sails this transect</h2>

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/chrome/Breadcrumbs";
 import { Kicker } from "@/components/ui/primitives";
+import { FirnFigure } from "@/components/science/Figures";
 
 export const metadata: Metadata = {
   title: "Ice cores",
@@ -44,6 +45,8 @@ export default function IceCorePage() {
               that happens, the archive is still being written; below it, the archive is closed.
             </p>
           </section>
+
+          <FirnFigure />
 
           <section>
             <h2 className="display text-xl font-semibold text-text">What the layers carry</h2>

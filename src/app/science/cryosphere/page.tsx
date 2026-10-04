@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/chrome/Breadcrumbs";
 import { Kicker } from "@/components/ui/primitives";
+import { MeltFigure } from "@/components/science/Figures";
 
 export const metadata: Metadata = {
   title: "The cryosphere",
@@ -52,6 +53,8 @@ export default function CryospherePage() {
               starts by separating the three.
             </p>
           </section>
+
+          <MeltFigure />
 
           <section>
             <h2 className="display text-xl font-semibold text-text">How it is measured</h2>

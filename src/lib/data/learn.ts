@@ -179,7 +179,8 @@ export const LEARN_PATHS: LearnPath[] = [
             minutes: 5,
             blocks: [
               {
-                text: "A glacier is a river of ice, moving under its own weight. Snow falls, compresses into ice, and flows downhill. Glaciers gain mass at the top and lose it at the snout — the balance between the two is the clearest signal of a warming or cooling world.",
+                text: "A glacier is a river of ice, moving under its own weight. Snow falls, compresses into ice, and flows downhill. Glaciers gain mass at the top and lose it at the snout — the balance between the two is the clearest signal of a warming or cooling world.",                figure: "glacier",
+
               },
             ],
           },
@@ -199,7 +200,8 @@ export const LEARN_PATHS: LearnPath[] = [
             minutes: 5,
             blocks: [
               {
-                text: "Field teams stake out mass-balance plots, dig snow pits, and drill cores. Satellites measure ice height, speed and gravity. Ships log sea-ice from the bridge. YETI's Vault shows the kinds of records these campaigns produce — explore a synthetic dataset to see how it works.",
+                text: "Field teams stake out mass-balance plots, dig snow pits, and drill cores. Satellites measure ice height, speed and gravity. Ships log sea-ice from the bridge. YETI's Vault shows the kinds of records these campaigns produce — explore a synthetic dataset to see how it works.",                figure: "firn",
+
               },
             ],
           },
@@ -324,7 +326,8 @@ export const LEARN_PATHS: LearnPath[] = [
             minutes: 6,
             blocks: [
               {
-                text: "Greenland and Antarctica hold enough ice to raise global sea level by many metres — but over centuries, not years, and only if warming pushes them past thresholds scientists are still mapping. Even today's partial losses are already visible in tide-gauge records, including along the Indian coastline.",
+                text: "Greenland and Antarctica hold enough ice to raise global sea level by many metres — but over centuries, not years, and only if warming pushes them past thresholds scientists are still mapping. Even today's partial losses are already visible in tide-gauge records, including along the Indian coastline.",                figure: "melt",
+
               },
               {
                 heading: "Why 'committed' melt matters",

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Check, Compass, Database, FlaskConical, Map, Sparkles } from "lucide-react";
 import { MISSIONS } from "@/lib/data/missions";
 import { cn } from "@/lib/utils";
+import { useStoredJson } from "@/lib/useStoredJson";
 
 const STEP_ICON = {
   dataset: Database,
@@ -16,32 +16,14 @@ const STEP_ICON = {
 
 const KEY = "yeti-missions";
 
-function load(): Record<string, number[]> {
-  if (typeof window === "undefined") return {};
-  try {
-    return JSON.parse(localStorage.getItem(KEY) ?? "{}") as Record<string, number[]>;
-  } catch {
-    return {};
-  }
-}
+const NONE_DONE: Record<string, number[]> = {};
 
 export function MissionsClient() {
-  const [done, setDone] = useState<Record<string, number[]>>({});
-
-  useEffect(() => setDone(load()), []);
+  const [done, setDone] = useStoredJson(KEY, NONE_DONE);
 
   const toggle = (missionId: string, step: number) => {
-    setDone((prev) => {
-      const cur = prev[missionId] ?? [];
-      const next = cur.includes(step) ? cur.filter((s) => s !== step) : [...cur, step];
-      const updated = { ...prev, [missionId]: next };
-      try {
-        localStorage.setItem(KEY, JSON.stringify(updated));
-      } catch {
-        /* storage unavailable — demo keeps working in-memory */
-      }
-      return updated;
-    });
+    const cur = done[missionId] ?? [];
+    setDone({ ...done, [missionId]: cur.includes(step) ? cur.filter((s) => s !== step) : [...cur, step] });
   };
 
   return (

@@ -11,6 +11,7 @@ export type { ArcSpec, GlobeHandle, GlobeStation };
 interface YetiGlobeInnerProps {
   arcs: ArcSpec[];
   showStations?: boolean;
+  stations?: GlobeStation[];
   onStationClick?: (s: GlobeStation) => void;
   onArcClick?: (a: ArcSpec) => void;
   autoRotate?: boolean;
@@ -24,6 +25,7 @@ interface YetiGlobeInnerProps {
 export default function YetiGlobeInner({
   arcs,
   showStations = true,
+  stations = STATION_POINTS,
   onStationClick,
   onArcClick,
   autoRotate = true,
@@ -121,7 +123,7 @@ export default function YetiGlobeInner({
             arcAltitudeAutoScale: 0.42,
             arcCurvature: 0.42,
             onArcClick: onArcClick ? (arc: object) => onArcClick(arc as ArcSpec) : undefined,
-            htmlElementsData: showStations ? STATION_POINTS : [],
+            htmlElementsData: showStations ? stations : [],
             htmlAltitude: 0.03,
             htmlElement: (d: object) => stationHtml(d as GlobeStation),
             onGlobeReady: () => {

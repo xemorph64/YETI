@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { createElement, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import {
@@ -23,8 +23,12 @@ import {
 } from "lucide-react";
 import type { LearnPath } from "@/lib/types";
 import { Button, ProvenanceChip } from "@/components/ui/primitives";
+import { FirnFigure, GlacierFigure, MeltFigure } from "@/components/science/Figures";
 import { MascotBadge } from "@/components/yeti/Mascot";
 import { cn } from "@/lib/utils";
+import { useStoredJson } from "@/lib/useStoredJson";
+
+const LESSON_FIGURES = { melt: MeltFigure, firn: FirnFigure, glacier: GlacierFigure };
 
 const BADGE_ICONS: Record<string, React.ReactNode> = {
   compass: <Compass className="size-6" strokeWidth={1.5} />,
@@ -40,42 +44,27 @@ type Stage =
   | { kind: "lesson"; moduleId: string; lessonIdx: number }
   | { kind: "quiz"; moduleId: string };
 
-function loadPassed(): Set<string> {
-  if (typeof window === "undefined") return new Set();
-  try {
-    return new Set(JSON.parse(localStorage.getItem("yeti-badges") ?? "[]") as string[]);
-  } catch {
-    return new Set();
-  }
-}
+const NO_BADGES: string[] = [];
 
 export function LearnPathClient({ path }: { path: LearnPath }) {
   const [stage, setStage] = useState<Stage>({ kind: "overview" });
-  const [passed, setPassed] = useState<Set<string>>(new Set());
+  const [badgeIds, setBadgeIds] = useStoredJson("yeti-badges", NO_BADGES);
+  const passed = useMemo(() => new Set(badgeIds), [badgeIds]);
   const [certName, setCertName] = useState("");
   const [celebration, setCelebration] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  useEffect(() => setPassed(loadPassed()), []);
-
   const markPassed = useCallback(
     (badgeId: string) => {
-      setPassed((prev) => {
-        const isNew = !prev.has(badgeId);
-        if (isNew) {
-          const badge = path.modules.find((m) => m.badge.id === badgeId)?.badge;
-          if (badge) {
-            setCelebration(`${badge.name}|||${badge.description}`);
-            window.setTimeout(() => setCelebration(null), 4200);
-          }
-        }
-        const next = new Set(prev);
-        next.add(badgeId);
-        localStorage.setItem("yeti-badges", JSON.stringify([...next]));
-        return next;
-      });
+      if (passed.has(badgeId)) return;
+      const badge = path.modules.find((m) => m.badge.id === badgeId)?.badge;
+      if (badge) {
+        setCelebration(`${badge.name}|||${badge.description}`);
+        window.setTimeout(() => setCelebration(null), 4200);
+      }
+      setBadgeIds([...badgeIds, badgeId]);
     },
-    [path],
+    [path, passed, badgeIds, setBadgeIds],
   );
 
   const pathComplete = path.modules.every((m) => passed.has(m.badge.id));
@@ -369,6 +358,7 @@ function LessonReader({
           <div key={i}>
             {b.heading && <h3 className="display mb-1.5 text-lg font-semibold text-accent">{b.heading}</h3>}
             <p className="text-[15px] leading-[1.75] text-text-2">{b.text}</p>
+            {b.figure && <div className="mt-5">{createElement(LESSON_FIGURES[b.figure])}</div>}
           </div>
         ))}
       </div>

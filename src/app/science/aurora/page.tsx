@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Breadcrumbs } from "@/components/chrome/Breadcrumbs";
 import { Kicker } from "@/components/ui/primitives";
+import { AuroraOvalFigure } from "@/components/science/Figures";
 
 export const metadata: Metadata = {
   title: "The aurora",
@@ -78,6 +79,8 @@ export default function AuroraPage() {
               why aurora reports and magnetometer readings travel together.
             </p>
           </section>
+
+          <AuroraOvalFigure />
 
           <section>
             <h2 className="display text-xl font-semibold text-text">Why it is science, not just spectacle</h2>

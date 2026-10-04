@@ -20,6 +20,9 @@ const PROGRAMME_COLOR: Record<string, [string, string]> = {
   "Southern Ocean": ["#FF8A5C", "rgba(255,138,92,0.06)"],
 };
 
+// First Indian Arctic expedition: 2007. The north pin stays off the globe before then.
+const ARCTIC_FROM = 2007;
+
 const NEAREST_STATION: Record<string, GlobeStation> = {
   Antarctic: STATION_POINTS[0],
   Arctic: STATION_POINTS[2],
@@ -56,6 +59,11 @@ export function AtlasClient() {
         };
       }),
     [programmes, decades, year],
+  );
+
+  const stations = useMemo(
+    () => (year < ARCTIC_FROM ? STATION_POINTS.filter((s) => s.lat < 0) : STATION_POINTS),
+    [year],
   );
 
   const focusStation = useCallback((s: GlobeStation) => {
@@ -102,9 +110,10 @@ export function AtlasClient() {
   return (
     <div className="relative h-[100dvh] w-full overflow-hidden">
       <div className="absolute inset-0">
-        <GlobeFallback arcs={arcs}>
+        <GlobeFallback arcs={arcs} stations={stations}>
           <YetiGlobe
             arcs={arcs}
+            stations={stations}
             pov={{ lat: 18, lng: 55, altitude: 2.2 }}
             zoomEnabled
             autoRotate={false}
@@ -275,7 +284,7 @@ export function AtlasClient() {
 
       {/* Station drawer */}
       <AnimatePresence>
-        {station && selectedStation && (
+        {station && selectedStation && stations.includes(selectedStation) && (
           <motion.aside
             initial={{ x: 420, opacity: 0 }}
             animate={{ x: 0, opacity: 1 }}

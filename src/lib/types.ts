@@ -170,7 +170,7 @@ export interface Lesson {
   id: string;
   title: string;
   minutes: number;
-  blocks: { heading?: string; text: string }[];
+  blocks: { heading?: string; text: string; figure?: "melt" | "firn" | "glacier" }[];
 }
 
 export interface LearnModule {
