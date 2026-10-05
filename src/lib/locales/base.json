@@ -1,0 +1,330 @@
+{
+  "nav.atlas": {
+    "en": "Atlas",
+    "hi": "एटलस",
+    "bn": "অ্যাটলাস"
+  },
+  "nav.labs": {
+    "en": "Labs",
+    "hi": "लैब्स",
+    "bn": "ল্যাব"
+  },
+  "nav.expeditions": {
+    "en": "Expeditions",
+    "hi": "अभियान",
+    "bn": "অভিযান"
+  },
+  "nav.vault": {
+    "en": "Vault",
+    "hi": "भंडार",
+    "bn": "ভান্ডার"
+  },
+  "nav.stories": {
+    "en": "Stories",
+    "hi": "कहानियाँ",
+    "bn": "গল্প"
+  },
+  "nav.learn": {
+    "en": "Learn",
+    "hi": "सीखें",
+    "bn": "শিখুন"
+  },
+  "nav.gallery": {
+    "en": "Gallery",
+    "hi": "गैलरी",
+    "bn": "গ্যালারি"
+  },
+  "nav.stations": {
+    "en": "Stations",
+    "hi": "स्टेशन",
+    "bn": "স্টেশন"
+  },
+  "nav.newsroom": {
+    "en": "Newsroom",
+    "hi": "समाचार",
+    "bn": "সংবাদঘর"
+  },
+  "nav.science": {
+    "en": "Science",
+    "hi": "विज्ञान",
+    "bn": "বিজ্ঞান"
+  },
+  "nav.museum": {
+    "en": "Museum bridge",
+    "hi": "म्यूज़ियम ब्रिज",
+    "bn": "জাদুঘর সেতু"
+  },
+  "nav.about": {
+    "en": "About",
+    "hi": "परिचय",
+    "bn": "পরিচিতি"
+  },
+  "nav.more": {
+    "en": "More",
+    "hi": "और",
+    "bn": "আরও"
+  },
+  "nav.timeline": {
+    "en": "Timeline",
+    "hi": "समयरेखा",
+    "bn": "সময়রেখা"
+  },
+  "nav.researchers": {
+    "en": "Researchers",
+    "hi": "शोधकर्ता",
+    "bn": "গবেষক"
+  },
+  "nav.participate": {
+    "en": "Participate",
+    "hi": "भागीदारी",
+    "bn": "অংশগ্রহণ"
+  },
+  "search.placeholder": {
+    "en": "Search the archive…",
+    "hi": "संग्रह में खोजें…",
+    "bn": "সংগ্রহে খুঁজুন…"
+  },
+  "menu.signin": {
+    "en": "Sign in — researcher & admin",
+    "hi": "साइन इन — शोधकर्ता और प्रशासक",
+    "bn": "সাইন ইন — গবেষক ও প্রশাসক"
+  },
+  "menu.workspace.researcher": {
+    "en": "Researcher workspace",
+    "hi": "शोधकर्ता वर्कस्पेस",
+    "bn": "গবেষক ওয়ার্কস্পেস"
+  },
+  "menu.workspace.admin": {
+    "en": "Admin console",
+    "hi": "प्रशासक कंसोल",
+    "bn": "প্রশাসক কনসোল"
+  },
+  "menu.signedinas": {
+    "en": "Signed in as",
+    "hi": "साइन इन किया",
+    "bn": "সাইন ইন করেছেন"
+  },
+  "lang.label": {
+    "en": "Language",
+    "hi": "भाषा",
+    "bn": "ভাষা"
+  },
+  "lang.continues": {
+    "en": "This section continues in English — terminology, names and units are preserved.",
+    "hi": "यह अनुभाग अंग्रेज़ी में है — शब्दावली, नाम और इकाइयाँ यथावत हैं।",
+    "bn": "এই অংশ ইংরেজিতে রয়েছে — পরিভাষা, নাম ও একক অপরিবর্তিত।"
+  },
+  "hero.kicker": {
+    "en": "Ministry of Earth Sciences · NCPOR · Demonstration build",
+    "hi": "पृथ्वी विज्ञान मंत्रालय · एनसीपीओआर · डेमो बिल्ड",
+    "bn": "আর্থ সায়েন্সেস মন্ত্রক · এনসিপিওআর · ডেমো বিল্ড"
+  },
+  "hero.line1": {
+    "en": "India has been going to the ice since 1981.",
+    "hi": "1981 से भारत बर्फ़ की दुनिया में जा रहा है।",
+    "bn": "১৯৮১ সাল থেকে ভারত বরফের দুনিয়ায় যাচ্ছে।"
+  },
+  "hero.line2": {
+    "en": "Almost no one has seen it.",
+    "hi": "बहुत कम लोगों ने इसे देखा है।",
+    "bn": "প্রায় কেউ এটি দেখেনি।"
+  },
+  "hero.line3": {
+    "en": "Until now.",
+    "hi": "अब तक।",
+    "bn": "এখন আর নয়।"
+  },
+  "hero.sub": {
+    "en": "45 years of Indian polar expeditions, data, imagery and stories — one window, open to everyone.",
+    "hi": "भारतीय ध्रुवीय अभियानों के 45 साल — डेटा, तस्वीरें और कहानियाँ, एक खिड़की में, सबके लिए खुली।",
+    "bn": "ভারতীয় মেরু অভিযানের ৪৫ বছর — ডেটা, ছবি ও গল্প, এক জানালায়, সবার জন্য উন্মুক্ত।"
+  },
+  "cta.journey": {
+    "en": "Begin the journey",
+    "hi": "यात्रा शुरू करें",
+    "bn": "যাত্রা শুরু করুন"
+  },
+  "cta.gyaan": {
+    "en": "Polar Gyaan for schools",
+    "hi": "स्कूलों के लिए पोलर ज्ञान",
+    "bn": "স্কুলের জন্য মেরু জ্ঞান"
+  },
+  "hero.cta.workspace": {
+    "en": "Enter your workspace",
+    "hi": "अपना वर्कस्पेस खोलें",
+    "bn": "আপনার ওয়ার্কস্পেস খুলুন"
+  },
+  "hero.cta.explore": {
+    "en": "Explore the science",
+    "hi": "विज्ञान देखें",
+    "bn": "বিজ্ঞান দেখুন"
+  },
+  "hero.cta.ask": {
+    "en": "Ask YETI",
+    "hi": "येती से पूछें",
+    "bn": "যেতিকে জিজ্ঞাসা"
+  },
+  "hero.scrollcue": {
+    "en": "Scroll — the camera descends",
+    "hi": "स्क्रॉल — कैमरा उतरता है",
+    "bn": "স্ক্রল — ক্যামেরা নামছে"
+  },
+  "usp.kicker": {
+    "en": "One connected ecosystem",
+    "hi": "एक जुड़ा हुआ तंत्र",
+    "bn": "একটি সংযুক্ত ব্যবস্থা"
+  },
+  "usp.one": {
+    "en": "YETI transforms India's existing polar research into connected, understandable and reusable knowledge — from scientific evidence to immersive exploration, contextual AI, education and trusted outreach.",
+    "hi": "येती भारत के मौजूदा ध्रुवीय शोध को जुड़ा, समझने योग्य और पुनः प्रयोग योग्य ज्ञान बनाता है — वैज्ञानिक साक्ष्य से इमर्सिव अन्वेषण, संदर्भ-सचेतन AI, शिक्षा और भरोसेमंद प्रसार तक।",
+    "bn": "যেতি ভারতের বিদ্যমান মেরু গবেষণাকে সংযুক্ত, বোধগম্য ও পুনঃব্যবহারযোগ্য জ্ঞানে রূপ দেয় — বৈজ্ঞানিক প্রমাণ থেকে নিমজ্জনশীল অন্বেষণ, প্রাসঙ্গিক AI, শিক্ষা ও বিশ্বস্ত প্রচার পর্যন্ত।"
+  },
+  "usp.discover": {
+    "en": "Discover",
+    "hi": "खोजें",
+    "bn": "আবিষ্কার"
+  },
+  "usp.discover.sub": {
+    "en": "Maps, search, graph, expeditions",
+    "hi": "नक्शे, खोज, ग्राफ, अभियान",
+    "bn": "মানচিত্র, অনুসন্ধান, গ্রাফ, অভিযান"
+  },
+  "usp.understand": {
+    "en": "Understand",
+    "hi": "समझें",
+    "bn": "বুঝুন"
+  },
+  "usp.understand.sub": {
+    "en": "YETI AI, evidence, learning",
+    "hi": "येती AI, साक्ष्य, शिक्षा",
+    "bn": "যেতি AI, প্রমাণ, শিক্ষা"
+  },
+  "usp.create": {
+    "en": "Create",
+    "hi": "बनाएँ",
+    "bn": "সৃষ্টি"
+  },
+  "usp.create.sub": {
+    "en": "Media studio, museum, outreach",
+    "hi": "मीडिया स्टूडियो, म्यूज़ियम, आउटरीच",
+    "bn": "মিডিয়া স্টুডিও, জাদুঘর, প্রচার"
+  },
+  "usp.chips.label": {
+    "en": "Jump straight in",
+    "hi": "सीधे जाएँ",
+    "bn": "সরাসরি যান"
+  },
+  "usp.chip.atlas": {
+    "en": "Expedition Atlas",
+    "hi": "अभियान एटलस",
+    "bn": "অভিযান অ্যাটলাস"
+  },
+  "usp.chip.labs": {
+    "en": "Science Labs",
+    "hi": "साइंस लैब्स",
+    "bn": "সায়েন্স ল্যাব"
+  },
+  "usp.chip.vault": {
+    "en": "Research Vault",
+    "hi": "रिसर्च वॉल्ट",
+    "bn": "রিসার্চ ভল্ট"
+  },
+  "usp.chip.learn": {
+    "en": "Learning hub",
+    "hi": "लर्निंग हब",
+    "bn": "লার্নিং হাব"
+  },
+  "usp.chip.researcher": {
+    "en": "Researcher desk",
+    "hi": "शोधकर्ता डेस्क",
+    "bn": "গবেষক ডেস্ক"
+  },
+  "usp.chip.admin": {
+    "en": "NCPOR console",
+    "hi": "एनसीपीओआर कंसोल",
+    "bn": "এনসিপিওআর কনসোল"
+  },
+  "doors.kicker": {
+    "en": "Three experiences, one archive",
+    "hi": "तीन अनुभव, एक संग्रह",
+    "bn": "তিন অভিজ্ঞতা, এক সংগ্রহ"
+  },
+  "doors.title": {
+    "en": "Where would you like to start?",
+    "hi": "आप कहाँ से शुरू करना चाहेंगे?",
+    "bn": "কোথা থেকে শুরু করতে চান?"
+  },
+  "doors.oneclick": {
+    "en": "One-click demo sign-in",
+    "hi": "वन-क्लिक डेमो साइन-इन",
+    "bn": "ওয়ান-ক্লিক ডেমো সাইন-ইন"
+  },
+  "doors.public.cta": {
+    "en": "Explore as a visitor",
+    "hi": "आगंतुक के रूप में देखें",
+    "bn": "দর্শক হিসেবে ঘুরুন"
+  },
+  "ask.title": {
+    "en": "Ask YETI",
+    "hi": "येती से पूछें",
+    "bn": "যেতিকে জিজ্ঞাসা"
+  },
+  "ask.grounded": {
+    "en": "Answers are grounded in the archive. No citation, no answer.",
+    "hi": "उत्तर केवल संग्रह से — बिना स्रोत, बिना उत्तर।",
+    "bn": "উত্তর শুধু সংগ্রহ থেকে — উৎস ছাড়া উত্তর নেই।"
+  },
+  "ask.placeholder": {
+    "en": "Ask about the poles…",
+    "hi": "ध्रुवों के बारे में पूछें…",
+    "bn": "মেরু সম্পর্কে জিজ্ঞাসা করুন…"
+  },
+  "ask.reading": {
+    "en": "Reading with you",
+    "hi": "आपके साथ पढ़ रहा हूँ",
+    "bn": "আপনার সাথে পড়ছি"
+  },
+  "ask.thinking": {
+    "en": "Searching the archive…",
+    "hi": "संग्रह खोज रहा हूँ…",
+    "bn": "সংগ্রহ খুঁজছি…"
+  },
+  "home.start.kicker": {
+    "en": "Start here",
+    "hi": "यहाँ से शुरू करें",
+    "bn": "এখান থেকে শুরু"
+  },
+  "home.milestones.kicker": {
+    "en": "45 years in motion",
+    "hi": "45 साल की यात्रा",
+    "bn": "৪৫ বছরের যাত্রা"
+  },
+  "home.stations.kicker": {
+    "en": "India on the ice",
+    "hi": "बर्फ़ पर भारत",
+    "bn": "বরফে ভারত"
+  },
+  "home.news.kicker": {
+    "en": "From the newsroom",
+    "hi": "समाचार कक्ष से",
+    "bn": "সংবাদঘর থেকে"
+  },
+  "home.education.kicker": {
+    "en": "Learn the poles",
+    "hi": "ध्रुवों को जानें",
+    "bn": "মেরু শিখুন"
+  },
+  "footer.tagline": {
+    "en": "YETI Knows. Now You Can Too!",
+    "hi": "येती जानता है। अब आप भी!",
+    "bn": "যেতি জানে। এখন আপনিও!"
+  },
+  "footer.demo": {
+    "en": "Demonstration build for SIH26063 — all records are labelled demo data.",
+    "hi": "SIH26063 हेतु डेमो बिल्ड — सभी रिकॉर्ड डेमो डेटा हैं।",
+    "bn": "SIH26063-এর জন্য ডেমো বিল্ড — সব রেকর্ড ডেমো ডেটা।"
+  },
+  "lang.machine": {
+    "en": "Machine-translated with AI4Bharat IndicTrans2 — wording may be imperfect."
+  }
+}

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { Check, ChevronDown, Globe, Menu, Moon, Search, Sun, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { T, useLang, type Lang } from "@/lib/i18n";
+import { T, langDir, langFont, useLang, type Lang } from "@/lib/i18n";
 import { AuthChip } from "@/components/chrome/AuthChip";
 import { useRole } from "@/lib/roles";
 
@@ -287,7 +287,7 @@ export function SiteHeader({ onOpenSearch }: { onOpenSearch: () => void }) {
   );
 }
 
-/** Desktop language dropdown — English · हिन्दी · বাংলা. */
+/** Desktop language dropdown — English + the 22 scheduled languages. */
 export function LangSwitcher() {
   const { lang, setLang, langs, t } = useLang();
   const [open, setOpen] = useState(false);
@@ -321,14 +321,16 @@ export function LangSwitcher() {
         className="btn-tactile flex items-center gap-1.5 rounded-md border border-line-strong px-2.5 py-2 text-xs font-semibold text-text-2 hover:border-text-3 hover:text-text"
       >
         <Globe className="size-3.5" strokeWidth={1.5} aria-hidden />
-        <span className="hidden font-hindi md:inline">{lang === "hi" ? "हिन्दी" : lang === "bn" ? "বাংলা" : "EN"}</span>
+        <span className={cn("hidden max-w-[9ch] truncate md:inline", langFont(lang))} dir={langDir(lang)}>
+          {lang === "en" ? "EN" : current.native}
+        </span>
         <ChevronDown className={cn("size-3 transition-transform", open && "rotate-180")} strokeWidth={1.5} aria-hidden />
       </button>
       {open && (
         <div
           role="menu"
           aria-label={t("lang.label")}
-          className="absolute right-0 top-[calc(100%+8px)] z-[95] w-44 overflow-hidden rounded-xl border border-line-strong bg-surface py-1.5 shadow-[var(--shadow-raised)]"
+          className="panel-scroll absolute right-0 top-[calc(100%+8px)] z-[95] max-h-[min(70vh,560px)] w-60 overflow-y-auto rounded-xl border border-line-strong bg-surface py-1.5 shadow-[var(--shadow-raised)]"
         >
           {langs.map((l) => (
             <button
@@ -344,40 +346,47 @@ export function LangSwitcher() {
                 lang === l.id ? "font-semibold text-accent" : "text-text-2 hover:bg-surface-2 hover:text-text",
               )}
             >
-              <span className={l.id === "hi" ? "font-hindi" : l.id === "bn" ? "font-bengali" : ""}>{l.native}</span>
-              {lang === l.id && <Check className="size-3.5" strokeWidth={2} aria-hidden />}
+              <span className="flex min-w-0 items-baseline gap-2">
+                <span className={langFont(l.id)} lang={l.id} dir={langDir(l.id)}>{l.native}</span>
+                {l.id !== "en" && <span className="truncate text-[11px] text-text-3">{l.label}</span>}
+              </span>
+              {lang === l.id ? (
+                <Check className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
+              ) : (
+                l.mt && <span className="numeral shrink-0 text-[10px] text-text-3" title="Machine-translated">MT</span>
+              )}
             </button>
           ))}
+          <p className="mt-1 border-t border-line px-3.5 pb-1 pt-2 text-[11px] leading-snug text-text-3">
+            MT = machine-translated (AI4Bharat IndicTrans2). English, हिन्दी and বাংলা are hand-written.
+          </p>
         </div>
       )}
     </div>
   );
 }
 
-/** Compact language row for the full-screen mobile menu. */
+/** Language picker for the full-screen mobile menu — a native select scales to 23 languages. */
 export function MobileLangRow() {
   const { lang, setLang, langs } = useLang();
   return (
-    <div className="flex items-center gap-1.5" role="group" aria-label="Language">
-      <Globe className="size-3.5 text-text-3" strokeWidth={1.5} aria-hidden />
-      {langs.map((l) => (
-        <button
-          key={l.id}
-          onClick={() => setLang(l.id as Lang)}
-          aria-pressed={lang === l.id}
-          className={cn(
-            "btn-tactile flex-1 rounded-md border px-3 py-2.5 text-sm font-semibold transition-colors",
-            lang === l.id
-              ? "border-accent/50 bg-accent-dim text-accent"
-              : "border-line-strong text-text-2 hover:text-text",
-            l.id === "hi" && "font-hindi",
-            l.id === "bn" && "font-bengali",
-          )}
-        >
-          {l.native}
-        </button>
-      ))}
-    </div>
+    <label className="flex items-center gap-2">
+      <Globe className="size-3.5 shrink-0 text-text-3" strokeWidth={1.5} aria-hidden />
+      <span className="sr-only">Language</span>
+      <select
+        value={lang}
+        onChange={(e) => setLang(e.target.value as Lang)}
+        className="w-full rounded-md border border-line-strong bg-surface px-3 py-2.5 text-sm font-semibold text-text"
+      >
+        {langs.map((l) => (
+          <option key={l.id} value={l.id}>
+            {l.native}
+            {l.id !== "en" ? ` · ${l.label}` : ""}
+            {l.mt ? " (MT)" : ""}
+          </option>
+        ))}
+      </select>
+    </label>
   );
 }
 

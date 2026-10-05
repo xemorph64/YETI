@@ -1,5 +1,21 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Sans, JetBrains_Mono, Noto_Sans_Bengali, Noto_Sans_Devanagari, Space_Grotesk } from "next/font/google";
+import {
+  IBM_Plex_Sans,
+  JetBrains_Mono,
+  Noto_Naskh_Arabic,
+  Noto_Sans_Bengali,
+  Noto_Sans_Devanagari,
+  Noto_Sans_Gujarati,
+  Noto_Sans_Gurmukhi,
+  Noto_Sans_Kannada,
+  Noto_Sans_Malayalam,
+  Noto_Sans_Meetei_Mayek,
+  Noto_Sans_Ol_Chiki,
+  Noto_Sans_Oriya,
+  Noto_Sans_Tamil,
+  Noto_Sans_Telugu,
+  Space_Grotesk,
+} from "next/font/google";
 import "./globals.css";
 import { SiteChrome } from "@/components/chrome/SiteChrome";
 import { SiteFooter } from "@/components/chrome/SiteFooter";
@@ -30,6 +46,34 @@ const notoBengali = Noto_Sans_Bengali({
   variable: "--font-noto-bengali",
   display: "swap",
 });
+
+// Remaining scheduled-language scripts. Script subset only and no preload: each
+// file downloads only when a page actually renders glyphs from its unicode-range.
+const notoSansGujarati = Noto_Sans_Gujarati({ display: "swap", preload: false, subsets: ["gujarati"], variable: "--font-gujarati" });
+const notoSansGurmukhi = Noto_Sans_Gurmukhi({ display: "swap", preload: false, subsets: ["gurmukhi"], variable: "--font-gurmukhi" });
+const notoSansKannada = Noto_Sans_Kannada({ display: "swap", preload: false, subsets: ["kannada"], variable: "--font-kannada" });
+const notoSansMalayalam = Noto_Sans_Malayalam({ display: "swap", preload: false, subsets: ["malayalam"], variable: "--font-malayalam" });
+const notoSansOriya = Noto_Sans_Oriya({ display: "swap", preload: false, subsets: ["oriya"], variable: "--font-oriya" });
+const notoSansTamil = Noto_Sans_Tamil({ display: "swap", preload: false, subsets: ["tamil"], variable: "--font-tamil" });
+const notoSansTelugu = Noto_Sans_Telugu({ display: "swap", preload: false, subsets: ["telugu"], variable: "--font-telugu" });
+const notoSansOlChiki = Noto_Sans_Ol_Chiki({ display: "swap", preload: false, subsets: ["ol-chiki"], variable: "--font-ol-chiki" });
+const notoSansMeeteiMayek = Noto_Sans_Meetei_Mayek({ display: "swap", preload: false, subsets: ["meetei-mayek"], variable: "--font-meetei-mayek" });
+const notoNaskhArabic = Noto_Naskh_Arabic({ display: "swap", preload: false, subsets: ["arabic"], variable: "--font-arabic" });
+
+const scriptVars = [
+  notoSansGujarati,
+  notoSansGurmukhi,
+  notoSansKannada,
+  notoSansMalayalam,
+  notoSansOriya,
+  notoSansTamil,
+  notoSansTelugu,
+  notoSansOlChiki,
+  notoSansMeeteiMayek,
+  notoNaskhArabic,
+]
+  .map((f) => f.variable)
+  .join(" ");
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -94,7 +138,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${spaceGrotesk.variable} ${plexSans.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`${spaceGrotesk.variable} ${plexSans.variable} ${notoDevanagari.variable} ${notoBengali.variable} ${scriptVars} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeBootstrap }} />

@@ -83,11 +83,16 @@
   --color-sunrise: var(--sunrise);
   --color-sunrise-dim: var(--sunrise-dim);
   --color-danger: var(--danger);
-  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  /* Per-glyph fallback for Indic and Perso-Arabic scripts: Latin stays in the brand
+     faces, other scripts drop through to the matching Noto face. */
+  --font-indic: var(--font-noto-devanagari), var(--font-noto-bengali), var(--font-gujarati), var(--font-gurmukhi),
+    var(--font-kannada), var(--font-malayalam), var(--font-oriya), var(--font-tamil), var(--font-telugu),
+    var(--font-ol-chiki), var(--font-meetei-mayek), var(--font-arabic);
+  --font-display: var(--font-space-grotesk), var(--font-indic), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plex-sans), var(--font-indic), ui-sans-serif, system-ui, sans-serif;
   --font-hindi: var(--font-noto-devanagari), var(--font-plex-sans), sans-serif;
   --font-bengali: var(--font-noto-bengali), var(--font-plex-sans), sans-serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  --font-mono: var(--font-jetbrains-mono), var(--font-indic), ui-monospace, monospace;
 }
 
 html {
