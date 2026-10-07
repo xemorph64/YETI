@@ -2,6 +2,7 @@ import Link from "next/link";
 import { BadgeCheck, FlaskConical, Sparkles, Radio } from "lucide-react";
 import type { Provenance } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/ui/Reveal";
 
 /* --- Provenance chip: the honesty primitive ------------------------------ */
 
@@ -109,7 +110,7 @@ export function SectionHeader({
   className?: string;
 }) {
   return (
-    <div className={cn("flex flex-col gap-4", className)} data-reveal>
+    <Reveal className={cn("flex flex-col gap-4", className)}>
       <Kicker>{kicker}</Kicker>
       <div className="flex flex-wrap items-end justify-between gap-6">
         <h2 className="display max-w-2xl text-3xl font-semibold leading-[1.05] text-balance md:text-4xl">
@@ -125,7 +126,7 @@ export function SectionHeader({
         )}
       </div>
       {body && <p className="max-w-[65ch] text-sm leading-relaxed text-text-2">{body}</p>}
-    </div>
+    </Reveal>
   );
 }
 

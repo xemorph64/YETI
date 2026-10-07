@@ -87,99 +87,95 @@ const MILESTONES: Milestone[] = [
   },
 ];
 
-/** Editorial scroll timeline: sticky year column + milestone stream. */
+/**
+ * Editorial scroll timeline. The page scrolls the milestone stream naturally;
+ * on md+ the year column stays pinned beside it and shows whichever milestone
+ * sits in the middle of the viewport.
+ */
 export function YearsInMotion() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const streamRef = useRef<HTMLDivElement>(null);
   const yearRef = useRef<HTMLSpanElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    if (document.documentElement.getAttribute("data-reduced-motion") === "true") return;
-
-    let destroyed = false;
-    (async () => {
-      const { gsap } = await import("gsap");
-      const { ScrollTrigger } = await import("gsap/ScrollTrigger");
-      if (destroyed) return;
-      gsap.registerPlugin(ScrollTrigger);
-
-      const years = MILESTONES.map((m) => m.year);
-      const st = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: 0.5,
-          onUpdate: (self) => {
-            const idx = Math.min(years.length - 1, Math.floor(self.progress * years.length));
-            if (yearRef.current) yearRef.current.textContent = String(years[idx]);
-            if (barRef.current) barRef.current.style.transform = `scaleY(${self.progress})`;
-          },
-        },
-      });
-      st.to({}, { duration: 1 });
-    })();
-    return () => {
-      destroyed = true;
-    };
+    const stream = streamRef.current;
+    if (!stream) return;
+    const items = Array.from(stream.querySelectorAll<HTMLElement>("[data-year]"));
+    // A thin band across the middle of the viewport: the milestone crossing it is "now".
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const el = entry.target as HTMLElement;
+          const idx = items.indexOf(el);
+          if (yearRef.current) yearRef.current.textContent = el.dataset.year ?? "";
+          if (barRef.current) barRef.current.style.transform = `scaleY(${(idx + 1) / items.length})`;
+        }
+      },
+      { rootMargin: "-45% 0px -45% 0px" },
+    );
+    items.forEach((el) => io.observe(el));
+    return () => io.disconnect();
   }, []);
 
   return (
-    <section id="years" ref={sectionRef} className="relative bg-bg" aria-label="45 years of the Indian polar programme">
-      <div className="sticky top-0 z-10 flex h-[100dvh] items-center overflow-hidden">
-        {/* Sticky year column */}
-        <div className="dh-container flex h-full items-center">
-          <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-[minmax(220px,0.9fr)_2fr]">
-            <div className="pointer-events-none relative hidden flex-col justify-center md:flex">
-              <span className="numeral select-none text-[9rem] font-bold leading-none text-text/90 tabular-nums lg:text-[11rem]">
+    <section id="years" className="relative bg-bg" aria-label="45 years of the Indian polar programme">
+      <div className="dh-container">
+        <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-[minmax(220px,0.9fr)_2fr]">
+          {/* Pinned year column (md+) */}
+          <div className="pointer-events-none relative hidden md:block" aria-hidden>
+            <div className="sticky top-0 flex h-[100dvh] flex-col justify-center">
+              <span className="numeral select-none text-[clamp(5rem,9vw,11rem)] font-bold leading-none text-text/90 tabular-nums">
                 <span ref={yearRef}>1981</span>
               </span>
               <span className="meta-label mt-2">Indian polar programme · 1981 → 2026</span>
               <div className="absolute -right-6 top-1/2 hidden h-[60vh] w-px -translate-y-1/2 bg-line lg:block">
-                <div ref={barRef} className="h-full w-full origin-top bg-accent/70" style={{ transform: "scaleY(0)" }} />
+                <div
+                  ref={barRef}
+                  className="h-full w-full origin-top bg-accent/70 transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                  style={{ transform: "scaleY(0)" }}
+                />
               </div>
             </div>
+          </div>
 
-            {/* Milestone stream */}
-            <div className="flex flex-col gap-6 py-24 md:py-[40vh]">
-              {MILESTONES.map((m) => (
-                <Reveal key={m.year} delay={40}>
-                  <article className="relative grid gap-5 border-l border-line-strong pl-6 md:pl-10">
-                    <span
-                      className="absolute -left-[5px] top-2 size-2.5 rounded-full bg-accent shadow-[0_0_0_4px_var(--bg)]"
-                      aria-hidden
-                    />
-                    <div className="flex items-center gap-3">
-                      <span className="numeral text-sm font-bold text-accent md:hidden">{m.year}</span>
-                      <ProvenanceChip p={m.provenance ?? "demo"} />
+          {/* Milestone stream */}
+          <div ref={streamRef} className="flex flex-col gap-16 py-24 md:gap-24 md:py-[40vh]">
+            {MILESTONES.map((m) => (
+              <Reveal key={m.year} delay={40}>
+                <article data-year={m.year} className="relative grid gap-5 border-l border-line-strong pl-6 md:pl-10">
+                  <span
+                    className="absolute -left-[5px] top-2 size-2.5 rounded-full bg-accent shadow-[0_0_0_4px_var(--bg)]"
+                    aria-hidden
+                  />
+                  <div className="flex items-center gap-3">
+                    <span className="numeral text-sm font-bold text-accent md:sr-only">{m.year}</span>
+                    <ProvenanceChip p={m.provenance ?? "demo"} />
+                  </div>
+                  <div className="grid gap-5 md:grid-cols-[1.4fr_1fr] md:items-center">
+                    <div>
+                      <h3 className="display text-2xl font-semibold text-text md:text-3xl">{m.title}</h3>
+                      <p className="mt-3 max-w-[52ch] text-sm leading-relaxed text-text-2">{m.body}</p>
                     </div>
-                    <div className="grid gap-5 md:grid-cols-[1.4fr_1fr] md:items-center">
-                      <div>
-                        <h3 className="display text-2xl font-semibold text-text md:text-3xl">{m.title}</h3>
-                        <p className="mt-3 max-w-[52ch] text-sm leading-relaxed text-text-2">{m.body}</p>
-                      </div>
-                      {m.image && (
-                        <figure className="overflow-hidden rounded-lg border border-line">
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img src={m.image} alt="" className="aspect-[4/3] w-full object-cover" loading="lazy" />
-                          {m.credit && <figcaption className="bg-surface px-3 py-1.5 text-[10px] text-text-3">{m.credit}</figcaption>}
-                        </figure>
-                      )}
-                    </div>
-                  </article>
-                </Reveal>
-              ))}
-              <Reveal>
-                <Link
-                  href="/expeditions"
-                  className="btn-tactile mt-6 inline-flex items-center gap-2 rounded-md border border-line-strong px-5 py-3 text-sm font-semibold text-text hover:border-accent/60 hover:text-accent"
-                >
-                  Open the full expedition index →
-                </Link>
+                    {m.image && (
+                      <figure className="overflow-hidden rounded-lg border border-line">
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                        <img src={m.image} alt="" className="aspect-[4/3] w-full object-cover" loading="lazy" />
+                        {m.credit && <figcaption className="bg-surface px-3 py-1.5 text-xs text-text-3">{m.credit}</figcaption>}
+                      </figure>
+                    )}
+                  </div>
+                </article>
               </Reveal>
-            </div>
+            ))}
+            <Reveal>
+              <Link
+                href="/expeditions"
+                className="btn-tactile mt-6 inline-flex items-center gap-2 rounded-md border border-line-strong px-5 py-3 text-sm font-semibold text-text hover:border-accent/60 hover:text-accent"
+              >
+                Open the full expedition index →
+              </Link>
+            </Reveal>
           </div>
         </div>
       </div>

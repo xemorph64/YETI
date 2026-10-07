@@ -12,6 +12,7 @@ import Link from "next/link";
 import { ArrowRight, GraduationCap, ShieldCheck, Users, Zap } from "lucide-react";
 import { useRole } from "@/lib/roles";
 import { cn } from "@/lib/utils";
+import { SectionHeader } from "@/components/ui/primitives";
 
 export function ThreeDoors() {
   const { session } = useRole();
@@ -58,15 +59,11 @@ export function ThreeDoors() {
   return (
     <section className="hairline-t py-24" aria-label="Choose your way in">
       <div className="dh-container">
-        <div className="max-w-[64ch]">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-text md:text-4xl">
-            Three doors into the same archive.
-          </h2>
-          <p className="mt-3 text-base leading-relaxed text-text-2">
-            One portal, three experiences — pick the door that matches what you came to do. Every door reaches the
-            same verified records; they just open different tools.
-          </p>
-        </div>
+        <SectionHeader
+          kicker="Choose your way in"
+          title="Three doors into the same archive."
+          body="Pick the door that matches what you came to do. Every door reaches the same records; they just open different tools."
+        />
         <div className="mt-10 grid gap-4 lg:grid-cols-3">
           {doors.map((d) => (
             <div
@@ -79,7 +76,7 @@ export function ThreeDoors() {
               <div className="flex items-center justify-between">
                 <span className={d.tone === "violet" ? "text-violet" : "text-accent"}>{d.icon}</span>
                 {d.signedIn && (
-                  <span className="rounded-full border border-accent/50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-accent">
+                  <span className="rounded-full border border-accent/50 px-2.5 py-0.5 text-[0.72rem] font-bold uppercase tracking-[0.12em] text-accent">
                     your desk
                   </span>
                 )}

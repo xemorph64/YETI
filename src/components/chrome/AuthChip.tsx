@@ -69,7 +69,7 @@ export function AuthChip() {
         <span
           aria-hidden
           className={cn(
-            "numeral flex size-6 items-center justify-center rounded-full text-[10px] font-bold",
+            "numeral flex size-6 items-center justify-center rounded-full text-[0.72rem] font-bold",
             isAdmin ? "bg-violet-dim" : "bg-accent-dim",
           )}
         >
@@ -87,8 +87,8 @@ export function AuthChip() {
         >
           <div className="border-b border-line px-4 py-3.5">
             <p className="text-sm font-semibold text-text">{session.name}</p>
-            <p className="numeral text-[11px] text-text-3">{session.email}</p>
-            <p className={cn("meta-label mt-1.5 !text-[9px]", isAdmin ? "!text-violet" : "!text-accent")}>
+            <p className="numeral text-xs text-text-3">{session.email}</p>
+            <p className={cn("meta-label mt-1.5", isAdmin ? "!text-violet" : "!text-accent")}>
               {isAdmin ? "NCPOR Admin" : "Researcher"} · {ROLE_GOALS[session.role]}
             </p>
           </div>

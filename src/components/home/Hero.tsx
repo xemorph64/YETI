@@ -2,11 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, GraduationCap, LogIn } from "lucide-react";
+import { ArrowRight, Compass } from "lucide-react";
 import { YetiGlobe, GOA, STATION_POINTS, webglSupported, type ArcSpec, type GlobeHandle } from "@/components/globe/YetiGlobe";
 import { FallbackMap } from "@/components/globe/GlobeFallback";
 import { T } from "@/lib/i18n";
-import { useRole } from "@/lib/roles";
 
 const ARC_COLORS: Record<string, [string, string]> = {
   maitri: ["#3BE8B0", "rgba(59,232,176,0.05)"],
@@ -51,7 +50,6 @@ export function Hero() {
   const globeHandle = useRef<GlobeHandle | null>(null);
   const [globeOn, setGlobeOn] = useState(false);
   const [noWebGL, setNoWebGL] = useState(false);
-  const { session } = useRole();
 
   const fullArcs = useMemo<ArcSpec[]>(
     () =>
@@ -107,6 +105,9 @@ export function Hero() {
           scrub: 0.6,
           onUpdate: (self) => {
             const p = self.progress;
+            // Once the copy has faded to a ghost, it must stop catching clicks
+            // meant for the globe behind it.
+            copy.style.pointerEvents = p > 0.2 ? "none" : "";
             // Camera: Goa → Antarctica (imperative; no React state churn)
             globeHandle.current?.pointOfView(
               {
@@ -182,18 +183,13 @@ export function Hero() {
               <T k="hero.sub" as="span" />
             </p>
             <div className="mt-9 flex flex-wrap items-center gap-3">
-              {/* Primary: straight to a workspace — one click when signed in,
-                  one-click demo entry via ?demo= otherwise. */}
+              {/* Primary: the signature experience. Workspace entry lives in the header and the doors. */}
               <Link
-                href={session ? (session.role === "admin" ? "/admin" : "/researcher") : "/login"}
+                href="/atlas"
                 className="btn-tactile inline-flex items-center gap-2 rounded-md bg-accent-fill px-6 py-3.5 text-sm font-semibold text-accent-ink hover:opacity-90"
               >
-                {session ? (
-                  <GraduationCap className="size-4" strokeWidth={1.5} aria-hidden />
-                ) : (
-                  <LogIn className="size-4" strokeWidth={1.5} aria-hidden />
-                )}
-                <T k="hero.cta.workspace" as="span" />
+                <Compass className="size-4" strokeWidth={1.5} aria-hidden />
+                <T k="hero.cta.atlas" as="span" />
                 <ArrowRight className="size-4" strokeWidth={1.5} aria-hidden />
               </Link>
               {/* Secondary: anchor-scroll to the USP/feature band. */}
@@ -203,13 +199,6 @@ export function Hero() {
               >
                 <T k="hero.cta.explore" as="span" />
               </a>
-              {/* Tertiary: the signature experience. */}
-              <Link
-                href="/atlas"
-                className="btn-tactile inline-flex items-center gap-2 rounded-md px-4 py-3.5 text-sm font-semibold text-text-2 hover:text-accent"
-              >
-                <T k="cta.journey" as="span" />
-              </Link>
             </div>
           </div>
         </div>
@@ -217,7 +206,7 @@ export function Hero() {
         {/* Scroll cue */}
         <div className="pointer-events-none absolute bottom-6 left-1/2 z-10 -translate-x-1/2 max-md:bottom-20" aria-hidden>
           <div className="flex flex-col items-center gap-2 text-text-3">
-            <span className="meta-label !text-[9px] max-md:hidden">
+            <span className="meta-label max-md:hidden">
               <T k="hero.scrollcue" as="span" />
             </span>
             <span className="h-8 w-px animate-pulse bg-gradient-to-b from-accent to-transparent" />

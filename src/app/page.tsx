@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, BookOpen, Compass, Database, FileText, MapPin, Waves } from "lucide-react";
+import { ArrowRight, BookOpen, Compass, Database, FileText, MapPin } from "lucide-react";
 import { Hero } from "@/components/home/Hero";
 import { YearsInMotion } from "@/components/home/YearsInMotion";
 import { ScatterToWindow } from "@/components/home/ScatterToWindow";
 import { StartHere } from "@/components/home/StartHere";
+import { AtlasPreview } from "@/components/home/AtlasPreview";
 import { ThreeDoors } from "@/components/home/ThreeDoors";
 import { UspBand } from "@/components/home/UspBand";
 import { SourceCoverage } from "@/components/home/SourceCoverage";
@@ -14,22 +15,39 @@ import { STORIES } from "@/lib/data/stories";
 import { DATASETS, PUBLICATIONS, REPORTS } from "@/lib/data/vault";
 import { LEARN_PATHS } from "@/lib/data/learn";
 import { STATIONS } from "@/lib/data/stations";
-import { MEDIA } from "@/lib/data/media";
-import { NEWS } from "@/lib/data/newsroom";
-import { formatDate } from "@/lib/utils";
 
 export default function HomePage() {
   const story = STORIES[0];
   const dataset = DATASETS[0];
   const antarcticCount = EXPEDITIONS.filter((e) => e.programme === "Antarctic").length;
-  const latestNews = NEWS.slice(0, 3);
+  const arcticCount = EXPEDITIONS.filter((e) => e.programme === "Arctic").length;
 
   return (
     <>
       <Hero />
       <UspBand />
-      <YearsInMotion />
       <StartHere />
+
+      {/* --- The problem, drawn: scattered → one window --------------------- */}
+      <section className="hairline-t py-28" aria-label="From scattered to one window">
+        <div className="dh-container">
+          <SectionHeader
+            kicker="The problem, drawn"
+            title="Scattered for decades. One window now."
+            body="Expedition reports sit on drives, datasets behind old websites, photographs in cabinets, papers behind paywalls. YETI ingests every artefact, gives it complete metadata and human review, and connects it to the whole — so one search reaches the whole of Indian polar science."
+          />
+          <div className="mt-12 grid items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
+            <Reveal>
+              <ScatterToWindow />
+            </Reveal>
+            <Reveal delay={120} className="flex flex-col gap-6">
+              <SourceCoverage />
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      <YearsInMotion />
 
       {/* --- Atlas teaser: split composition -------------------------------- */}
       <section className="atmos hairline-t py-28" aria-label="Expedition Atlas">
@@ -41,7 +59,7 @@ export default function HomePage() {
             </h2>
             <p className="mt-6 max-w-[58ch] text-base leading-relaxed text-text-2">
               Orbit the Earth like a mission controller: expedition arcs rise from Goa and land on the ice.
-              Scrub forty-five years in seconds; drop into any voyage for its route, science and crew.
+              Scrub the decades in seconds; drop into any voyage for its route, science and crew.
               Stations are pins; the archive is the territory.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
@@ -55,22 +73,16 @@ export default function HomePage() {
             </div>
             <div className="mt-10 grid max-w-md grid-cols-3 gap-6 border-t border-line pt-6">
               <Stat value={antarcticCount} label="Antarctic expeditions" />
-              <Stat value="3 + 1" label="Active stations" />
-              <Stat value="45" label="Years in motion" />
+              <Stat value="3" label="Stations in service" />
+              <Stat value={arcticCount} label="Arctic expeditions" />
             </div>
           </Reveal>
           <Reveal delay={120}>
-            <figure className="relative overflow-hidden rounded-xl border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/img/blue-marble-antarctica.jpg"
-                alt="Satellite view of Antarctic icebergs and coastal sea ice"
-                className="aspect-[4/3] w-full object-cover"
-                loading="lazy"
-              />
-              <figcaption className="absolute inset-x-0 bottom-0 flex items-center justify-between bg-gradient-to-t from-bg/95 to-transparent px-4 pb-3 pt-10 text-[11px] text-text-3">
-                <span>NASA · Public domain · via Wikimedia Commons</span>
-                <ProvenanceChip p="third-party" label="Credited asset" />
+            <figure className="flex flex-col gap-3">
+              <AtlasPreview />
+              <figcaption className="flex items-center justify-between gap-3 text-xs text-text-3">
+                <span>Every expedition arc in the archive, drawn flat. The Atlas flies the same data in 3-D.</span>
+                <ProvenanceChip p="verified" label="Archive data" />
               </figcaption>
             </figure>
           </Reveal>
@@ -145,7 +157,7 @@ export default function HomePage() {
                 {PUBLICATIONS.slice(0, 3).map((p) => (
                   <li key={p.id} className="py-3">
                     <p className="text-sm font-medium leading-snug text-text">{p.title}</p>
-                    <p className="numeral mt-1 text-[11px] text-text-3">
+                    <p className="numeral mt-1 text-xs text-text-3">
                       {p.type} · {p.year} · {p.venue}
                     </p>
                   </li>
@@ -164,7 +176,7 @@ export default function HomePage() {
                 {REPORTS.slice(0, 3).map((r) => (
                   <li key={r.id} className="py-3">
                     <p className="text-sm font-medium leading-snug text-text">{r.title}</p>
-                    <p className="numeral mt-1 text-[11px] text-text-3">
+                    <p className="numeral mt-1 text-xs text-text-3">
                       {r.year} · {r.pages} pp · {r.parsed ? "OCR-parsed" : "scan only"}
                     </p>
                   </li>
@@ -173,40 +185,6 @@ export default function HomePage() {
               <ProvenanceChip p="demo" label="Demonstration records" />
             </Reveal>
           </div>
-        </div>
-      </section>
-
-      {/* --- The problem, drawn: scattered → one window --------------------- */}
-      <section className="hairline-t py-28" aria-label="From scattered to one window">
-        <div className="dh-container">
-          <SectionHeader
-            kicker="The problem, drawn"
-            title="Scattered for decades. One window now."
-            body="Expedition reports sit on drives, datasets behind old websites, photographs in cabinets, papers behind paywalls. YETI ingests every artefact, gives it complete metadata and human review, and connects it to the whole — so one search reaches forty-five years of Indian polar science."
-          />
-          <div className="mt-12 grid items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
-            <Reveal>
-              <ScatterToWindow />
-            </Reveal>
-            <Reveal delay={120} className="flex flex-col gap-6">
-              <SourceCoverage />
-            </Reveal>
-          </div>
-          <Reveal delay={180} className="mt-10">
-            <figure className="overflow-hidden rounded-xl border border-line">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/img/yeti-scattered-to-core.jpg"
-                alt="Illustration of scattered polar artefacts — reports, photographs, datasets — drifting toward one glowing core"
-                className="aspect-[21/9] w-full object-cover"
-                loading="lazy"
-              />
-              <figcaption className="flex flex-wrap items-baseline justify-between gap-2 bg-surface px-4 py-2.5 text-[11px] text-text-3">
-                <span>The premise in one frame: everything scattered, converging into one window.</span>
-                <span>AI-generated illustration · <a href="/about#provenance" className="link-line text-accent">provenance</a></span>
-              </figcaption>
-            </figure>
-          </Reveal>
         </div>
       </section>
 
@@ -222,7 +200,7 @@ export default function HomePage() {
                 className="aspect-[5/4] w-full object-cover"
                 loading="lazy"
               />
-              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg/95 to-transparent px-4 pb-3 pt-10 text-[11px] text-text-3">
+              <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-bg/95 to-transparent px-4 pb-3 pt-10 text-xs text-text-3">
                 {LEARN_PATHS[0].coverCredit}
               </figcaption>
             </figure>
@@ -276,7 +254,7 @@ export default function HomePage() {
                   <div className="relative flex flex-col gap-1.5 p-5">
                     <div className="flex items-center gap-2">
                       <MapPin className="size-3.5 text-accent" strokeWidth={1.5} aria-hidden />
-                      <span className="meta-label !text-[9px]">{s.status === "heritage" ? "Heritage site" : `Est. ${s.established}`}</span>
+                      <span className="meta-label">{s.status === "heritage" ? "Heritage site" : `Est. ${s.established}`}</span>
                     </div>
                     <span className="display text-2xl font-semibold text-text">{s.name}</span>
                     <span className="text-xs text-text-2">{s.location}</span>
@@ -288,69 +266,9 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* --- Newsroom + gallery strip ---------------------------------------- */}
-      <section className="hairline-t py-28" aria-label="Newsroom and gallery">
-        <div className="dh-container grid gap-14 lg:grid-cols-[1.2fr_1fr]">
-          <div>
-            <SectionHeader kicker="Newsroom" title="From the programme desk." action={{ label: "All news", href: "/newsroom" }} />
-            <div className="mt-8 flex flex-col divide-y divide-line border-t border-line">
-              {latestNews.map((n, i) => (
-                <Reveal key={n.id} delay={i * 60}>
-                  <Link href="/newsroom" className="group flex items-baseline justify-between gap-6 py-5">
-                    <div>
-                      <p className="numeral text-[11px] text-text-3">
-                        {formatDate(n.date)} · {n.category}
-                      </p>
-                      <p className="display mt-1.5 text-lg font-semibold text-text group-hover:text-accent">{n.title}</p>
-                      <p className="mt-1 line-clamp-2 max-w-[62ch] text-sm text-text-2">{n.excerpt}</p>
-                    </div>
-                    <ArrowUpRight className="size-4 shrink-0 text-text-3 group-hover:text-accent" strokeWidth={1.5} aria-hidden />
-                  </Link>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-          <div>
-            <SectionHeader kicker="CryoLens" title="Light from the ice." action={{ label: "Gallery", href: "/gallery" }} />
-            <div className="mt-8 grid grid-cols-2 gap-4">
-              {MEDIA.slice(0, 4).map((m, i) => (
-                <Reveal key={m.id} delay={i * 60} className={i % 3 === 0 ? "col-span-2" : ""}>
-                  <Link href={`/gallery?asset=${m.id}`} className="btn-tactile block overflow-hidden rounded-lg border border-line">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={m.src}
-                      alt={m.alt}
-                      className="aspect-[4/3] w-full object-cover transition-transform duration-500 hover:scale-[1.03]"
-                      loading="lazy"
-                    />
-                  </Link>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* --- Three doors: task-based entry ----------------------------------- */}
       <ThreeDoors />
 
-      {/* --- Closing CTA ------------------------------------------------------ */}
-      <section className="atmos hairline-t py-28" aria-label="Explore YETI">
-        <div className="dh-container flex flex-col items-center gap-8 text-center">
-          <Waves className="size-6 text-accent" strokeWidth={1.5} aria-hidden />
-          <Reveal>
-            <h2 className="display max-w-3xl text-balance text-4xl font-semibold leading-[1.03] md:text-5xl">
-              Archive. Atlas. Classroom. Newsroom. One window to the poles.
-            </h2>
-            <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <ButtonLink href="/atlas">Begin the Journey</ButtonLink>
-              <ButtonLink href="/about" variant="secondary">
-                What is real vs demo
-              </ButtonLink>
-            </div>
-          </Reveal>
-        </div>
-      </section>
     </>
   );
 }

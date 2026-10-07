@@ -89,7 +89,7 @@ export function SearchPalette({
             className="h-14 w-full bg-transparent text-[15px] text-text outline-none placeholder:text-text-3"
             aria-label={t("search.placeholder")}
           />
-          <kbd className="numeral rounded border border-line px-1.5 py-0.5 text-[10px] text-text-3">ESC</kbd>
+          <kbd className="numeral rounded border border-line px-1.5 py-0.5 text-[0.72rem] text-text-3">ESC</kbd>
         </div>
 
         <div ref={listRef} className="panel-scroll flex-1 overflow-y-auto p-2">

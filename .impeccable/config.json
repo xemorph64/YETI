@@ -1,0 +1,88 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "brag-output/work/comp.html"
+        ],
+        "createdAt": "2026-10-05T17:31:51.588Z",
+        "reason": "agent: video composition — short uppercase labels/headlines and display type at 0.85 leading are deliberate title-card typography, not body copy"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "brag-output/work/comp.html"
+        ],
+        "createdAt": "2026-10-05T17:31:51.605Z",
+        "reason": "agent: video composition — short uppercase labels/headlines and display type at 0.85 leading are deliberate title-card typography, not body copy"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "brag-output/work/comp.html"
+        ],
+        "createdAt": "2026-10-05T17:31:51.613Z",
+        "reason": "agent: video composition — short uppercase labels/headlines and display type at 0.85 leading are deliberate title-card typography, not body copy"
+      },
+      {
+        "rule": "wide-tracking",
+        "value": "*",
+        "files": [
+          "brag-output/work/outro.html"
+        ],
+        "createdAt": "2026-10-05T17:31:51.621Z",
+        "reason": "agent: video composition — short uppercase labels/headlines and display type at 0.85 leading are deliberate title-card typography, not body copy"
+      },
+      {
+        "rule": "tight-leading",
+        "value": "*",
+        "files": [
+          "brag-output/work/outro.html"
+        ],
+        "createdAt": "2026-10-05T17:31:51.628Z",
+        "reason": "agent: video composition — short uppercase labels/headlines and display type at 0.85 leading are deliberate title-card typography, not body copy"
+      },
+      {
+        "rule": "all-caps-body",
+        "value": "*",
+        "files": [
+          "brag-output/work/outro.html"
+        ],
+        "createdAt": "2026-10-05T17:31:51.637Z",
+        "reason": "agent: video composition — short uppercase labels/headlines and display type at 0.85 leading are deliberate title-card typography, not body copy"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "brag-output/work/comp.html"
+        ],
+        "createdAt": "2026-10-05T17:31:51.654Z",
+        "reason": "agent: evidence block mirrors the shipped AskYeti component (border-l-2 border-accent in src/components/chrome/AskYeti.tsx)"
+      },
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "src/components/chrome/AskYeti.tsx"
+        ],
+        "createdAt": "2026-10-07T08:27:00.410Z",
+        "reason": "agent: DESIGN.md documents the Ask YETI evidence block's 2px mint left rule as a signature quote treatment, not a card side-tab"
+      }
+    ]
+  },
+  "buildPath": "code",
+  "hook": {
+    "enabled": true,
+    "limits": {
+      "maxFindings": 5,
+      "maxChars": 8000
+    }
+  }
+}

@@ -6,82 +6,85 @@
  * browser; never shown again once completed or dismissed.
  */
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import Link from "next/link";
 import { Check, Command, Globe2, MessageCircleQuestion, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useStoredJson } from "@/lib/useStoredJson";
+import { useChrome } from "@/components/chrome/SiteChrome";
+import { Kicker } from "@/components/ui/primitives";
 
-const KEY = "yeti-start-here";
+const KEY = "yeti-start-here-v2";
 
+type Progress = { done: number[]; closed: boolean };
+const FRESH: Progress = { done: [], closed: false };
+
+/** Each step performs the move it teaches; doing it ticks it off. */
 const STEPS = [
   {
     icon: <Command className="size-4" strokeWidth={1.5} aria-hidden />,
     title: "Search everything at once",
     body: "Press ⌘K anywhere — 45 years of expeditions, datasets, images and reports in one palette.",
+    action: "search" as const,
   },
   {
     icon: <MessageCircleQuestion className="size-4" strokeWidth={1.5} aria-hidden />,
     title: "Ask YETI, get sources",
     body: "The assistant answers only from the archive and always shows its citations.",
+    action: "ask" as const,
   },
   {
     icon: <Globe2 className="size-4" strokeWidth={1.5} aria-hidden />,
     title: "Fly the Expedition Atlas",
     body: "Every Indian polar expedition since 1981 as an interactive globe — scrub through time.",
+    href: "/atlas",
   },
 ];
 
+const noop = () => () => {};
+
 export function StartHere() {
-  const [visible, setVisible] = useState(false);
-  const [done, setDone] = useState<number[]>([]);
+  const [progress, setProgress] = useStoredJson<Progress>(KEY, FRESH);
+  const { openSearch, openAsk } = useChrome();
+  // Render nothing on the server and during hydration, so returning visitors never see a flash.
+  const hydrated = useSyncExternalStore(noop, () => true, () => false);
 
-  useEffect(() => {
-    try {
-      if (!window.localStorage.getItem(KEY)) setVisible(true);
-    } catch {
-      /* private mode: just don't persist */
-    }
-  }, []);
+  if (!hydrated || progress.closed) return null;
 
-  if (!visible) return null;
+  const allDone = progress.done.length === STEPS.length;
 
-  const complete = (i: number) =>
-    setDone((d) => {
-      const next = d.includes(i) ? d.filter((x) => x !== i) : [...d, i];
-      if (next.length === STEPS.length) {
-        window.setTimeout(() => {
-          try {
-            window.localStorage.setItem(KEY, "done");
-          } catch {}
-          setVisible(false);
-        }, 900);
-      }
-      return next;
-    });
-
-  const dismiss = () => {
-    try {
-      window.localStorage.setItem(KEY, "dismissed");
-    } catch {}
-    setVisible(false);
+  const markDone = (i: number) => {
+    if (progress.done.includes(i)) return;
+    setProgress({ ...progress, done: [...progress.done, i] });
   };
+
+  const run = (i: number) => {
+    markDone(i);
+    const step = STEPS[i];
+    if (step.action === "search") openSearch();
+    if (step.action === "ask") openAsk();
+  };
+
+  const dismiss = () => setProgress({ ...progress, closed: true });
 
   return (
     <section aria-label="Start here" className="hairline-t bg-surface-2/60 py-10">
       <div className="dh-container">
-        <div className="ws-rise flex flex-col gap-5 rounded-2xl border border-accent/25 bg-surface p-6 shadow-[var(--shadow-card)] lg:flex-row lg:items-center lg:gap-8">
+        <div className="ws-rise flex flex-col gap-5 rounded-2xl border border-accent/25 bg-surface p-6 lg:flex-row lg:items-center lg:gap-8">
           <div className="min-w-0 lg:max-w-[240px]">
-            <p className="text-[13px] font-bold uppercase tracking-[0.14em] text-accent">First time here?</p>
-            <h2 className="mt-1.5 text-xl font-bold tracking-tight text-text">Start here — three moves, one minute.</h2>
+            <Kicker>First time here?</Kicker>
+            <h2 className="display mt-3 text-xl font-semibold text-text text-balance" aria-live="polite">
+              {allDone ? "That's all three. The archive is yours." : "Start here — three moves, one minute."}
+            </h2>
           </div>
           <ol className="grid flex-1 gap-2.5 md:grid-cols-3">
             {STEPS.map((s, i) => {
-              const checked = done.includes(i);
+              const checked = progress.done.includes(i);
               return (
                 <li key={s.title}>
-                  <button
-                    onClick={() => complete(i)}
-                    aria-pressed={checked}
+                  <StepControl
+                    href={s.href}
+                    onClick={() => (s.href ? markDone(i) : run(i))}
                     className={cn(
                       "btn-tactile flex h-full w-full items-start gap-3 rounded-xl border p-4 text-left transition-colors",
                       checked ? "border-accent/50 bg-accent-dim" : "border-line bg-bg hover:border-line-strong",
@@ -102,7 +105,8 @@ export function StartHere() {
                       </span>
                       <span className="mt-1 block text-[13px] leading-relaxed text-text-3">{s.body}</span>
                     </span>
-                  </button>
+                    {checked && <span className="sr-only">(done)</span>}
+                  </StepControl>
                 </li>
               );
             })}
@@ -124,5 +128,27 @@ export function StartHere() {
         </p>
       </div>
     </section>
+  );
+}
+
+function StepControl({
+  href,
+  onClick,
+  className,
+  children,
+}: {
+  href?: string;
+  onClick: () => void;
+  className: string;
+  children: React.ReactNode;
+}) {
+  return href ? (
+    <Link href={href} onClick={onClick} className={className}>
+      {children}
+    </Link>
+  ) : (
+    <button type="button" onClick={onClick} className={className}>
+      {children}
+    </button>
   );
 }

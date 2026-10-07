@@ -129,7 +129,7 @@ export function AskYeti({
         aria-expanded={open}
         aria-label={open ? undefined : "Ask Yeti — archive assistant"}
         className={cn(
-          "btn-tactile fixed bottom-20 right-4 z-[75] flex items-center gap-2 rounded-full border border-accent/40 bg-bg/90 px-4 py-2.5 text-sm font-semibold text-accent shadow-[var(--shadow-raised)] backdrop-blur-lg hover:bg-accent-dim md:bottom-6 md:right-6",
+          "btn-tactile fixed bottom-20 right-4 z-[75] hidden items-center gap-2 rounded-full border border-accent/40 bg-bg/90 px-4 py-2.5 text-sm font-semibold text-accent shadow-[var(--shadow-raised)] backdrop-blur-lg hover:bg-accent-dim md:bottom-6 md:right-6 md:flex",
           open && "pointer-events-none opacity-0",
           pathname.startsWith("/admin") && "hidden",
         )}
@@ -159,7 +159,7 @@ export function AskYeti({
                   <p className="display text-sm font-bold tracking-wide text-text">
                     <T k="ask.title" />
                   </p>
-                  <p className="text-[11px] text-text-3">
+                  <p className="text-xs text-text-3">
                     <T k="ask.grounded" />
                   </p>
                 </div>
@@ -177,7 +177,7 @@ export function AskYeti({
               {turns.length === 0 && (
                 <div className="flex flex-col gap-4">
                   {ctx && (
-                    <p className="flex items-center gap-2 rounded-lg border border-accent/30 bg-accent-dim px-3 py-2 text-[11px] text-accent" role="status">
+                    <p className="flex items-center gap-2 rounded-lg border border-accent/30 bg-accent-dim px-3 py-2 text-xs text-accent" role="status">
                       <Mascot state="thinking" className="size-6 shrink-0" />
                       <span>
                         <T k="ask.reading" as="span" />: <strong>{ctx.label}</strong>
@@ -228,7 +228,7 @@ export function AskYeti({
                         )}
                         {turn.evidence && (
                           <div className="mt-3 rounded-lg border-l-2 border-accent bg-surface-2 px-3 py-2.5" aria-label="Supporting evidence">
-                            <p className="meta-label !text-[9px] !text-accent">Evidence — {turn.evidence.section}</p>
+                            <p className="meta-label !text-accent">Evidence — {turn.evidence.section}</p>
                             <blockquote className="mt-1.5 text-xs leading-relaxed text-text-2">
                               “{turn.evidence.quote}”
                             </blockquote>
@@ -306,7 +306,7 @@ export function AskYeti({
 /** Honest notice when an answer exists only in English (master doc §56). */
 function ContinuesNote() {
   return (
-    <p className="mt-2 text-[10px] leading-snug text-text-3">
+    <p className="mt-2 text-xs leading-snug text-text-3">
       ⓘ यह उत्तर अंग्रेज़ी में है — वैज्ञानिक शब्दावली यथावत।
     </p>
   );

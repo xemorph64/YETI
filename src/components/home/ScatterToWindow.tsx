@@ -173,7 +173,7 @@ export function ScatterToWindow() {
         </g>
       </svg>
 
-      <p className="meta-label border-t border-line px-4 py-2.5 !text-[9px]">
+      <p className="border-t border-line px-4 py-2.5 text-xs leading-snug text-text-3">
         Illustration of the ingestion concept — sources are representative, not exhaustive. Every arriving artefact becomes a metadata-complete, review-gated record.
       </p>
     </div>

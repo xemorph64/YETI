@@ -23,7 +23,16 @@ export function GlobeFallback({
   return <FallbackMap arcs={arcs} stations={stations} />;
 }
 
-export function FallbackMap({ arcs, stations = STATION_POINTS }: { arcs: ArcSpec[]; stations?: GlobeStation[] }) {
+export function FallbackMap({
+  arcs,
+  stations = STATION_POINTS,
+  notice = true,
+}: {
+  arcs: ArcSpec[];
+  stations?: GlobeStation[];
+  /** The "WebGL unavailable" note; off when the flat map is used on purpose, not as a fallback. */
+  notice?: boolean;
+}) {
   const W = 1000;
   const H = 500;
   const px = (lat: number, lng: number) => ({
@@ -82,12 +91,14 @@ export function FallbackMap({ arcs, stations = STATION_POINTS }: { arcs: ArcSpec
           GOA
         </text>
       </svg>
-      <div className="absolute bottom-3 left-3 rounded-md border border-line bg-bg/85 px-3 py-2 text-xs text-text-2 backdrop-blur">
-        WebGL unavailable — showing the static expedition map.
-        <Link href="/expeditions" className="link-line ml-2 font-medium text-accent">
-          Browse as list →
-        </Link>
-      </div>
+      {notice && (
+        <div className="absolute bottom-3 left-3 rounded-md border border-line bg-bg/85 px-3 py-2 text-xs text-text-2 backdrop-blur">
+          WebGL unavailable — showing the static expedition map.
+          <Link href="/expeditions" className="link-line ml-2 font-medium text-accent">
+            Browse as list →
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

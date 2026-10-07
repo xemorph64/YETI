@@ -62,7 +62,7 @@ export function RoleGate({
           Back to the public archive
         </Link>
       </div>
-      <p className="text-[11px] leading-relaxed text-text-3">
+      <p className="text-xs leading-relaxed text-text-3">
         Demo note: authentication in this build is browser-local only — no real accounts, no network calls.
       </p>
     </div>

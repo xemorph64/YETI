@@ -55,7 +55,7 @@ function DockButton({
   return (
     <button
       onClick={onClick}
-      className="btn-tactile flex flex-1 flex-col items-center gap-1 py-2.5 text-[10px] font-medium tracking-wide text-text-2 hover:text-text"
+      className="btn-tactile flex flex-1 flex-col items-center gap-1 py-2.5 text-[0.72rem] font-medium tracking-wide text-text-2 hover:text-text"
     >
       {icon}
       {label}
@@ -75,7 +75,7 @@ function DockLink({
   return (
     <Link
       href={href}
-      className="btn-tactile flex flex-1 flex-col items-center gap-1 py-2.5 text-[10px] font-semibold tracking-wide text-accent"
+      className="btn-tactile flex flex-1 flex-col items-center gap-1 py-2.5 text-[0.72rem] font-semibold tracking-wide text-accent"
     >
       {icon}
       {label}

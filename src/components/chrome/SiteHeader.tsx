@@ -45,7 +45,7 @@ export function Logo({ compact = false }: { compact?: boolean }) {
       <span className="flex flex-col leading-none">
         <span className="display text-[17px] font-bold tracking-[0.08em] text-text">YETI</span>
         {!compact && (
-          <span className="meta-label mt-1 !text-[9px] tracking-[0.22em]">Knows. Now you can too!</span>
+          <span className="meta-label mt-1 hidden whitespace-nowrap sm:block">Knows. Now you can too!</span>
         )}
       </span>
     </span>
@@ -186,7 +186,7 @@ export function SiteHeader({ onOpenSearch }: { onOpenSearch: () => void }) {
             >
               <Search className="size-3.5" strokeWidth={1.5} aria-hidden />
               <span className="hidden xl:inline"><T k="search.placeholder" /></span>
-              <kbd className="numeral ml-1 hidden rounded border border-line px-1.5 py-0.5 text-[10px] text-text-3 xl:inline">
+              <kbd className="numeral ml-1 hidden rounded border border-line px-1.5 py-0.5 text-[0.72rem] text-text-3 xl:inline">
                 ⌘K
               </kbd>
             </button>
@@ -348,16 +348,16 @@ export function LangSwitcher() {
             >
               <span className="flex min-w-0 items-baseline gap-2">
                 <span className={langFont(l.id)} lang={l.id} dir={langDir(l.id)}>{l.native}</span>
-                {l.id !== "en" && <span className="truncate text-[11px] text-text-3">{l.label}</span>}
+                {l.id !== "en" && <span className="truncate text-xs text-text-3">{l.label}</span>}
               </span>
               {lang === l.id ? (
                 <Check className="size-3.5 shrink-0" strokeWidth={2} aria-hidden />
               ) : (
-                l.mt && <span className="numeral shrink-0 text-[10px] text-text-3" title="Machine-translated">MT</span>
+                l.mt && <span className="numeral shrink-0 text-[0.72rem] text-text-3" title="Machine-translated">MT</span>
               )}
             </button>
           ))}
-          <p className="mt-1 border-t border-line px-3.5 pb-1 pt-2 text-[11px] leading-snug text-text-3">
+          <p className="mt-1 border-t border-line px-3.5 pb-1 pt-2 text-xs leading-snug text-text-3">
             MT = machine-translated (AI4Bharat IndicTrans2). English, हिन्दी and বাংলা are hand-written.
           </p>
         </div>

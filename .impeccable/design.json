@@ -1,0 +1,531 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-07T08:26:29.950708+00:00",
+  "title": "Design System: YETI",
+  "extensions": {
+    "colorMeta": {
+      "polar-night": {
+        "role": "neutral",
+        "displayName": "Polar Night",
+        "canonical": "#0a1628",
+        "tonalRamp": [
+          "oklch(15% 0.04 255)",
+          "oklch(25% 0.04 255)",
+          "oklch(38% 0.04 255)",
+          "oklch(50% 0.04 255)",
+          "oklch(62% 0.04 255)",
+          "oklch(74% 0.04 255)",
+          "oklch(85% 0.04 255)",
+          "oklch(95% 0.04 255)"
+        ]
+      },
+      "polar-night-deep": {
+        "role": "neutral",
+        "displayName": "Polar Night Deep",
+        "canonical": "#071020",
+        "tonalRamp": [
+          "oklch(15% 0.04 255)",
+          "oklch(25% 0.04 255)",
+          "oklch(38% 0.04 255)",
+          "oklch(50% 0.04 255)",
+          "oklch(62% 0.04 255)",
+          "oklch(74% 0.04 255)",
+          "oklch(85% 0.04 255)",
+          "oklch(95% 0.04 255)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#0f1c2e",
+        "tonalRamp": [
+          "oklch(15% 0.04 255)",
+          "oklch(25% 0.04 255)",
+          "oklch(38% 0.04 255)",
+          "oklch(50% 0.04 255)",
+          "oklch(62% 0.04 255)",
+          "oklch(74% 0.04 255)",
+          "oklch(85% 0.04 255)",
+          "oklch(95% 0.04 255)"
+        ]
+      },
+      "surface-2": {
+        "role": "neutral",
+        "displayName": "Surface 2",
+        "canonical": "#132238",
+        "tonalRamp": [
+          "oklch(15% 0.04 255)",
+          "oklch(25% 0.04 255)",
+          "oklch(38% 0.04 255)",
+          "oklch(50% 0.04 255)",
+          "oklch(62% 0.04 255)",
+          "oklch(74% 0.04 255)",
+          "oklch(85% 0.04 255)",
+          "oklch(95% 0.04 255)"
+        ]
+      },
+      "surface-3": {
+        "role": "neutral",
+        "displayName": "Surface 3",
+        "canonical": "#182a3e",
+        "tonalRamp": [
+          "oklch(15% 0.04 255)",
+          "oklch(25% 0.04 255)",
+          "oklch(38% 0.04 255)",
+          "oklch(50% 0.04 255)",
+          "oklch(62% 0.04 255)",
+          "oklch(74% 0.04 255)",
+          "oklch(85% 0.04 255)",
+          "oklch(95% 0.04 255)"
+        ]
+      },
+      "text": {
+        "role": "neutral",
+        "displayName": "Ice Text",
+        "canonical": "#eaf2f8",
+        "tonalRamp": [
+          "oklch(15% 0.02 240)",
+          "oklch(25% 0.02 240)",
+          "oklch(38% 0.02 240)",
+          "oklch(50% 0.02 240)",
+          "oklch(62% 0.02 240)",
+          "oklch(74% 0.02 240)",
+          "oklch(85% 0.02 240)",
+          "oklch(95% 0.02 240)"
+        ]
+      },
+      "text-2": {
+        "role": "neutral",
+        "displayName": "Frost Text",
+        "canonical": "#b0c3d6",
+        "tonalRamp": [
+          "oklch(15% 0.03 245)",
+          "oklch(25% 0.03 245)",
+          "oklch(38% 0.03 245)",
+          "oklch(50% 0.03 245)",
+          "oklch(62% 0.03 245)",
+          "oklch(74% 0.03 245)",
+          "oklch(85% 0.03 245)",
+          "oklch(95% 0.03 245)"
+        ]
+      },
+      "text-3": {
+        "role": "neutral",
+        "displayName": "Mist Text",
+        "canonical": "#7e91a7",
+        "tonalRamp": [
+          "oklch(15% 0.03 250)",
+          "oklch(25% 0.03 250)",
+          "oklch(38% 0.03 250)",
+          "oklch(50% 0.03 250)",
+          "oklch(62% 0.03 250)",
+          "oklch(74% 0.03 250)",
+          "oklch(85% 0.03 250)",
+          "oklch(95% 0.03 250)"
+        ]
+      },
+      "signal-mint": {
+        "role": "primary",
+        "displayName": "Signal Mint",
+        "canonical": "#3be8b0",
+        "tonalRamp": [
+          "oklch(15% 0.14 165)",
+          "oklch(25% 0.14 165)",
+          "oklch(38% 0.14 165)",
+          "oklch(50% 0.14 165)",
+          "oklch(62% 0.14 165)",
+          "oklch(74% 0.14 165)",
+          "oklch(85% 0.14 165)",
+          "oklch(95% 0.14 165)"
+        ]
+      },
+      "light-signal-mint": {
+        "role": "primary",
+        "displayName": "Signal Mint (light ink)",
+        "canonical": "#0c8f6e",
+        "tonalRamp": [
+          "oklch(15% 0.12 165)",
+          "oklch(25% 0.12 165)",
+          "oklch(38% 0.12 165)",
+          "oklch(50% 0.12 165)",
+          "oklch(62% 0.12 165)",
+          "oklch(74% 0.12 165)",
+          "oklch(85% 0.12 165)",
+          "oklch(95% 0.12 165)"
+        ]
+      },
+      "signal-ink": {
+        "role": "primary",
+        "displayName": "Signal Ink",
+        "canonical": "#04231a"
+      },
+      "arctic-violet": {
+        "role": "secondary",
+        "displayName": "Arctic Violet",
+        "canonical": "#8a6cff",
+        "tonalRamp": [
+          "oklch(15% 0.17 290)",
+          "oklch(25% 0.17 290)",
+          "oklch(38% 0.17 290)",
+          "oklch(50% 0.17 290)",
+          "oklch(62% 0.17 290)",
+          "oklch(74% 0.17 290)",
+          "oklch(85% 0.17 290)",
+          "oklch(95% 0.17 290)"
+        ]
+      },
+      "light-arctic-violet": {
+        "role": "secondary",
+        "displayName": "Arctic Violet (light ink)",
+        "canonical": "#6d4fe0",
+        "tonalRamp": [
+          "oklch(15% 0.17 290)",
+          "oklch(25% 0.17 290)",
+          "oklch(38% 0.17 290)",
+          "oklch(50% 0.17 290)",
+          "oklch(62% 0.17 290)",
+          "oklch(74% 0.17 290)",
+          "oklch(85% 0.17 290)",
+          "oklch(95% 0.17 290)"
+        ]
+      },
+      "heritage-ember": {
+        "role": "tertiary",
+        "displayName": "Heritage Ember",
+        "canonical": "#ff8a5c",
+        "tonalRamp": [
+          "oklch(15% 0.15 45)",
+          "oklch(25% 0.15 45)",
+          "oklch(38% 0.15 45)",
+          "oklch(50% 0.15 45)",
+          "oklch(62% 0.15 45)",
+          "oklch(74% 0.15 45)",
+          "oklch(85% 0.15 45)",
+          "oklch(95% 0.15 45)"
+        ]
+      },
+      "light-heritage-ember": {
+        "role": "tertiary",
+        "displayName": "Heritage Ember (light ink)",
+        "canonical": "#d95a28",
+        "tonalRamp": [
+          "oklch(15% 0.15 45)",
+          "oklch(25% 0.15 45)",
+          "oklch(38% 0.15 45)",
+          "oklch(50% 0.15 45)",
+          "oklch(62% 0.15 45)",
+          "oklch(74% 0.15 45)",
+          "oklch(85% 0.15 45)",
+          "oklch(95% 0.15 45)"
+        ]
+      },
+      "danger": {
+        "role": "error",
+        "displayName": "Danger",
+        "canonical": "#ff6b6b",
+        "tonalRamp": [
+          "oklch(15% 0.17 25)",
+          "oklch(25% 0.17 25)",
+          "oklch(38% 0.17 25)",
+          "oklch(50% 0.17 25)",
+          "oklch(62% 0.17 25)",
+          "oklch(74% 0.17 25)",
+          "oklch(85% 0.17 25)",
+          "oklch(95% 0.17 25)"
+        ]
+      },
+      "ice": {
+        "role": "neutral",
+        "displayName": "Ice",
+        "canonical": "#eef6fc"
+      },
+      "light-bg": {
+        "role": "neutral",
+        "displayName": "Cool Paper",
+        "canonical": "#f4f9fc",
+        "tonalRamp": [
+          "oklch(15% 0.015 235)",
+          "oklch(25% 0.015 235)",
+          "oklch(38% 0.015 235)",
+          "oklch(50% 0.015 235)",
+          "oklch(62% 0.015 235)",
+          "oklch(74% 0.015 235)",
+          "oklch(85% 0.015 235)",
+          "oklch(95% 0.015 235)"
+        ]
+      },
+      "light-surface": {
+        "role": "neutral",
+        "displayName": "Paper White",
+        "canonical": "#ffffff"
+      },
+      "light-text": {
+        "role": "neutral",
+        "displayName": "Deep Navy Ink",
+        "canonical": "#0e1b2a",
+        "tonalRamp": [
+          "oklch(15% 0.04 255)",
+          "oklch(25% 0.04 255)",
+          "oklch(38% 0.04 255)",
+          "oklch(50% 0.04 255)",
+          "oklch(62% 0.04 255)",
+          "oklch(74% 0.04 255)",
+          "oklch(85% 0.04 255)",
+          "oklch(95% 0.04 255)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page H1s, capped at 24–26ch."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section headers under a Kicker."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Workspace and panel titles."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Reading text, 65ch max."
+      },
+      "body-sm": {
+        "displayName": "Body small",
+        "purpose": "Default UI text (Tailwind text-sm override)."
+      },
+      "caption": {
+        "displayName": "Caption",
+        "purpose": "Secondary UI text (Tailwind text-xs override)."
+      },
+      "label": {
+        "displayName": "Mono label",
+        "purpose": "Kickers, metadata, stat captions; uppercase."
+      },
+      "numeral": {
+        "displayName": "Numeral",
+        "purpose": "Stats, years, counts; tabular."
+      },
+      "statement": {
+        "displayName": "Statement",
+        "purpose": "Home hero headline only."
+      },
+      "numeral-statement": {
+        "displayName": "Numeral statement",
+        "purpose": "Pinned timeline year; decorative."
+      },
+      "pill": {
+        "displayName": "Pill",
+        "purpose": "Provenance chips, source pills, step badges; smallest size."
+      }
+    },
+    "shadows": [
+      {
+        "name": "raised",
+        "value": "0 24px 48px -24px rgba(4,10,20,0.8)",
+        "purpose": "Menus, Ask YETI panel, drawers, palette (dark)."
+      },
+      {
+        "name": "raised-light",
+        "value": "0 24px 48px -28px rgba(20,40,60,0.25)",
+        "purpose": "Raised, light theme."
+      },
+      {
+        "name": "card",
+        "value": "0 16px 32px -20px rgba(4,10,20,0.7)",
+        "purpose": "Rare lifted card (dark)."
+      },
+      {
+        "name": "card-light",
+        "value": "0 12px 28px -20px rgba(20,40,60,0.28)",
+        "purpose": "Lifted card, light theme."
+      },
+      {
+        "name": "signal-halo",
+        "value": "0 0 0 1px rgba(59,232,176,0.35)",
+        "purpose": "Range thumbs and active pins."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-expo-out",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Tactile press, link underline draw, scroll reveal."
+      },
+      {
+        "name": "ease-toast",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Toasts and workspace stat rise."
+      },
+      {
+        "name": "press",
+        "value": "180ms",
+        "purpose": "Button press/hover band."
+      },
+      {
+        "name": "underline",
+        "value": "250ms",
+        "purpose": "Link underline draw."
+      },
+      {
+        "name": "reveal",
+        "value": "700ms",
+        "purpose": "Scroll reveal: 18px rise + fade."
+      },
+      {
+        "name": "toast",
+        "value": "220ms in / 180ms out",
+        "purpose": "Toast enter/exit."
+      }
+    ],
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "xl",
+        "value": "1280px"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The one Signal Mint action per view.",
+      "html": "<button class=\"ds-btn-primary\">Enter the Atlas →</button>",
+      "css": ".ds-btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--accent-fill,#3be8b0);color:var(--accent-ink,#04231a);border:none;border-radius:6px;padding:12px 20px;font:600 15px/1.6 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer;transition:transform .18s cubic-bezier(.16,1,.3,1),opacity .18s ease}.ds-btn-primary:hover{opacity:.9}.ds-btn-primary:active{transform:translateY(1px) scale(.985)}.ds-btn-primary:focus-visible{outline:2px solid var(--accent,#3be8b0);outline-offset:2px}"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Hairline-outlined alternative action.",
+      "html": "<button class=\"ds-btn-secondary\">Browse the Vault</button>",
+      "css": ".ds-btn-secondary{display:inline-flex;align-items:center;gap:8px;background:var(--surface,#0f1c2e);color:var(--text,#eaf2f8);border:1px solid var(--line-strong,rgba(167,188,207,.27));border-radius:6px;padding:12px 20px;font:600 15px/1.6 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer;transition:transform .18s cubic-bezier(.16,1,.3,1),background-color .18s ease,border-color .18s ease}.ds-btn-secondary:hover{border-color:var(--text-3,#7e91a7);background:var(--surface-2,#132238)}.ds-btn-secondary:active{transform:translateY(1px) scale(.985)}.ds-btn-secondary:focus-visible{outline:2px solid var(--accent,#3be8b0);outline-offset:2px}"
+    },
+    {
+      "name": "Filter Chip",
+      "kind": "chip",
+      "refersTo": "chip",
+      "description": "Pill filter; active state goes mint.",
+      "html": "<div style=\"display:flex;gap:8px\"><button class=\"ds-chip\" aria-pressed=\"true\">Antarctic</button><button class=\"ds-chip\" aria-pressed=\"false\">Arctic</button></div>",
+      "css": ".ds-chip{display:inline-flex;align-items:center;gap:6px;border-radius:9999px;border:1px solid var(--line-strong,rgba(167,188,207,.27));background:var(--surface,#0f1c2e);color:var(--text-2,#b0c3d6);padding:4px 12px;font:400 13px/1.5 'IBM Plex Sans',system-ui,sans-serif;cursor:pointer;transition:transform .18s cubic-bezier(.16,1,.3,1),border-color .18s,color .18s}.ds-chip:hover{color:var(--text,#eaf2f8);border-color:var(--text-3,#7e91a7)}.ds-chip[aria-pressed=true]{border-color:rgba(59,232,176,.6);background:var(--accent-dim,rgba(59,232,176,.14));color:var(--accent,#3be8b0)}.ds-chip:active{transform:translateY(1px) scale(.985)}.ds-chip:focus-visible{outline:2px solid var(--accent,#3be8b0);outline-offset:2px}"
+    },
+    {
+      "name": "Provenance Chips",
+      "kind": "chip",
+      "refersTo": "provenance-chip",
+      "description": "The honesty primitive: Verified / Demo record / Synthetic data / Third-party.",
+      "html": "<div style=\"display:flex;flex-wrap:wrap;gap:8px\"><span class=\"ds-prov ds-prov-verified\"><svg width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.5\"><path d=\"m9 12 2 2 4-4\"/><circle cx=\"12\" cy=\"12\" r=\"9\"/></svg>Verified</span><span class=\"ds-prov ds-prov-demo\">Demo record</span><span class=\"ds-prov ds-prov-synth\">Synthetic data</span><span class=\"ds-prov ds-prov-third\">Third-party · credited</span></div>",
+      "css": ".ds-prov{display:inline-flex;align-items:center;gap:6px;border-radius:9999px;border:1px solid;padding:2px 8px;font:500 11px/16px 'IBM Plex Sans',system-ui,sans-serif}.ds-prov-verified{color:var(--accent,#3be8b0);border-color:rgba(59,232,176,.4);background:rgba(59,232,176,.1)}.ds-prov-demo{color:var(--sunrise,#ff8a5c);border-color:rgba(255,138,92,.4);background:rgba(255,138,92,.1)}.ds-prov-synth{color:var(--violet,#8a6cff);border-color:rgba(138,108,255,.4);background:rgba(138,108,255,.1)}.ds-prov-third{color:var(--text-3,#7e91a7);border-color:var(--line-strong,rgba(167,188,207,.27));background:var(--surface-2,#132238)}"
+    },
+    {
+      "name": "Record Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Flat surface card with hairline; kicker, title, provenance.",
+      "html": "<article class=\"ds-card\"><p class=\"ds-label\">Expedition · 1983</p><h3 class=\"ds-card-title\">Dakshin Gangotri</h3><p class=\"ds-card-body\">India's first Antarctic station, now buried under ice and preserved as a heritage site.</p></article>",
+      "css": ".ds-card{background:var(--surface,#0f1c2e);border:1px solid var(--line,rgba(167,188,207,.14));border-radius:12px;padding:24px;max-width:340px}.ds-label{margin:0;font:500 .72rem/1.4 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--text-3,#7e91a7)}.ds-card-title{margin:8px 0 6px;font:700 1.5rem/1.2 'Space Grotesk',system-ui,sans-serif;letter-spacing:-.02em;color:var(--text,#eaf2f8)}.ds-card-body{margin:0;font:400 15px/1.6 'IBM Plex Sans',system-ui,sans-serif;color:var(--text-2,#b0c3d6)}"
+    },
+    {
+      "name": "Text Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "44px hairline field; border goes mint on focus.",
+      "html": "<input class=\"ds-input\" placeholder=\"Ask about Maitri, sea ice, the 35th expedition…\" />",
+      "css": ".ds-input{height:44px;width:320px;border-radius:8px;border:1px solid var(--line-strong,rgba(167,188,207,.27));background:var(--surface,#0f1c2e);color:var(--text,#eaf2f8);padding:0 14px;font:400 15px 'IBM Plex Sans',system-ui,sans-serif;outline:none;transition:border-color .18s}.ds-input::placeholder{color:var(--text-3,#7e91a7)}.ds-input:focus{border-color:rgba(59,232,176,.6)}.ds-input:focus-visible{outline:2px solid var(--accent,#3be8b0);outline-offset:2px}"
+    },
+    {
+      "name": "Header Navigation",
+      "kind": "nav",
+      "refersTo": "menu",
+      "description": "Shallow header nav with draw-in underline; active is mint.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#\" aria-current=\"page\">Atlas</a><a href=\"#\">Labs</a><a href=\"#\">Expeditions</a><a href=\"#\">Vault</a><a href=\"#\">Stories</a><a href=\"#\">Learn</a></nav>",
+      "css": ".ds-nav{display:flex;gap:24px}.ds-nav a{position:relative;font:500 13px/1 'IBM Plex Sans',system-ui,sans-serif;letter-spacing:.025em;color:var(--text-2,#b0c3d6);text-decoration:none}.ds-nav a:hover{color:var(--text,#eaf2f8)}.ds-nav a[aria-current=page]{color:var(--accent,#3be8b0)}.ds-nav a::after{content:'';position:absolute;left:0;bottom:-2px;height:1px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.16,1,.3,1)}.ds-nav a:hover::after,.ds-nav a:focus-visible::after{transform:scaleX(1)}.ds-nav a:focus-visible{outline:2px solid var(--accent,#3be8b0);outline-offset:2px}"
+    },
+    {
+      "name": "Kicker + Section Header",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Signature section opener: mint rule, mono kicker, grotesk headline, action link.",
+      "html": "<div class=\"ds-sh\"><p class=\"ds-kicker\"><span></span>The archive</p><h2>Forty-five years on the ice, in one place.</h2><a href=\"#\">Open the timeline →</a></div>",
+      "css": ".ds-sh{display:flex;flex-direction:column;gap:16px}.ds-kicker{display:flex;align-items:center;gap:8px;margin:0;font:500 .72rem/1.4 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--text-3,#7e91a7)}.ds-kicker span{display:inline-block;height:1px;width:24px;background:rgba(59,232,176,.7)}.ds-sh h2{margin:0;max-width:32rem;font:600 2.25rem/1.05 'Space Grotesk',system-ui,sans-serif;letter-spacing:-.02em;color:var(--text,#eaf2f8);text-wrap:balance}.ds-sh a{align-self:flex-start;font:500 15px 'IBM Plex Sans',system-ui,sans-serif;color:var(--accent,#3be8b0);text-decoration:none}.ds-sh a:hover{text-decoration:underline;text-underline-offset:4px}"
+    },
+    {
+      "name": "Ask YETI Evidence Block",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Cited answer: evidence quote with mint rule plus source pills.",
+      "html": "<div class=\"ds-ev\"><p class=\"ds-ev-label\">Evidence — Stations</p><blockquote>Maitri has operated in the Schirmacher Oasis since 1989.</blockquote><div class=\"ds-ev-src\"><span>Sources</span><a href=\"#\">Maitri station</a></div></div>",
+      "css": ".ds-ev{max-width:360px;background:var(--surface-2,#132238);border-left:2px solid var(--accent,#3be8b0);border-radius:8px;padding:10px 12px}.ds-ev-label{margin:0;font:500 9px/1.4 'JetBrains Mono',ui-monospace,monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--accent,#3be8b0)}.ds-ev blockquote{margin:6px 0 10px;font:400 13px/1.5 'IBM Plex Sans',system-ui,sans-serif;color:var(--text-2,#b0c3d6)}.ds-ev-src{display:flex;align-items:center;gap:6px}.ds-ev-src span{font:500 .72rem 'JetBrains Mono',monospace;letter-spacing:.13em;text-transform:uppercase;color:var(--text-3,#7e91a7)}.ds-ev-src a{border-radius:9999px;border:1px solid rgba(59,232,176,.4);background:var(--accent-dim,rgba(59,232,176,.14));color:var(--accent,#3be8b0);padding:4px 10px;font:500 11px 'IBM Plex Sans',sans-serif;text-decoration:none}.ds-ev-src a:hover{opacity:.8}"
+    }
+  ],
+  "narrative": {
+    "northStar": "YETI",
+    "overview": "The system is named after the product and its keeper. YETI is the creature that has been out on the ice, knows the archive, and hands it over with its sources attached. The visual world follows that: a deep polar-night field where Indian expeditions glow as signal lines, and a calm, precise instrument layer of hairlines, mono labels and provenance chips that shows how every claim is known.\n\nTwo climates share one set of tokens. **Immersive dark** (home, Atlas, stations, stories, gallery, expeditions, labs) is the field: navy depth, grain, faint aurora washes, a WebGL globe, a header that floats clear until you scroll. **Utility light** (Vault, Learn, admin, newsroom, search, about) is the reading room: cool paper, white surfaces, darker inks of the same accents. Each route picks a default, and the reader can override it. Components never fork per theme; they read the same semantic variables.\n\nDensity is moderate and editorial. Wonder carries the first viewport. After that, the interface turns quiet and exact, and the brand shows in details: a 24px accent rule before a kicker, tabular numerals, a 1px press on every button.",
+    "keyCharacteristics": [
+      "Polar-night navy field with grain and two faint radial washes (mint top-right, violet bottom-left)",
+      "One primary signal colour (mint) plus two semantic accents (violet, ember) that also encode provenance",
+      "Space Grotesk display, IBM Plex Sans reading text, JetBrains Mono for labels, numerals and data",
+      "Hairline borders and tonal surfaces; shadows only on things that float",
+      "Provenance chips on every record: honesty is a visible component, not a footnote",
+      "Dual theme from one token set; reduced motion collapses everything to still"
+    ],
+    "rules": [
+      {
+        "name": "The Provenance Colour Rule",
+        "body": "Mint, violet and ember are honesty codes before they are decoration: Verified is mint, Synthetic is violet, Demo record is ember, Third-party is neutral. Never use them in a way that contradicts that mapping next to a record.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Signal Rule",
+        "body": "Mint is the only colour that means \"act here\" or \"you are here\". Violet and ember never fill a primary button.",
+        "section": "colors"
+      },
+      {
+        "name": "The Mono Means Data Rule",
+        "body": "JetBrains Mono is reserved for labels, numerals, codes and data. It is never used for sentences.",
+        "section": "typography"
+      },
+      {
+        "name": "The Comfort Floor Rule",
+        "body": "Running text never drops below 15px. Captions, credits and metadata sit at 13px. Functional labels (dock, kbd hints, status chips, mono kickers) sit at the 0.72rem label size. Only pills and badges may go down to 11px, and nothing goes below 11px.",
+        "section": "typography"
+      },
+      {
+        "name": "The Float-Only Shadow Rule",
+        "body": "If it does not overlay other content, it has no shadow. Use a hairline instead.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "**Do** read colours only through the semantic variables (`--bg`, `--surface`, `--text-2`, `--accent` and the rest) so that both themes work from one component.",
+      "**Do** open sections with the Kicker (24px mint rule + mono uppercase label) and a stacked headline.",
+      "**Do** attach a provenance chip to every record, dataset, image and generated draft, coloured per the Provenance Colour Rule.",
+      "**Do** use JetBrains Mono with tabular numerals for every year, count and statistic.",
+      "**Do** keep resting surfaces flat with a 1px `line` hairline; give the Raised shadow only to menus, panels, drawers and palettes.",
+      "**Do** give every animated path a still fallback for `prefers-reduced-motion` and `data-reduced-motion=\"true\"`.",
+      "**Do** use the tactile press (`btn-tactile`) on every clickable control."
+    ],
+    "donts": [
+      "**Don't** fill a primary action with violet or ember, and don't use mint for anything that isn't actionable, active, or Verified.",
+      "**Don't** set sentences in mono, or running text below 15px.",
+      "**Don't** add drop shadows to resting cards, or a second border colour beyond `line` and `line-strong`.",
+      "**Don't** hard-code hex values in components. The only sanctioned exception is the globe's arc colours, which mirror the tokens because WebGL cannot read CSS variables.",
+      "**Don't** add requestAnimationFrame loops to simulations. Animate them with CSS only."
+    ]
+  }
+}

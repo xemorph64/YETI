@@ -66,7 +66,7 @@ export function SiteFooter() {
         </div>
         <div className="mt-14 flex flex-col gap-3 border-t border-line pt-6 text-xs text-text-3 md:flex-row md:items-center md:justify-between">
           <span className="numeral">YETI — Knows. Now You Can Too! · v1.0 demo</span>
-          <span>Best experienced with sound off, curiosity on. Built for the Smart India Hackathon format.</span>
+          <span>Built for the Smart India Hackathon. Not an official Government of India website.</span>
         </div>
       </div>
     </footer>

@@ -30,7 +30,7 @@ export function SourceCoverage({ compact = false }: { compact?: boolean }) {
     <div className={compact ? "" : "overflow-hidden rounded-xl border border-line bg-surface"}>
       <div className="flex items-baseline justify-between gap-4 border-b border-line px-5 py-4">
         <h3 className="display text-base font-bold text-text">Source Coverage Registry</h3>
-        <span className="meta-label !text-[9px]">demo status</span>
+        <span className="meta-label">demo status</span>
       </div>
       <ul className="divide-y divide-line">
         {CHANNELS.map((c) => {
@@ -39,16 +39,16 @@ export function SourceCoverage({ compact = false }: { compact?: boolean }) {
             <li key={c.channel} className="flex items-start justify-between gap-3 px-5 py-3.5">
               <div className="min-w-0">
                 <p className="text-sm font-medium leading-snug text-text">{c.channel}</p>
-                <p className="numeral mt-0.5 text-[11px] text-text-3">
+                <p className="numeral mt-0.5 text-xs text-text-3">
                   {c.artefacts} · {c.est}
                 </p>
               </div>
-              <span className={`shrink-0 rounded-full border px-2 py-1 text-[10px] font-semibold ${s.cls}`}>{s.label}</span>
+              <span className={`shrink-0 rounded-full border px-2 py-1 text-[0.72rem] font-semibold ${s.cls}`}>{s.label}</span>
             </li>
           );
         })}
       </ul>
-      <p className="border-t border-line px-5 py-3 text-[11px] leading-snug text-text-3">
+      <p className="border-t border-line px-5 py-3 text-xs leading-snug text-text-3">
         Demonstration statuses. Production ingestion runs the documented pipeline — validate, checksum, OCR,
         extract, deduplicate — before anything enters the Vault.
       </p>

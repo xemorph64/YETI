@@ -115,9 +115,9 @@
     "bn": "এই অংশ ইংরেজিতে রয়েছে — পরিভাষা, নাম ও একক অপরিবর্তিত।"
   },
   "hero.kicker": {
-    "en": "Ministry of Earth Sciences · NCPOR · Demonstration build",
-    "hi": "पृथ्वी विज्ञान मंत्रालय · एनसीपीओआर · डेमो बिल्ड",
-    "bn": "আর্থ সায়েন্সেস মন্ত্রক · এনসিপিওআর · ডেমো বিল্ড"
+    "en": "Demonstration build · a concept for India's polar programme",
+    "hi": "डेमो बिल्ड · भारत के ध्रुवीय कार्यक्रम के लिए एक अवधारणा",
+    "bn": "ডেমো বিল্ড · ভারতের মেরু কর্মসূচির জন্য একটি ধারণা"
   },
   "hero.line1": {
     "en": "India has been going to the ice since 1981.",
@@ -154,6 +154,11 @@
     "hi": "अपना वर्कस्पेस खोलें",
     "bn": "আপনার ওয়ার্কস্পেস খুলুন"
   },
+  "hero.cta.atlas": {
+    "en": "Fly the Atlas",
+    "hi": "एटलस में उड़ान भरें",
+    "bn": "অ্যাটলাসে উড়ে যান"
+  },
   "hero.cta.explore": {
     "en": "Explore the science",
     "hi": "विज्ञान देखें",
@@ -175,9 +180,9 @@
     "bn": "একটি সংযুক্ত ব্যবস্থা"
   },
   "usp.one": {
-    "en": "YETI transforms India's existing polar research into connected, understandable and reusable knowledge — from scientific evidence to immersive exploration, contextual AI, education and trusted outreach.",
-    "hi": "येती भारत के मौजूदा ध्रुवीय शोध को जुड़ा, समझने योग्य और पुनः प्रयोग योग्य ज्ञान बनाता है — वैज्ञानिक साक्ष्य से इमर्सिव अन्वेषण, संदर्भ-सचेतन AI, शिक्षा और भरोसेमंद प्रसार तक।",
-    "bn": "যেতি ভারতের বিদ্যমান মেরু গবেষণাকে সংযুক্ত, বোধগম্য ও পুনঃব্যবহারযোগ্য জ্ঞানে রূপ দেয় — বৈজ্ঞানিক প্রমাণ থেকে নিমজ্জনশীল অন্বেষণ, প্রাসঙ্গিক AI, শিক্ষা ও বিশ্বস্ত প্রচার পর্যন্ত।"
+    "en": "YETI gathers India's polar research — reports, datasets, imagery and stories — and makes it easy to find, understand and share, with every source shown.",
+    "hi": "येती भारत के ध्रुवीय शोध — रिपोर्ट, डेटा, तस्वीरें और कहानियाँ — को एक जगह लाता है और हर स्रोत दिखाते हुए उसे खोजने, समझने और साझा करने में आसान बनाता है।",
+    "bn": "যেতি ভারতের মেরু গবেষণা — রিপোর্ট, ডেটা, ছবি ও গল্প — এক জায়গায় আনে, এবং প্রতিটি উৎস দেখিয়ে তা খোঁজা, বোঝা ও ভাগ করা সহজ করে।"
   },
   "usp.discover": {
     "en": "Discover",
@@ -320,9 +325,9 @@
     "bn": "যেতি জানে। এখন আপনিও!"
   },
   "footer.demo": {
-    "en": "Demonstration build for SIH26063 — all records are labelled demo data.",
-    "hi": "SIH26063 हेतु डेमो बिल्ड — सभी रिकॉर्ड डेमो डेटा हैं।",
-    "bn": "SIH26063-এর জন্য ডেমো বিল্ড — সব রেকর্ড ডেমো ডেটা।"
+    "en": "Demonstration build for SIH26063 — every record says whether it is verified, a demo, synthetic or credited to a third party.",
+    "hi": "SIH26063 हेतु डेमो बिल्ड — हर रिकॉर्ड बताता है कि वह सत्यापित है, डेमो है, कृत्रिम है या किसी अन्य स्रोत से श्रेय सहित है।",
+    "bn": "SIH26063-এর জন্য ডেমো বিল্ড — প্রতিটি রেকর্ড জানায় সেটি যাচাইকৃত, ডেমো, কৃত্রিম, নাকি তৃতীয় পক্ষের কৃতিত্বসহ।"
   },
   "lang.machine": {
     "en": "Machine-translated with AI4Bharat IndicTrans2 — wording may be imperfect."
